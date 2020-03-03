@@ -2,12 +2,11 @@
 title: "Prédire le prix des maisons présentant plusieurs caractéristiques"
 subtitle: "Une analyse par les méthodes de régression sur variables latentes"
 output: 
-  bookdown::gitbook
-   #word_document:
-      #reference_docx : "template2.docx"
+  #bookdown::gitbook
+   word_document:
+      reference_docx : "template2.docx"
 author: Axel-Cleris Gailloty
-output_dir : docs
-#toc: true
+toc: true
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
