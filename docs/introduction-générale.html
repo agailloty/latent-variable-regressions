@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Prédire le prix des maisons présentant plusieurs caractéristiques</title>
+  <meta name="description" content="Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="analyse-exploratoire-des-données.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-générale.html"><a href="introduction-générale.html"><i class="fa fa-check"></i><b>1</b> Introduction générale</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-générale.html"><a href="introduction-générale.html#présentation-des-données"><i class="fa fa-check"></i><b>1.1</b> Présentation des données</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-générale.html"><a href="introduction-générale.html#plan-de-létude"><i class="fa fa-check"></i><b>1.3</b> Plan de l’étude</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html"><i class="fa fa-check"></i><b>2</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-univariées"><i class="fa fa-check"></i><b>2.1</b> Statistiques descriptives univariées</a></li>
+<li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
+<li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modélisations.html"><a href="modélisations.html"><i class="fa fa-check"></i><b>3</b> Modélisations</a><ul>
+<li class="chapter" data-level="3.1" data-path="modélisations.html"><a href="modélisations.html#transformations-des-données"><i class="fa fa-check"></i><b>3.1</b> Transformations des données</a></li>
+<li class="chapter" data-level="3.2" data-path="modélisations.html"><a href="modélisations.html#modèle-de-régression-multiple"><i class="fa fa-check"></i><b>3.2</b> Modèle de régression multiple</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="modélisations.html"><a href="modélisations.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.2.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="modélisations.html"><a href="modélisations.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.2.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modélisations.html"><a href="modélisations.html#régressions-sur-variables-latentes"><i class="fa fa-check"></i><b>3.3</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="modélisations.html"><a href="modélisations.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>3.3.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="modélisations.html"><a href="modélisations.html#régréssion-sur-composantes-principales"><i class="fa fa-check"></i><b>3.4</b> Régréssion sur composantes principales</a></li>
+<li class="chapter" data-level="3.5" data-path="modélisations.html"><a href="modélisations.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>3.5</b> Résultats d’estimations avec SAS</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="modélisations.html"><a href="modélisations.html#régéressions-sur-les-moindres-carrés-partiels"><i class="fa fa-check"></i><b>3.5.1</b> Régéressions sur les moindres carrés partiels</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>4</b> Comparaison des performances des différentes méthodes d’estimation</a></li>
+<li class="chapter" data-level="5" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>5</b> Bibliographie</a></li>
+<li class="chapter" data-level="6" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>6</b> Annexes</a><ul>
+<li class="chapter" data-level="6.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>6.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Prédire le prix des maisons présentant plusieurs caractéristiques</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Prédire le prix des maisons présentant plusieurs caractéristiques</h1>
+<h2 class="subtitle"><em>Une analyse par les méthodes de régression sur variables latentes</em></h2>
+<p class="author"><em>Axel-Cleris Gailloty</em></p>
+</div>
+<div id="introduction-générale" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction générale</h1>
+<p>L’estimation de la valeur d’un bien immobilier est une étape cruciale dans la vente du bien. L’économie de la décision a mis en exergue une opposition entre le comportement des acheteurs et celui des vendeurs de biens immobiliers. Dans un premier temps, les vendeurs de biens immobiliers ont tendance à surévaluer leurs propriétés pour des raisons personnelles (il peut s’agir d’une propriété familiale à laquelle le vendeur attache une valeur sentimentale) tandis que l’attitude des acheteurs est toute autre : les acheteurs ont tendance à fixer un prix de réserve bien souvent inférieur à la valeur à laquelle les propriétaires vendent le bien immobilier. Cette situation peut conduire à une inefficience du marché des biens immobiliers.</p>
+<p>Ce problème d’inefficience est principalement dû au différentiel d’estimation de la valeur que font les parties prenantes sur le marché. C’est pour cette raison que dans le cadre de cette étude, la question qui nous occupe est celle de comprendre les facteurs entrant dans la valorisation des biens immobiliers. Plus précisément il s’agit de se pencher sur les caractéristiques observables du bien qui entre positivement ou négativement dans la valeur du bien.</p>
+<p>Pour comprendre donc ces facteurs cette étude se base sur une historique des des ventes de propriétés résidentielles effectuées dans la ville de Ames dans l’Etat de l’Iowa aux Etats-Unis sur la période de 2006 à 2010.</p>
+<blockquote>
+<p>Mots clés : Econométrie, analyse exploratoire des données, analyses en composantes principales, régression</p>
+</blockquote>
+<div id="présentation-des-données" class="section level2">
+<h2><span class="header-section-number">1.1</span> Présentation des données</h2>
+<p>Le jeu de données sur lequel ce travail se base est décrit la vente de propriétés résidentielles individuelles à Ames, une ville de l’Etat de l’Iowa aux USA entre 2006 et 2010.
+L’ensemble de données contient 2930 observations et 80 variables explicatives (23 nominales, 23 ordinales, 14 discrètes et 20 continues) impliquées dans l’évaluation de la valeur des propriétés résidentielles.</p>
+</div>
+<div id="objectifs-de-létude" class="section level2">
+<h2><span class="header-section-number">1.2</span> Objectifs de l’étude</h2>
+<p>Bien que la motivation première de cette étude est celle de déterminer les facteurs entrant dans l’évaluation d’un bien immobilier, cette étude porte un grand intérêt à l’utilisation des méthodes économétriques d’estimation. Pour cette étude nous adoptons la démarche économétrique qui consiste à mettre en évidence les relations de causalité entre le prix auquel le bien immobilier est vendu et les caractéristiques de ce bien. Il ne s’agit pas seulement d’une analyse des corrélations, mais de déterminer aussi les causalités en hiérarchisant les effets des caractéristiques observables d’un bien immobilier sur son prix de vente et par cela identifier également les potentiels effets non observables.</p>
+</div>
+<div id="plan-de-létude" class="section level2">
+<h2><span class="header-section-number">1.3</span> Plan de l’étude</h2>
+<p>Nous commencerons par faire des statistiques descriptives univariées des données. Dans cette partie nous cherchons à comprendre la distribution des variables que nous avons sélectionnées. Puis nous nous intéresserons aux statistiques bivariées en étudiant notamment les corrélations entre chaque paire de variables.</p>
+<p>Après avoir fait les statistiques descriptives et bivariées nous chercherons à modéliser le prix de vente des biens immobiliers en passant en revue les différentes méthodes d’estimations économétriques.
+Nous commencerons par utiliser la méthode des moindre carrés ordinaires. Nous ferons les différents tests et déterminer les éventuelles limites de cette méthode. Ensuite nous allons utiliser la méthode de régression sur composantes principales puis la méthode des moindres carrés partiels pour adresser les limites des moindres carrés ordinaires.</p>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="analyse-exploratoire-des-données.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

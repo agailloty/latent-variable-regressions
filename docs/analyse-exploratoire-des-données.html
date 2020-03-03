@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Analyse exploratoire des données | Prédire le prix des maisons présentant plusieurs caractéristiques</title>
+  <meta name="description" content="2 Analyse exploratoire des données | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Analyse exploratoire des données | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Analyse exploratoire des données | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-générale.html"/>
+<link rel="next" href="modélisations.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-générale.html"><a href="introduction-générale.html"><i class="fa fa-check"></i><b>1</b> Introduction générale</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-générale.html"><a href="introduction-générale.html#présentation-des-données"><i class="fa fa-check"></i><b>1.1</b> Présentation des données</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-générale.html"><a href="introduction-générale.html#plan-de-létude"><i class="fa fa-check"></i><b>1.3</b> Plan de l’étude</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html"><i class="fa fa-check"></i><b>2</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-univariées"><i class="fa fa-check"></i><b>2.1</b> Statistiques descriptives univariées</a></li>
+<li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
+<li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modélisations.html"><a href="modélisations.html"><i class="fa fa-check"></i><b>3</b> Modélisations</a><ul>
+<li class="chapter" data-level="3.1" data-path="modélisations.html"><a href="modélisations.html#transformations-des-données"><i class="fa fa-check"></i><b>3.1</b> Transformations des données</a></li>
+<li class="chapter" data-level="3.2" data-path="modélisations.html"><a href="modélisations.html#modèle-de-régression-multiple"><i class="fa fa-check"></i><b>3.2</b> Modèle de régression multiple</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="modélisations.html"><a href="modélisations.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.2.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="modélisations.html"><a href="modélisations.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.2.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modélisations.html"><a href="modélisations.html#régressions-sur-variables-latentes"><i class="fa fa-check"></i><b>3.3</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="modélisations.html"><a href="modélisations.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>3.3.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="modélisations.html"><a href="modélisations.html#régréssion-sur-composantes-principales"><i class="fa fa-check"></i><b>3.4</b> Régréssion sur composantes principales</a></li>
+<li class="chapter" data-level="3.5" data-path="modélisations.html"><a href="modélisations.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>3.5</b> Résultats d’estimations avec SAS</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="modélisations.html"><a href="modélisations.html#régéressions-sur-les-moindres-carrés-partiels"><i class="fa fa-check"></i><b>3.5.1</b> Régéressions sur les moindres carrés partiels</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>4</b> Comparaison des performances des différentes méthodes d’estimation</a></li>
+<li class="chapter" data-level="5" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>5</b> Bibliographie</a></li>
+<li class="chapter" data-level="6" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>6</b> Annexes</a><ul>
+<li class="chapter" data-level="6.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>6.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Prédire le prix des maisons présentant plusieurs caractéristiques</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analyse-exploratoire-des-données" class="section level1">
+<h1><span class="header-section-number">2</span> Analyse exploratoire des données</h1>
+<div id="statistiques-descriptives-univariées" class="section level2">
+<h2><span class="header-section-number">2.1</span> Statistiques descriptives univariées</h2>
+<p>Nous allons afficher les statistiques descriptives des variables quantitatives continues présentes dans le jeu de données. Ces statistiques descriptives seront présentées sous formes d’un tableau à 5 colonnes qui affichent respectivement le minimum, la moyenne, l’écart-type, le maximum et la médiane.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-4">Table 2.1: </span>Tableau 1 : Statistiques descriptives sur les colonnes numériques</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Min</th>
+<th align="right">Moyenne</th>
+<th align="right">Ecart_type</th>
+<th align="right">Max</th>
+<th align="right">Médiane</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lot_Frontage</td>
+<td align="right">0</td>
+<td align="right">57.64778</td>
+<td align="right">33.49944</td>
+<td align="right">313</td>
+<td align="right">63.0</td>
+</tr>
+<tr class="even">
+<td>Lot_Area</td>
+<td align="right">1300</td>
+<td align="right">10147.92184</td>
+<td align="right">7880.01776</td>
+<td align="right">215245</td>
+<td align="right">9436.5</td>
+</tr>
+<tr class="odd">
+<td>Year_Built</td>
+<td align="right">1872</td>
+<td align="right">1971.35631</td>
+<td align="right">30.24536</td>
+<td align="right">2010</td>
+<td align="right">1973.0</td>
+</tr>
+<tr class="even">
+<td>Year_Remod_Add</td>
+<td align="right">1950</td>
+<td align="right">1984.26655</td>
+<td align="right">20.86029</td>
+<td align="right">2010</td>
+<td align="right">1993.0</td>
+</tr>
+<tr class="odd">
+<td>Mas_Vnr_Area</td>
+<td align="right">0</td>
+<td align="right">101.09693</td>
+<td align="right">178.63454</td>
+<td align="right">1600</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td>BsmtFin_SF_1</td>
+<td align="right">0</td>
+<td align="right">4.17747</td>
+<td align="right">2.23337</td>
+<td align="right">7</td>
+<td align="right">3.0</td>
+</tr>
+<tr class="odd">
+<td>BsmtFin_SF_2</td>
+<td align="right">0</td>
+<td align="right">49.70546</td>
+<td align="right">169.14209</td>
+<td align="right">1526</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td>Bsmt_Unf_SF</td>
+<td align="right">0</td>
+<td align="right">559.07167</td>
+<td align="right">439.54057</td>
+<td align="right">2336</td>
+<td align="right">465.5</td>
+</tr>
+<tr class="odd">
+<td>Total_Bsmt_SF</td>
+<td align="right">0</td>
+<td align="right">1051.25563</td>
+<td align="right">440.96802</td>
+<td align="right">6110</td>
+<td align="right">990.0</td>
+</tr>
+<tr class="even">
+<td>First_Flr_SF</td>
+<td align="right">334</td>
+<td align="right">1159.55768</td>
+<td align="right">391.89089</td>
+<td align="right">5095</td>
+<td align="right">1084.0</td>
+</tr>
+<tr class="odd">
+<td>Second_Flr_SF</td>
+<td align="right">0</td>
+<td align="right">335.45597</td>
+<td align="right">428.39572</td>
+<td align="right">2065</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td>Low_Qual_Fin_SF</td>
+<td align="right">0</td>
+<td align="right">4.67679</td>
+<td align="right">46.31051</td>
+<td align="right">1064</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td>Gr_Liv_Area</td>
+<td align="right">334</td>
+<td align="right">1499.69044</td>
+<td align="right">505.50889</td>
+<td align="right">5642</td>
+<td align="right">1442.0</td>
+</tr>
+<tr class="even">
+<td>Bsmt_Full_Bath</td>
+<td align="right">0</td>
+<td align="right">0.43106</td>
+<td align="right">0.52476</td>
+<td align="right">3</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td>Bsmt_Half_Bath</td>
+<td align="right">0</td>
+<td align="right">0.06109</td>
+<td align="right">0.24518</td>
+<td align="right">2</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td>Full_Bath</td>
+<td align="right">0</td>
+<td align="right">1.56655</td>
+<td align="right">0.55294</td>
+<td align="right">4</td>
+<td align="right">2.0</td>
+</tr>
+<tr class="odd">
+<td>Half_Bath</td>
+<td align="right">0</td>
+<td align="right">0.37952</td>
+<td align="right">0.50263</td>
+<td align="right">2</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td>Bedroom_AbvGr</td>
+<td align="right">0</td>
+<td align="right">2.85427</td>
+<td align="right">0.82773</td>
+<td align="right">8</td>
+<td align="right">3.0</td>
+</tr>
+<tr class="odd">
+<td>Kitchen_AbvGr</td>
+<td align="right">0</td>
+<td align="right">1.04437</td>
+<td align="right">0.21408</td>
+<td align="right">3</td>
+<td align="right">1.0</td>
+</tr>
+<tr class="even">
+<td>TotRms_AbvGrd</td>
+<td align="right">2</td>
+<td align="right">6.44300</td>
+<td align="right">1.57296</td>
+<td align="right">15</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="odd">
+<td>Fireplaces</td>
+<td align="right">0</td>
+<td align="right">0.59932</td>
+<td align="right">0.64792</td>
+<td align="right">4</td>
+<td align="right">1.0</td>
+</tr>
+<tr class="even">
+<td>Garage_Cars</td>
+<td align="right">0</td>
+<td align="right">1.76621</td>
+<td align="right">0.76114</td>
+<td align="right">5</td>
+<td align="right">2.0</td>
+</tr>
+<tr class="odd">
+<td>Garage_Area</td>
+<td align="right">0</td>
+<td align="right">472.65836</td>
+<td align="right">215.18720</td>
+<td align="right">1488</td>
+<td align="right">480.0</td>
+</tr>
+<tr class="even">
+<td>Wood_Deck_SF</td>
+<td align="right">0</td>
+<td align="right">93.75188</td>
+<td align="right">126.36156</td>
+<td align="right">1424</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td>Open_Porch_SF</td>
+<td align="right">0</td>
+<td align="right">47.53345</td>
+<td align="right">67.48340</td>
+<td align="right">742</td>
+<td align="right">27.0</td>
+</tr>
+<tr class="even">
+<td>Enclosed_Porch</td>
+<td align="right">0</td>
+<td align="right">23.01160</td>
+<td align="right">64.13906</td>
+<td align="right">1012</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td>Three_season_porch</td>
+<td align="right">0</td>
+<td align="right">2.59249</td>
+<td align="right">25.14133</td>
+<td align="right">508</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td>Screen_Porch</td>
+<td align="right">0</td>
+<td align="right">16.00205</td>
+<td align="right">56.08737</td>
+<td align="right">576</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td>Pool_Area</td>
+<td align="right">0</td>
+<td align="right">2.24334</td>
+<td align="right">35.59718</td>
+<td align="right">800</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td>Misc_Val</td>
+<td align="right">0</td>
+<td align="right">50.63515</td>
+<td align="right">566.34429</td>
+<td align="right">17000</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td>Mo_Sold</td>
+<td align="right">1</td>
+<td align="right">6.21604</td>
+<td align="right">2.71449</td>
+<td align="right">12</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="even">
+<td>Year_Sold</td>
+<td align="right">2006</td>
+<td align="right">2007.79044</td>
+<td align="right">1.31661</td>
+<td align="right">2010</td>
+<td align="right">2008.0</td>
+</tr>
+<tr class="odd">
+<td>Sale_Price</td>
+<td align="right">12789</td>
+<td align="right">180796.06007</td>
+<td align="right">79886.69236</td>
+<td align="right">755000</td>
+<td align="right">160000.0</td>
+</tr>
+</tbody>
+</table>
+<p>En moyenne les maisons vendues coûtent un peu plus de 180 mille dollars. Les prix varient fortement d’une maison à l’autre puisque le prix minimum de vente est de 12789 dollars tandis que le prix maximum est de plus de 755 mille dollars.
+Pour avoir une meilleure vision de la distribution des prix, nous pouvons représenter un histogramme des prix.</p>
+<p><img src="main_files/figure-html/unnamed-chunk-5-1.png" width="2400" /></p>
+<p>Nous pouvons également avoir un aperçu de l’ensemble des colonnes numériques du jeu de données en faisant une représentation graphique combinée de ces colonnes.</p>
+<p><img src="main_files/figure-html/unnamed-chunk-6-1.png" width="2400" /></p>
+<p>Il est important que nous explorions les données pour découvrir la structure des données. Le but de cette analyse exploratoire est d’étudier la variance associée au jeu de données. En effet une base de donnée comporte en elle une variance ou information et le but de tout travail économétrique consistant à modéliser la variable dépendante est de trouver un modèle qui arrive à expliquer la variance de cette variable dépendante en se basant sur des variables qu’on appelle variable explicatives.</p>
+</div>
+<div id="statistiques-descriptives-bivariées" class="section level2">
+<h2><span class="header-section-number">2.2</span> Statistiques descriptives bivariées</h2>
+<p>Les statistiques bivariées nous permettent d’observer le degré de liaisons entre les différentes variables. Nous allons nous intéresser au coefficient de corrélation pour chaque paire de variables afin de voir le degré de liaisons pour les variables prises deux à deux.</p>
+<p>Pour simplifier la lecture de ces paires de corrélation, nous allons représenter la matrice des paires de corrélation sous la forme d’un graphique. Cette façon nous permet de voir à la fois dans la globalité et pour chaque variable le degré de corrélation.</p>
+<p><img src="main_files/figure-html/unnamed-chunk-7-1.png" width="2400" /></p>
+<p>Nous voyons que sur un plan global les corrélations entre les variables sont davantage positives que négatives. Etant donné le grand nombre des variables que nous étudions, nous n’allons commenter que les coefficients de corrélation les plus fortes.
+Pour cela nous affichons dans les tableaux suivants les respectivement les plus fortes corrélations positives et les plus fortes corrélations négatives.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-8">Table 2.2: </span>Les 10 premières fortes corrélations entre les variables</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">1</th>
+<th align="left">2</th>
+<th align="right">cor.coef</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td align="left">Garage_Cars</td>
+<td align="left">Garage_Area</td>
+<td align="right">0.88987</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td align="left">First_Flr_SF</td>
+<td align="left">Total_Bsmt_SF</td>
+<td align="right">0.80043</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td align="left">Gr_Liv_Area</td>
+<td align="left">Sale_Price</td>
+<td align="right">0.70678</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td align="left">Gr_Liv_Area</td>
+<td align="left">Second_Flr_SF</td>
+<td align="right">0.65525</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td align="left">Garage_Cars</td>
+<td align="left">Sale_Price</td>
+<td align="right">0.64756</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td align="left">Sale_Price</td>
+<td align="left">Total_Bsmt_SF</td>
+<td align="right">0.63253</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td align="left">Gr_Liv_Area</td>
+<td align="left">Full_Bath</td>
+<td align="right">0.63032</td>
+</tr>
+<tr class="even">
+<td>23</td>
+<td align="left">Year_Remod_Add</td>
+<td align="left">Year_Built</td>
+<td align="right">0.61210</td>
+</tr>
+<tr class="odd">
+<td>26</td>
+<td align="left">Second_Flr_SF</td>
+<td align="left">Half_Bath</td>
+<td align="right">0.61163</td>
+</tr>
+<tr class="even">
+<td>29</td>
+<td align="left">Gr_Liv_Area</td>
+<td align="left">First_Flr_SF</td>
+<td align="right">0.56217</td>
+</tr>
+</tbody>
+</table>
+<p>La variable Garage_Cars mesure la taille du garage en capacité de voiture et la variable Garage_Area mesure la taille du garage en pieds carrés (mesure américaine). La corrélation entre ces deux variables est positive et très forte.
+La superficie totale en pieds carrés du sous-sol (Total_Bsmt_SF) est fortement corrélée avec la superficie du premier étage (First_Flr_SF).
+Nous voyons également que la corrélation entre la superficie totale (Gr_Liv_Area) de la maison et son prix (Sale_Price) est également positive et forte.
+Nous voyons également qu’il y a une corrélation positive entre le prix de la maison et la superficie totale du sous-sol. La superficie totale corrèle également positivement et fortement avec les salles de bain complètes au-dessus du niveau du sol (Full_Bath).</p>
+<table>
+<caption><span id="tab:unnamed-chunk-9">Table 2.3: </span>Les 10 premières fortes corrélations négatives entre les variables</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">1</th>
+<th align="left">2</th>
+<th align="right">cor.coef</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td align="left">BsmtFin_SF_1</td>
+<td align="left">Bsmt_Full_Bath</td>
+<td align="right">-0.47342</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td align="left">Bsmt_Full_Bath</td>
+<td align="left">Bsmt_Unf_SF</td>
+<td align="right">-0.39863</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td align="left">Year_Built</td>
+<td align="left">Enclosed_Porch</td>
+<td align="right">-0.37436</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td align="left">Longitude</td>
+<td align="left">Sale_Price</td>
+<td align="right">-0.25140</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td align="left">First_Flr_SF</td>
+<td align="left">Second_Flr_SF</td>
+<td align="right">-0.25006</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td align="left">Longitude</td>
+<td align="left">Full_Bath</td>
+<td align="right">-0.22877</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td align="left">Year_Remod_Add</td>
+<td align="left">Enclosed_Porch</td>
+<td align="right">-0.22038</td>
+</tr>
+<tr class="even">
+<td>23</td>
+<td align="left">Longitude</td>
+<td align="left">Garage_Area</td>
+<td align="right">-0.20820</td>
+</tr>
+<tr class="odd">
+<td>26</td>
+<td align="left">Total_Bsmt_SF</td>
+<td align="left">Second_Flr_SF</td>
+<td align="right">-0.20449</td>
+</tr>
+<tr class="even">
+<td>29</td>
+<td align="left">Total_Bsmt_SF</td>
+<td align="left">BsmtFin_SF_1</td>
+<td align="right">-0.16331</td>
+</tr>
+</tbody>
+</table>
+<p>La lecture de ces corrélations nous montre certaines choses qu’on connaissait déjà à savoir par exemple que le prix d’une maison corrèle positivement avec sa superficie. Toutefois, étudier les paires de corrélations une à une peut être redondant du fait que plusieurs variables peuvent évoluer dans le même sens. Il serait donc plus intéressant de synthétiser les axes de variabilités qui existent entre les variables.<br />
+Pour ce faire nous pouvons utiliser l’analyse en composante principale qui est une méthode factorielle permettant de résumer la matrice des variances-covariances.</p>
+</div>
+<div id="lanalyse-en-composantes-principales" class="section level2">
+<h2><span class="header-section-number">2.3</span> L’analyse en composantes principales</h2>
+<p>Le cercle de corrélation que nous construisons ici est le résultat d’une analyse en composantes principales sur les données quantitatives. Par souci de simplicité nous ne représenterons que le premier plan factoriel.<br />
+Ce premier plan factoriel comporte affiche la direction et la force de corrélation de chacune des variables sur les deux premiers axes factoriels. En ACP le pouvoir explicatif des axes est descendant, les deux premiers axes expliquent souvent une grande partie de la variance.
+L’intérêt de cette représentation est d’observer dans quel sens vont les corrélations et comment les variables peuvent être groupées sur les axes factoriels.</p>
+<p><img src="main_files/figure-html/unnamed-chunk-12-1.png" width="3600" /></p>
+<p>Le pouvoir explicatif marginal d’une composante est négative. Les deux premières composantes arrivent à expliquer 27,1% de la variance des caractéristiques des maisons.</p>
+<p>Nous pouvons représenter sur un plan factoriel les deux premières composantes principales pour observer le sens des variances.</p>
+<p><img src="main_files/figure-html/unnamed-chunk-13-1.png" width="3600" /></p>
+<p>Le cercle des corrélations montre qu’une grande partie des variable est fortement corrélée avec l’axe 1. Ce qui signifie que ces variables évoluent dans le même sens.</p>
+<p>Pour avoir une meilleure idée de ce que représente chacun des axes, nous pouvons lister les contributions respectives des variables à la définition des axes.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-14">Table 2.4: </span>Les dix premières contributions à la première composante</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Dim.1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gr_Liv_Area</td>
+<td align="right">11.4213</td>
+</tr>
+<tr class="even">
+<td align="left">Garage_Cars</td>
+<td align="right">9.2884</td>
+</tr>
+<tr class="odd">
+<td align="left">Garage_Area</td>
+<td align="right">8.8031</td>
+</tr>
+<tr class="even">
+<td align="left">Full_Bath</td>
+<td align="right">8.1581</td>
+</tr>
+<tr class="odd">
+<td align="left">First_Flr_SF</td>
+<td align="right">7.3976</td>
+</tr>
+<tr class="even">
+<td align="left">TotRms_AbvGrd</td>
+<td align="right">7.3825</td>
+</tr>
+<tr class="odd">
+<td align="left">Total_Bsmt_SF</td>
+<td align="right">7.0687</td>
+</tr>
+<tr class="even">
+<td align="left">Year_Built</td>
+<td align="right">6.0077</td>
+</tr>
+<tr class="odd">
+<td align="left">Year_Remod_Add</td>
+<td align="right">4.9472</td>
+</tr>
+<tr class="even">
+<td align="left">Mas_Vnr_Area</td>
+<td align="right">4.5411</td>
+</tr>
+</tbody>
+</table>
+<p>Les variables qui ont les plus fortes contributions sur le premier axe factoriel sont principalement des variables qui touchent à la superficie de la maison ainsi que la superficie des pièces (Garages, salles de bain) que contient la maison.
+Cette composante désigne donc globalement la taille de la maison.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-15">Table 2.5: </span>Les dix premières contributions à la deuxième composante</caption>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="right">Dim.2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Second_Flr_SF</td>
+<td align="right">16.2427</td>
+</tr>
+<tr class="even">
+<td align="left">Bedroom_AbvGr</td>
+<td align="right">13.6544</td>
+</tr>
+<tr class="odd">
+<td align="left">Bsmt_Full_Bath</td>
+<td align="right">10.0511</td>
+</tr>
+<tr class="even">
+<td align="left">TotRms_AbvGrd</td>
+<td align="right">9.7775</td>
+</tr>
+<tr class="odd">
+<td align="left">BsmtFin_SF_1</td>
+<td align="right">8.9509</td>
+</tr>
+<tr class="even">
+<td align="left">Year_Built</td>
+<td align="right">4.9721</td>
+</tr>
+<tr class="odd">
+<td align="left">Total_Bsmt_SF</td>
+<td align="right">4.7762</td>
+</tr>
+<tr class="even">
+<td align="left">Gr_Liv_Area</td>
+<td align="right">4.7257</td>
+</tr>
+<tr class="odd">
+<td align="left">Half_Bath</td>
+<td align="right">3.9566</td>
+</tr>
+<tr class="even">
+<td align="left">Kitchen_AbvGr</td>
+<td align="right">3.5546</td>
+</tr>
+</tbody>
+</table>
+<p>Sur la deuxième composante ce sont les caractéristiques relatives au nombre d’étages et de pièces situés dans les étages des maisons.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-générale.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modélisations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

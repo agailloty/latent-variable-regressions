@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Annexes | Prédire le prix des maisons présentant plusieurs caractéristiques</title>
+  <meta name="description" content="6 Annexes | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Annexes | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Annexes | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="bibliographie.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-générale.html"><a href="introduction-générale.html"><i class="fa fa-check"></i><b>1</b> Introduction générale</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-générale.html"><a href="introduction-générale.html#présentation-des-données"><i class="fa fa-check"></i><b>1.1</b> Présentation des données</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-générale.html"><a href="introduction-générale.html#plan-de-létude"><i class="fa fa-check"></i><b>1.3</b> Plan de l’étude</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html"><i class="fa fa-check"></i><b>2</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-univariées"><i class="fa fa-check"></i><b>2.1</b> Statistiques descriptives univariées</a></li>
+<li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
+<li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modélisations.html"><a href="modélisations.html"><i class="fa fa-check"></i><b>3</b> Modélisations</a><ul>
+<li class="chapter" data-level="3.1" data-path="modélisations.html"><a href="modélisations.html#transformations-des-données"><i class="fa fa-check"></i><b>3.1</b> Transformations des données</a></li>
+<li class="chapter" data-level="3.2" data-path="modélisations.html"><a href="modélisations.html#modèle-de-régression-multiple"><i class="fa fa-check"></i><b>3.2</b> Modèle de régression multiple</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="modélisations.html"><a href="modélisations.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.2.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="modélisations.html"><a href="modélisations.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.2.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modélisations.html"><a href="modélisations.html#régressions-sur-variables-latentes"><i class="fa fa-check"></i><b>3.3</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="modélisations.html"><a href="modélisations.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>3.3.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="modélisations.html"><a href="modélisations.html#régréssion-sur-composantes-principales"><i class="fa fa-check"></i><b>3.4</b> Régréssion sur composantes principales</a></li>
+<li class="chapter" data-level="3.5" data-path="modélisations.html"><a href="modélisations.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>3.5</b> Résultats d’estimations avec SAS</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="modélisations.html"><a href="modélisations.html#régéressions-sur-les-moindres-carrés-partiels"><i class="fa fa-check"></i><b>3.5.1</b> Régéressions sur les moindres carrés partiels</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>4</b> Comparaison des performances des différentes méthodes d’estimation</a></li>
+<li class="chapter" data-level="5" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>5</b> Bibliographie</a></li>
+<li class="chapter" data-level="6" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>6</b> Annexes</a><ul>
+<li class="chapter" data-level="6.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>6.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Prédire le prix des maisons présentant plusieurs caractéristiques</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="annexes" class="section level1">
+<h1><span class="header-section-number">6</span> Annexes</h1>
+<div id="annexe-1-liste-exhaustive-des-colonnes" class="section level2">
+<h2><span class="header-section-number">6.1</span> Annexe 1 : Liste exhaustive des colonnes</h2>
+<p>Le jeu de données contient initialement 81 colonnes</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Colonnes</th>
+<th align="left">..</th>
+<th align="left">…</th>
+<th align="left">….</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MS_SubClass</td>
+<td align="left">Roof_Style</td>
+<td align="left">Central_Air</td>
+<td align="left">Garage_Area</td>
+</tr>
+<tr class="even">
+<td align="left">MS_Zoning</td>
+<td align="left">Roof_Matl</td>
+<td align="left">Electrical</td>
+<td align="left">Garage_Qual</td>
+</tr>
+<tr class="odd">
+<td align="left">Lot_Frontage</td>
+<td align="left">Exterior_1st</td>
+<td align="left">First_Flr_SF</td>
+<td align="left">Garage_Cond</td>
+</tr>
+<tr class="even">
+<td align="left">Lot_Area</td>
+<td align="left">Exterior_2nd</td>
+<td align="left">Second_Flr_SF</td>
+<td align="left">Paved_Drive</td>
+</tr>
+<tr class="odd">
+<td align="left">Street</td>
+<td align="left">Mas_Vnr_Type</td>
+<td align="left">Low_Qual_Fin_SF</td>
+<td align="left">Wood_Deck_SF</td>
+</tr>
+<tr class="even">
+<td align="left">Alley</td>
+<td align="left">Mas_Vnr_Area</td>
+<td align="left">Gr_Liv_Area</td>
+<td align="left">Open_Porch_SF</td>
+</tr>
+<tr class="odd">
+<td align="left">Lot_Shape</td>
+<td align="left">Exter_Qual</td>
+<td align="left">Bsmt_Full_Bath</td>
+<td align="left">Enclosed_Porch</td>
+</tr>
+<tr class="even">
+<td align="left">Land_Contour</td>
+<td align="left">Exter_Cond</td>
+<td align="left">Bsmt_Half_Bath</td>
+<td align="left">Three_season_porch</td>
+</tr>
+<tr class="odd">
+<td align="left">Utilities</td>
+<td align="left">Foundation</td>
+<td align="left">Full_Bath</td>
+<td align="left">Screen_Porch</td>
+</tr>
+<tr class="even">
+<td align="left">Lot_Config</td>
+<td align="left">Bsmt_Qual</td>
+<td align="left">Half_Bath</td>
+<td align="left">Pool_Area</td>
+</tr>
+<tr class="odd">
+<td align="left">Land_Slope</td>
+<td align="left">Bsmt_Cond</td>
+<td align="left">Bedroom_AbvGr</td>
+<td align="left">Pool_QC</td>
+</tr>
+<tr class="even">
+<td align="left">Neighborhood</td>
+<td align="left">Bsmt_Exposure</td>
+<td align="left">Kitchen_AbvGr</td>
+<td align="left">Fence</td>
+</tr>
+<tr class="odd">
+<td align="left">Condition_1</td>
+<td align="left">BsmtFin_Type_1</td>
+<td align="left">Kitchen_Qual</td>
+<td align="left">Misc_Feature</td>
+</tr>
+<tr class="even">
+<td align="left">Condition_2</td>
+<td align="left">BsmtFin_SF_1</td>
+<td align="left">TotRms_AbvGrd</td>
+<td align="left">Misc_Val</td>
+</tr>
+<tr class="odd">
+<td align="left">Bldg_Type</td>
+<td align="left">BsmtFin_Type_2</td>
+<td align="left">Functional</td>
+<td align="left">Mo_Sold</td>
+</tr>
+<tr class="even">
+<td align="left">House_Style</td>
+<td align="left">BsmtFin_SF_2</td>
+<td align="left">Fireplaces</td>
+<td align="left">Year_Sold</td>
+</tr>
+<tr class="odd">
+<td align="left">Overall_Qual</td>
+<td align="left">Bsmt_Unf_SF</td>
+<td align="left">Fireplace_Qu</td>
+<td align="left">Sale_Type</td>
+</tr>
+<tr class="even">
+<td align="left">Overall_Cond</td>
+<td align="left">Total_Bsmt_SF</td>
+<td align="left">Garage_Type</td>
+<td align="left">Sale_Condition</td>
+</tr>
+<tr class="odd">
+<td align="left">Year_Built</td>
+<td align="left">Heating</td>
+<td align="left">Garage_Finish</td>
+<td align="left">Sale_Price</td>
+</tr>
+<tr class="even">
+<td align="left">Year_Remod_Add</td>
+<td align="left">Heating_QC</td>
+<td align="left">Garage_Cars</td>
+<td align="left">Longitude</td>
+</tr>
+</tbody>
+</table>
+<p>Description des colonnes :</p>
+<p>SalePrice - the property’s sale price in dollars. This is the target variable that you’re trying to predict.</p>
+<p>MSSubClass: The building class<br />
+MSZoning: The general zoning classification<br />
+LotFrontage: Linear feet of street connected to property<br />
+LotArea: Lot size in square feet<br />
+Street: Type of road access<br />
+Alley: Type of alley access<br />
+LotShape: General shape of property<br />
+LandContour: Flatness of the property<br />
+Utilities: Type of utilities available<br />
+LotConfig: Lot configuration<br />
+LandSlope: Slope of property<br />
+Neighborhood: Physical locations within Ames city limits<br />
+Condition1: Proximity to main road or railroad<br />
+Condition2: Proximity to main road or railroad (if a second is present)<br />
+BldgType: Type of dwelling<br />
+HouseStyle: Style of dwelling<br />
+OverallQual: Overall material and finish quality<br />
+OverallCond: Overall condition rating<br />
+YearBuilt: Original construction date<br />
+YearRemodAdd: Remodel date<br />
+RoofStyle: Type of roof<br />
+RoofMatl: Roof material<br />
+Exterior1st: Exterior covering on house<br />
+Exterior2nd: Exterior covering on house (if more than one material)<br />
+MasVnrType: Masonry veneer type<br />
+MasVnrArea: Masonry veneer area in square feet<br />
+ExterQual: Exterior material quality<br />
+ExterCond: Present condition of the material on the exterior<br />
+Foundation: Type of foundation<br />
+BsmtQual: Height of the basement<br />
+BsmtCond: General condition of the basement<br />
+BsmtExposure: Walkout or garden level basement walls<br />
+BsmtFinType1: Quality of basement finished area<br />
+BsmtFinSF1: Type 1 finished square feet<br />
+BsmtFinType2: Quality of second finished area (if present)<br />
+BsmtFinSF2: Type 2 finished square feet<br />
+BsmtUnfSF: Unfinished square feet of basement area<br />
+TotalBsmtSF: Total square feet of basement area<br />
+Heating: Type of heating<br />
+HeatingQC: Heating quality and condition<br />
+CentralAir: Central air conditioning<br />
+Electrical: Electrical system<br />
+1stFlrSF: First Floor square feet<br />
+2ndFlrSF: Second floor square feet<br />
+LowQualFinSF: Low quality finished square feet (all floors)<br />
+GrLivArea: Above grade (ground) living area square feet<br />
+BsmtFullBath: Basement full bathrooms<br />
+BsmtHalfBath: Basement half bathrooms<br />
+FullBath: Full bathrooms above grade<br />
+HalfBath: Half baths above grade<br />
+Bedroom: Number of bedrooms above basement level<br />
+Kitchen: Number of kitchens<br />
+KitchenQual: Kitchen quality<br />
+TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)<br />
+Functional: Home functionality rating<br />
+Fireplaces: Number of fireplaces<br />
+FireplaceQu: Fireplace quality<br />
+GarageType: Garage location<br />
+GarageYrBlt: Year garage was built<br />
+GarageFinish: Interior finish of the garage<br />
+GarageCars: Size of garage in car capacity<br />
+GarageArea: Size of garage in square feet<br />
+GarageQual: Garage quality<br />
+GarageCond: Garage condition<br />
+PavedDrive: Paved driveway<br />
+WoodDeckSF: Wood deck area in square feet<br />
+OpenPorchSF: Open porch area in square feet<br />
+EnclosedPorch: Enclosed porch area in square feet<br />
+3SsnPorch: Three season porch area in square feet<br />
+ScreenPorch: Screen porch area in square feet<br />
+PoolArea: Pool area in square feet<br />
+PoolQC: Pool quality<br />
+Fence: Fence quality<br />
+MiscFeature: Miscellaneous feature not covered in other categories<br />
+MiscVal: $Value of miscellaneous feature<br />
+MoSold: Month Sold<br />
+YrSold: Year Sold<br />
+SaleType: Type of sale<br />
+SaleCondition: Condition of sale</p>
+<p>Présenter le sujet :
+- Statistiques descriptives univariées (variable par variable)
+- Répondre à une question ou une série de questions
+- Présenter les statistiques bivariées : corrélation , test du khi-deux
+- ACP au préalable
+Comparer les résultats des différentes méthodes :
+- dire pourquoi utiliser chacune des méthode : pourquoi une OLS, pourquoi une PCR, PLS.
+- Dire quel résultat auquel on s’attend</p>
+<p>Présenter uniquement les tableaux de résultats principaux et les graphique. Mettre ce qui est moins pertinent en annexes. Commenter les résultats</p>
+<p>Conclure : analyser les résultats et les comparer à ce qu’on avait dit au début
+Quels résultats ces méthodes apportent?
+-</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="bibliographie.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -2,18 +2,17 @@
 title: "Prédire le prix des maisons présentant plusieurs caractéristiques"
 subtitle: "Une analyse par les méthodes de régression sur variables latentes"
 output: 
-  #prettydoc::html_pretty:
-    #theme: cayman
-    #number_section: true
-   word_document:
-      reference_docx : "template2.docx"
+  bookdown::gitbook
+   #word_document:
+      #reference_docx : "template2.docx"
 author: Axel-Cleris Gailloty
-toc: true
+output_dir : docs
+#toc: true
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 pkg <- c("tidyverse", "plsr", "caret", "pls", "recipes", "dplyr",
-         "AmesHousing", "ggcorrplot", "factoextra", "hrbrthemes")
+         "AmesHousing", "ggcorrplot", "factoextra", "hrbrthemes", "bookdown")
 
 for (package in pkg){
   if (package %in% installed.packages()[, "Package"]){
@@ -32,6 +31,7 @@ knitr::opts_chunk$set(dpi = 350, message = FALSE,
                       fig.height = 8, fig.width = 8, dpi=300)
 source("functions.R")
 kable <- knitr::kable
+options(scipen = 10, digits = 5)
 ```
 
 
@@ -40,7 +40,7 @@ kable <- knitr::kable
 
 L'estimation de la valeur d'un bien immobilier est une étape cruciale dans la vente du bien. L'économie de la décision a mis en exergue une opposition entre le comportement des acheteurs et celui des vendeurs de biens immobiliers. Dans un premier temps, les vendeurs de biens immobiliers ont tendance à surévaluer leurs propriétés pour des raisons personnelles (il peut s'agir d'une propriété familiale à laquelle le vendeur attache une valeur sentimentale) tandis que l'attitude des acheteurs est toute autre : les acheteurs ont tendance à fixer un prix de réserve bien souvent inférieur à la valeur à laquelle les propriétaires vendent le bien immobilier. Cette situation peut conduire à une inefficience du marché des biens immobiliers.  
 
-Ce problèmpe d'inefficience est principalement due au différentiel d'estimation de la valeur que font les parties prenantes sur le marché. C'est pour cette raison que dans le cadre de cette étude, la question qui nous occupe est celle de comprendre les facteurs entrant dans la valorisation des biens immobiliers. Plus précisémenent il s'agit de se pencher sur les caractéristiques observables du bien qui entre positivement ou négativement dans la valeur du bien.  
+Ce problème d'inefficience est principalement dû au différentiel d'estimation de la valeur que font les parties prenantes sur le marché. C'est pour cette raison que dans le cadre de cette étude, la question qui nous occupe est celle de comprendre les facteurs entrant dans la valorisation des biens immobiliers. Plus précisément il s'agit de se pencher sur les caractéristiques observables du bien qui entre positivement ou négativement dans la valeur du bien.  
 
 Pour comprendre donc ces facteurs cette étude se base sur une historique des des ventes de propriétés résidentielles effectuées dans la ville de Ames dans l'Etat de l'Iowa aux Etats-Unis sur la période de 2006 à 2010.
 
@@ -177,8 +177,8 @@ Pour ce faire nous pouvons utiliser l'analyse en composante principale qui est u
 
 ## L'analyse en composantes principales
 
-Le cercle de corrélation que nous contruisons ici est le résultat d'une analyse en composantes principales sur les données quantitatives. Par souci de simplicité nous ne représenterons que le premier plan factoriel.  
-Ce premier plan factoriel comporte affiche la direction et la force de corrélation de chacunes des variables sur les deux premiers axes factoriels. En ACP le pouvoir explicatif des axes est déscendant, les deux premiers axes expliquent souvent une grande partie de la variance. 
+Le cercle de corrélation que nous construisons ici est le résultat d'une analyse en composantes principales sur les données quantitatives. Par souci de simplicité nous ne représenterons que le premier plan factoriel.  
+Ce premier plan factoriel comporte affiche la direction et la force de corrélation de chacune des variables sur les deux premiers axes factoriels. En ACP le pouvoir explicatif des axes est descendant, les deux premiers axes expliquent souvent une grande partie de la variance. 
 L'intérêt de cette représentation est d'observer dans quel sens vont les corrélations et comment les variables peuvent être groupées sur les axes factoriels.
 
 ```{r}
@@ -225,11 +225,11 @@ fviz_eig(pc, main = "Pouvoir explicatif de chaque composante principale",
   theme(plot.title = element_text(face = "bold", size = 20))
 ```
 
-Le pouvoir explicatif marginal d'une composante est négative. Les deux premières composantes arrivent à expliquer 29,5% de la variance des caractéristiques des maisons.  
+Le pouvoir explicatif marginal d'une composante est négative. Les deux premières composantes arrivent à expliquer 27,1% de la variance des caractéristiques des maisons.  
 
 Nous pouvons représenter sur un plan factoriel les deux premières composantes principales pour observer le sens des variances.
 
-```{r fig.height=15, fig.width=15}
+```{r fig.height=12, fig.width=12}
 fviz_pca_var(pc, repel = TRUE, 
              title = "Cercle des corrélations",
              ) + theme_ipsum() +
@@ -237,6 +237,8 @@ fviz_pca_var(pc, repel = TRUE,
     plot.title = element_text(size = 50, face = "bold")
   )
 ```
+
+Le cercle des corrélations montre qu'une grande partie des variable est fortement corrélée avec l'axe 1. Ce qui signifie que ces variables évoluent dans le même sens.
 
 Pour avoir une meilleure idée de ce que représente chacun des axes, nous pouvons lister les contributions respectives des variables à la définition des axes.
 
@@ -248,7 +250,7 @@ data.frame(pc$var$contrib[, 1:2]) %>%
   kable(caption = "Les dix premières contributions à la première composante")
 ```
 
-Les variables qui ont les plus fortes contributions sur le premier axe factoriel en dehors du prix sont principalement des variables qui touchent à la superficie de la maison ainsi que la superficie des pièces (Garages, salles de bain) que contient la maison. 
+Les variables qui ont les plus fortes contributions sur le premier axe factoriel sont principalement des variables qui touchent à la superficie de la maison ainsi que la superficie des pièces (Garages, salles de bain) que contient la maison. 
 Cette composante désigne donc globalement la taille de la maison.
 
 ```{r}
@@ -256,10 +258,10 @@ data.frame(pc$var$contrib[, 1:2]) %>%
   tibble::rownames_to_column(var = "Variable") %>%
   arrange(-Dim.2) %>% select(Variable, Dim.2) %>%
   slice(1:10) %>%
-  kable(caption = "Les dix premières contributions à la deuxièeme composante")
+  kable(caption = "Les dix premières contributions à la deuxième composante")
 ```
 
-Sur la deuxième composante ce sont les caractéristiques relatives au nombre d'étages et de pièces situés
+Sur la deuxième composante ce sont les caractéristiques relatives au nombre d'étages et de pièces situés dans les étages des maisons.
 
 
 # Modélisations
@@ -269,9 +271,9 @@ Sur la deuxième composante ce sont les caractéristiques relatives au nombre d'
 ## Transformations des données
 
 
-Comme nous l'avions présenté dans la présentation des données, 46 des colonnes présentes dans le jeu de données ne sont pas quantitatives et continues. En effet 23 sont qualitatives ordinales et 23 autres sont qualitatives simples. Il est donc important que nous trouvions une stratégie pour inclure ces colonnes dans le modèle car ces informations qui ne sont pas nécessairement quantitatives sont importantes pour comprendre l'inertie de la variable que nous cherchons à modéliser qui est en l'occurence le prix du bien immobilier (`Sale_Price`).
+Comme nous l'avions présenté dans la présentation des données, 46 des colonnes présentes dans le jeu de données ne sont pas quantitatives et continues. En effet 23 sont qualitatives ordinales et 23 autres sont qualitatives simples. Il est donc important que nous trouvions une stratégie pour inclure ces colonnes dans le modèle car ces informations qui ne sont pas nécessairement quantitatives sont importantes pour comprendre l'inertie de la variable que nous cherchons à modéliser qui est en l'occurrence le prix du bien immobilier (`Sale_Price`).
 
-Pour nous assurer de l'importance d'inclure les variables non quantitatives dans le modèle, nous allons construire deux modèles de regression multiples simples. Le premier modèle inclut uniquement les variables quantitatives continues et le second modèle va inclure en plus des variables quantitatives les variables qualitatives transformées.
+Pour nous assurer de l'importance d'inclure les variables non quantitatives dans le modèle, nous allons construire deux modèles de régression multiples simples. Le premier modèle inclut uniquement les variables quantitatives continues et le second modèle va inclure en plus des variables quantitatives les variables qualitatives transformées.
 
 ## Modèle de régression multiple
 
@@ -292,7 +294,7 @@ Les variables sont toutes en niveau, nous pouvons donc interpréter les coeffici
 
 ### Le test d'inflation de la variance (VIF)
 
-Il n'est pas possible de réaliser le test d'inflation de la variance (*Variance Inflation Factor*) sur le modèle car le coefficient de la variable `Gr_Liv_Area` n'a pas été calculé à cause de la multicolinéaité. Pour pouvoir quantifier la multicolinéarité entre les variables, nous devons donc estimer un nouveau modèle dans lequel la variable `Gr_Liv_Area` est absente. 
+Il n'est pas possible de réaliser le test d'inflation de la variance (*Variance Inflation Factor*) sur le modèle car le coefficient de la variable `Gr_Liv_Area` n'a pas été calculé à cause de la multicolinéarité. Pour pouvoir quantifier la multicolinéarité entre les variables, nous devons donc estimer un nouveau modèle dans lequel la variable `Gr_Liv_Area` est absente. 
 
 Voici donc les résultats du test VIF que trouvons lorsque la variable `Gr_Liv_Area` est omise.
 
@@ -316,7 +318,7 @@ Nous pouvons représenter un histogramme de la distribution des résidus du mod�
 ggplot() + aes(x = mod$residuals) + 
   geom_histogram(bins = 70, color = "white") + 
   theme_minimal() + 
-  labs(title = "Histogramme des résidus", x= "Résidu") +
+  labs(title = "Histogramme des résidus", x= "Résidus") +
   theme(plot.title = element_text(face = "bold", size = 20))
 
 ```
@@ -555,3 +557,5 @@ Présenter uniquement les tableaux de résultats principaux et les graphique. Me
 Conclure : analyser les résultats et les comparer à ce qu'on avait dit au début
 Quels résultats ces méthodes apportent?
 - 
+
+
