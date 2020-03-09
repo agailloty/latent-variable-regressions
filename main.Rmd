@@ -6,7 +6,7 @@ output:
    #word_document:
       #reference_docx : "template2.docx"
 author: Axel-Cleris Gailloty
-toc: true
+#toc: true
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
@@ -357,6 +357,53 @@ la méthode prédictive originale de Wold (1966) et la méthode SIMPLS de de Jon
 
 En raison du fait que nous ne cherchons ici qu'à expliquer une seule variable (y), à savoir le prix des maisons, nous n'utiliserons pas la régression sur rang réduit car cela revient à faire une régression multiple, ce que nous avons déjà fait dans la section 3.2.
 
+# Le principe de la méthode de la régression sur les composantes principales
+
+Dans le cadre d'une régression multiple, nous cherchons à expliquer l'endogène y à l'aide de variables explicatives X. Nous cherchons donc $y = \alpha + \beta . X$
+
+La régression sur les composantes principales consiste à remplacer la matrice des $X$ (n lignes et m colonnes) par une nouvelle matrice T dérivée de X, de n lignes et k colonnes, avec k très inférieur à m.
+
+Chaque colonne k doit être une combinaison linéaire des variables d'origine.
+
+$$T= X.W$$
+
+
+Avec $W$ la matrice (m,k) des coefficients définissant les combinaisons linéaires, T une matrice dont les colonnes forment des variables « artificielles » obtenues par combinaison linéaire des variables
+d’origine.  
+Une régression multiple est ensuite appliquée avec T à la place de X :
+$$y = c + d.T$$
+
+Il faut donc déterminer $W$ de manière à avoir une matrice de variables explicatives T plus adaptée au calcul de la régression que la matrice X d’origine.
+
+Deux méthodes pour construire T (et donc W) : RCP et RPLS
+
+## Régression sur composantes principales (RCP ou PCR)
+
+ACP puis régression multiple. L’ACP nécessite des variables quantitatives. A partir des variables X centrées, l’ACP normée donne la matrice T dont les colonnes sont les composantes principales.   
+Elles sont orthogonales entre elles (plus de problème de colinéarité). La matrice $W$ est la matrice des coefficients des combinaisons linéaires (coordonnées sur les composantes principales).
+
+Mais, contrairement à la PCR, le calcul de T se fait en tenant compte de la variable à prédire $y$. Double modélisation :
+
+X = TP + R (1)
+Y = TQ + F (2)
+
+Avec : R matrice des résidus associées à la prédiction de X ;
+F vecteur des résidus associé à la prédiction de Y.  
+
+Première étape : calculer t1 la première composante principale, puis estimer (1) et (2) à une seule composante :
+
+$X = t_1 . p_1 + R1$ et $Y = t_1 . q_1 + F_1$
+
+Avec $t_1$ de dimension (n,1)
+$p_1$ de dim (1,m) loadings
+$q_1$ de dim (1,1) loadings
+
+On introduit une deuxième composante $t_2$. Ainsi, une ligne $x_i$ de X est égale à : $x_i = t_1i p_1 + t_2i p2$ 
+
+L’introduction de nouvelles composantes se fait selon la même procédure : partant d’un modèle à k composantes, on créé un nouveau modèle à k+1 composantes en calculant une nouvelle composante tk, puis les paramètres des deux modèles couplés :
+$X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1$
+$Y = t_1q_1+t_2 q_2 +…+t_k q_k + t_k+1 q_k+1 + F_k+1$
+
 ## Régréssion sur composantes principales
 
 La méthode de régression sur composantes principales consiste à effectuer une régression linéaire simple ou multiple sur les coordonnées des individus projetés dans un plan factoriel à k dimensions avec k strictement plus petit que le nombre de variables initial.
@@ -410,60 +457,43 @@ Les résultats globaux du modèle que nous trouvons sont les mêmes avec R. Les 
 
 Pour pouvoir interpréter les coefficients, il importe de savoir ce que mesure chaque composante. A l'aide de R nous pouvons, comme nous l'avons fait dans la section 2.3, afficher ce que mesure chaque composante en affichant les 10 premières contributions à chaque composante.
 
+
 ```{r}
 retrieve_dims_contrib <- function(pca.obj, dim = 1, keep = 10){
   dims = paste0("Dim.", dim)
   comp.df <- data.frame(pca.obj$var$contrib)
   idx <- order(comp.df[dims], decreasing = TRUE)
-  head(comp.df[idx,][dims], keep)
+  display = head(comp.df[idx,][dims], keep)
+  display$dim <- dims
+  display <- rownames_to_column(display, "variable")
+  colnames(display) = c("variable", "contrib", "dim")
+  return(display)
 }
 
 ```
-
 
 
 Les contributions des variables aux différents axes factoriels sont :
 
-```{r}
-kable(retrieve_dims_contrib(pc, dim = 1),
-      caption = "Les contributions des variables aux différents axes factoriels")
-```
 
 ```{r}
-kable(retrieve_dims_contrib(pc, dim = 2),
-      caption = "Les contributions des variables aux différents axes factoriels")
+df <- retrieve_dims_contrib(pc, dim = 1)
+for (i in 2:5) df <- rbind(df, retrieve_dims_contrib(pc, i))
 ```
 
 
-```{r}
-kable(retrieve_dims_contrib(pc, dim = 3),
-      caption = "Les contributions des variables aux différents axes factoriels")
+```{r fig.height=5, fig.width=10}
+df %>%
+  ggplot(aes(x = reorder(variable,contrib), y = contrib)) +
+  geom_col( col = "black", fill = "lightblue") + coord_flip() + 
+  facet_wrap(~dim, scales = "free", nrow = 2) + 
+  labs(title = "Contributions des variables à chacune des dimensions",
+         subtitle = "La longueur de la barre indique le poids de la variable sur la dimension.") +
+  theme_ipsum()
 ```
 
+Plusieurs variables ont un poids relativement comparable sur la dimension 1. 
 
-```{r}
-kable(retrieve_dims_contrib(pc, dim = 4),
-      caption = "Les contributions des variables aux différents axes factoriels")
-```
-
-
-```{r}
-tidy_all_dims <- function(pc, ndims = 5, keep = 10){
-  df <- data.frame(retrieve_dims_contrib(pc, 1, keep = keep), dim = "Dim.1")
-  
-  for (i in 2:ndims){
-    df_i <- data.frame(retrieve_dims_contrib(pc, i, keep = keep), dim = paste0("Dim.", i)
-    df <- rbind(df, df_i)
-  }
-  return(df)
-}
-```
-
-
-
-```{r}
-tidy_all_dims(pc)
-```
 
 
 ### Les loadings et les weights
