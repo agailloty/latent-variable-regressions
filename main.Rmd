@@ -10,7 +10,7 @@ author: Axel-Cleris Gailloty
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-pkg <- c("tidyverse", "plsr", "caret", "pls", "recipes", "dplyr",
+pkg <- c("tidyverse", "plsr", "caret", "pls", "recipes", "dplyr", "psych", "tidytext",
          "AmesHousing", "ggcorrplot", "factoextra", "hrbrthemes", "bookdown")
 
 for (package in pkg){
@@ -336,12 +336,13 @@ Dès lors que les résidus ne suivent pas une loi normale, les estimations faite
 
 ### Pourquoi faire une régression sur les variables latentes ?
 
-Les méthodes de régressions sur les latentes nous permettent d'adresser certaines limites que posent les méthodes de régression sur les moindres carrés. En effet pour qu'une régression par les OLS soit sans biais il faut que toutes les hypothèses posées par les OLS soient vérifiées. Parmi ces hypothèses nous pouvons citer l'hypothèse de l'absence de corrélations entre les variables ou encore l'hypothèse d'absence de colinéarité entre les variables.
+Les méthodes de régressions sur les latentes nous permettent d'adresser certaines limites que posent les méthodes de régression par les moindres carrés. En effet pour qu'une régression par les OLS soit sans biais il faut que toutes les hypothèses posées par les OLS soient vérifiées. Parmi ces hypothèses nous pouvons citer l'hypothèse de l'absence de corrélations entre les variables ou encore l'hypothèse d'absence de colinéarité entre les variables.
 
 Or en général les phénomènes que nous cherchons à expliquer, dans notre travail nous cherchons à expliquer le prix de vente d'un bien immobilier, ne vérifient pas toujours ces hypothèses à cause entre autres de l'interdépendance entre les variables.
-Dans le cas d'un bien immobilier, la taille des pièces du bien dépend de la superficie totale de la maison.  Cette situation nous amène à des résultats potentiellement biasés et non généralisables pour expliquer le phénomène.  
+Dans le cas d'un bien immobilier, la taille des pièces du bien dépend de la superficie totale de la maison.  Cette situation nous amène à des résultats potentiellement biasés et non généralisables pour expliquer le phénomène.   
 
-Les méthodes de régression sur les variables nous permettent donc de corriger ces limites des régression standards en créant des variables synthétiques sur lesquelles nous allons faire les estimations.
+Les méthodes de régression sur les variables nous permettent donc de corriger ces limites des régression standards en créant des variables synthétiques sur lesquelles nous allons faire les estimations.  
+
 Les variables synthétiques créées lors de l'estimation présentent une propriété très intéressante qui est celle de l'orthogonalité. En effet les variables synthétiques (ou les composantes) ne sont pas corrélées entre elles-mêmes, ce faisant nous pouvons donc estimer les paramètres du modèle que nous construisons sans courir le risque de violer les hypothèses posées par les moindres carrés ordinaires.
 
 Pour mettre en place ces méthodes, nous allons utiliser la procédure PLS (Partial Least Squares) implémentée dans le logiciel SAS.  
@@ -382,31 +383,6 @@ Deux méthodes pour construire T (et donc W) : RCP et RPLS
 ACP puis régression multiple. L’ACP nécessite des variables quantitatives. A partir des variables X centrées, l’ACP normée donne la matrice T dont les colonnes sont les composantes principales.   
 Elles sont orthogonales entre elles (plus de problème de colinéarité). La matrice $W$ est la matrice des coefficients des combinaisons linéaires (coordonnées sur les composantes principales).
 
-Mais, contrairement à la PCR, le calcul de T se fait en tenant compte de la variable à prédire $y$. Double modélisation :
-
-X = TP + R (1)
-Y = TQ + F (2)
-
-Avec : R matrice des résidus associées à la prédiction de X ;
-F vecteur des résidus associé à la prédiction de Y.  
-
-Première étape : calculer t1 la première composante principale, puis estimer (1) et (2) à une seule composante :
-
-$X = t_1 . p_1 + R1$ et $Y = t_1 . q_1 + F_1$
-
-Avec $t_1$ de dimension (n,1)
-$p_1$ de dim (1,m) loadings
-$q_1$ de dim (1,1) loadings
-
-On introduit une deuxième composante $t_2$. Ainsi, une ligne $x_i$ de X est égale à : $x_i = t_1i p_1 + t_2i p2$ 
-
-L’introduction de nouvelles composantes se fait selon la même procédure : partant d’un modèle à k composantes, on créé un nouveau modèle à k+1 composantes en calculant une nouvelle composante tk, puis les paramètres des deux modèles couplés :
-$X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1$
-$Y = t_1q_1+t_2 q_2 +…+t_k q_k + t_k+1 q_k+1 + F_k+1$
-
-## Régréssion sur composantes principales
-
-La méthode de régression sur composantes principales consiste à effectuer une régression linéaire simple ou multiple sur les coordonnées des individus projetés dans un plan factoriel à k dimensions avec k strictement plus petit que le nombre de variables initial.
 
 Pour cette méthode, nous allons utiliser conjointement SAS et R afin de ressortir le maximum d'informations utiles à l'interprétation des résultats.
 
@@ -420,15 +396,17 @@ Nous choisissons également de faire une validation croisée sur le jeu de donn�
 
 ![](pcr-img/pcr_split-sample.PNG)
 
-Pour pouvoir déterminer avec confiance le nombre de composantes principales (ou facteurs) à retenir dans la PCR, l'algorithme utilise une technique de validation croisée. Une technique de validation croisée consiste à diviser l'échantillon en plusieurs groupes sur lesquels des ajustements successifs sont effectués. L'ajustement du modèle est effectué sur le groupe d'apprentissage et les résultats sont comparés aux observations du groupe test. L'efficaité prédictive est évaluée à l'aide l'indicateur PRESS (Predicted REsidual Sum of Squares).
-Le tableau suivant nous montre que la valeur minimale de la validation croisée est atteinte si le nombre de composantes principales est 8. Toutefois il est préférable de se fier au test qui indique si oui ou non il existe une différence significative entre les 8 composantes.  
+Pour pouvoir déterminer avec confiance le nombre de composantes principales (ou facteurs) à retenir dans la PCR, l'algorithme utilise une technique de validation croisée. Une technique de validation croisée consiste à diviser l'échantillon en plusieurs groupes sur lesquels des ajustements successifs sont effectués. L'ajustement du modèle est effectué sur le groupe d'apprentissage et les résultats sont comparés aux observations du groupe test. L'efficaité prédictive est évaluée à l'aide l'indicateur PRESS (Predicted REsidual Sum of Squares).  
+
+Le tableau suivant nous montre que la valeur minimale de la validation croisée est atteinte si le nombre de composantes principales est 8. Toutefois il est préférable de se fier au test qui indique si oui ou non il existe une différence significative entre les 8 composantes.   
+
 Le test nous indique qu'à partir de la 4e composante il n'existe plus de différences significatives entre les composantes. Nous allons donc retenir 5 composantes pour la suite de l'analyse. 
 
 ![](pcr-img/pcr_analysis_val_crois.png)
 
 
 
-Il convient maintenant d'interpréter les résultats du modèle construit. 
+Il convient maintenant d'interpréter les résultats du modèle construit.   
 Le tableau suivant affiche la variation de pourcentage expliquée par composantes principales
 
 ![](pcr-img/pcr_results.PNG)
@@ -453,9 +431,18 @@ mod_pc <- lm(Sale_Price~., data = coord_pc)
 summary(mod_pc)
 ```
 
+
 Les résultats globaux du modèle que nous trouvons sont les mêmes avec R. Les 5 composantes retenues expliquent bien 75,93% de la variance des prix de vente de la maison.
 
+Nous pouvons écrire ce résultat sous forme d'une équation :
+
+$$SalePrice = 1800796.06 + 27395.65 * Dim1 - 7046.03 * Dim2 + 478.57 * Dim3 + 2778.86* Dim4 + 5769.77* Dim5 $$
+Tous les coefficients sont positifs, à l'exception du coefficient de la dimension 2.
+Le coefficient de la dimension 3 est le plus faible et est non significatif (p-value > 5%).
+
 Pour pouvoir interpréter les coefficients, il importe de savoir ce que mesure chaque composante. A l'aide de R nous pouvons, comme nous l'avons fait dans la section 2.3, afficher ce que mesure chaque composante en affichant les 10 premières contributions à chaque composante.
+
+Nous décidons de représenter ces composantes sur un graphique.
 
 
 ```{r}
@@ -482,32 +469,93 @@ for (i in 2:5) df <- rbind(df, retrieve_dims_contrib(pc, i))
 ```
 
 
-```{r fig.height=5, fig.width=10}
-df %>%
-  ggplot(aes(x = reorder(variable,contrib), y = contrib)) +
+```{r fig.height=8, fig.width=16}
+df %>% mutate(variable = tidytext::reorder_within(variable, contrib, dim)) %>%
+  ggplot(aes(variable, contrib)) +
   geom_col( col = "black", fill = "lightblue") + coord_flip() + 
   facet_wrap(~dim, scales = "free", nrow = 2) + 
+  tidytext::scale_x_reordered() +
   labs(title = "Contributions des variables à chacune des dimensions",
          subtitle = "La longueur de la barre indique le poids de la variable sur la dimension.") +
   theme_ipsum()
 ```
 
-Plusieurs variables ont un poids relativement comparable sur la dimension 1. 
+Le poids des variables sur les trois premières dimensions est assez équilibrée. Les deux dernières dimensions sont chacune fortement dominées par une variable.
+
+```{r}
+data.frame(pc$var$coord) %>%
+psych::pairs.panels( 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE, # show correlation ellipses
+             main = "Corrélation entre les composantes"
+             )
+```
 
 
+### Dimension 1
+
+La dimension 1 fait référence à la superficie de la maison, que ce soit la taille de la résidence et des pièces qui composent la maison. Cette composante est également dans une certaine mesure influencée par l'âge de la maison (l'année où la maison a été construite et l'année où elle a été renovée.)
+
+### Dimension 2
+
+La deuxième dimension se refère aux caractéristiques des maisons telles que la superficie du deuxième étage, et le nombres de pièces (salles de bain, chambres, cuisines) se trouvant au deuxième étage. Cette composante détermine donc le prestige de la maison.  
+
+### Dimension 3
+
+La troisième composante mesure l'âge de la maison et la condition de la maison au moment de la vente. 
+
+### Dimension 4
+
+Cette composante est principalement dominée par le fait que la maison contient des parties inachevées.
+
+### Dimension 5
+
+Cette composante est fortement dominée par le fait s'il y a une cuisine à l'étage et par la condition générale de la maison.
+
+
+## Limite de la régression sur les composantes principales
+
+Nous venons de voir l'intérêt de la régression sur les composantes principales. Nous avons vu notamment que les composantes issues de l'ACP sont orthogonales en ce sens qu'il  cette méthode permet d’obtenir des composantes orthogonales entre elles. Toutefois, l'analyse en composante principale que nous avons effectuée maximise les variances des variables $X$ indépendamment des variations de Y : la variance de Y n’est pas maximisée. Ceci peut surestimer le poids de certaines explicatives et conduire
+de ce fait à de mauvaises interprétations des résultats.
+
+Nous pouvons donc utiliser la deuxième méthode de cette famille.
+
+
+## Régéressions sur les moindres carrés partiels
+
+2) Régressions PLS
+Deux modèles PLS : PLS simple (ou PLS 1) et PLS 2
+a) PLS 1
+Comme pour la régression PCR, calcul de T dont les éléments
+sont les « scores » et les colonnes les « composantes » : T =
+XW avec W matrice des poids (ou loadings) et X matrice des
+variables explicatives centrées (n,m).
+
+Mais, contrairement à la PCR, le calcul de T se fait en tenant compte de la variable à prédire $y$. Double modélisation :
+
+X = TP + R (1)
+Y = TQ + F (2)
+
+Avec : R matrice des résidus associées à la prédiction de X ;
+F vecteur des résidus associé à la prédiction de Y.  
+
+Première étape : calculer t1 la première composante principale, puis estimer (1) et (2) à une seule composante :
+
+$X = t_1 . p_1 + R1$ et $Y = t_1 . q_1 + F_1$
+
+Avec $t_1$ de dimension (n,1)
+$p_1$ de dim (1,m) loadings
+$q_1$ de dim (1,1) loadings
+
+On introduit une deuxième composante $t_2$. Ainsi, une ligne $x_i$ de X est égale à : $x_i = t_1i p_1 + t_2i p2$ 
+
+L’introduction de nouvelles composantes se fait selon la même procédure : partant d’un modèle à k composantes, on créé un nouveau modèle à k+1 composantes en calculant une nouvelle composante tk, puis les paramètres des deux modèles couplés :
+$X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1$
+$Y = t_1q_1+t_2 q_2 +…+t_k q_k + t_k+1 q_k+1 + F_k+1$
 
 ### Les loadings et les weights
-
-
-
-
-
-
-### Régéressions sur les moindres carrés partiels
-
-
-
-
 
 \pagebreak
 
