@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Régéressions sur les moindres carrés partiels | Prédire le prix des maisons présentant plusieurs caractéristiques</title>
+  <meta name="description" content="5 Régéressions sur les moindres carrés partiels | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Régéressions sur les moindres carrés partiels | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="agailloty/latent-variable-regressions" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Régéressions sur les moindres carrés partiels | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"/>
+<link rel="next" href="comparaison-des-performances-des-différentes-méthodes-destimation.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-générale.html"><a href="introduction-générale.html"><i class="fa fa-check"></i><b>1</b> Introduction générale</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-générale.html"><a href="introduction-générale.html#présentation-des-données"><i class="fa fa-check"></i><b>1.1</b> Présentation des données</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-générale.html"><a href="introduction-générale.html#plan-de-létude"><i class="fa fa-check"></i><b>1.3</b> Plan de l’étude</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html"><i class="fa fa-check"></i><b>2</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-univariées"><i class="fa fa-check"></i><b>2.1</b> Statistiques descriptives univariées</a></li>
+<li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
+<li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modélisations.html"><a href="modélisations.html"><i class="fa fa-check"></i><b>3</b> Modélisations</a><ul>
+<li class="chapter" data-level="3.1" data-path="modélisations.html"><a href="modélisations.html#transformations-des-données"><i class="fa fa-check"></i><b>3.1</b> Transformations des données</a></li>
+<li class="chapter" data-level="3.2" data-path="modélisations.html"><a href="modélisations.html#modèle-de-régression-multiple"><i class="fa fa-check"></i><b>3.2</b> Modèle de régression multiple</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="modélisations.html"><a href="modélisations.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.2.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="modélisations.html"><a href="modélisations.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.2.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modélisations.html"><a href="modélisations.html#régressions-sur-variables-latentes"><i class="fa fa-check"></i><b>3.3</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="modélisations.html"><a href="modélisations.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>3.3.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><i class="fa fa-check"></i><b>4</b> Le principe de la méthode de la régression sur les composantes principales</a><ul>
+<li class="chapter" data-level="4.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#régression-sur-composantes-principales-rcp-ou-pcr"><i class="fa fa-check"></i><b>4.1</b> Régression sur composantes principales (RCP ou PCR)</a></li>
+<li class="chapter" data-level="4.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>4.2</b> Résultats d’estimations avec SAS</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-1"><i class="fa fa-check"></i><b>4.2.1</b> Dimension 1</a></li>
+<li class="chapter" data-level="4.2.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-2"><i class="fa fa-check"></i><b>4.2.2</b> Dimension 2</a></li>
+<li class="chapter" data-level="4.2.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-3"><i class="fa fa-check"></i><b>4.2.3</b> Dimension 3</a></li>
+<li class="chapter" data-level="4.2.4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-4"><i class="fa fa-check"></i><b>4.2.4</b> Dimension 4</a></li>
+<li class="chapter" data-level="4.2.5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-5"><i class="fa fa-check"></i><b>4.2.5</b> Dimension 5</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#limite-de-la-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>4.3</b> Limite de la régression sur les composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html"><i class="fa fa-check"></i><b>5</b> Régéressions sur les moindres carrés partiels</a><ul>
+<li class="chapter" data-level="5.1" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#les-loadings-et-les-weights"><i class="fa fa-check"></i><b>5.1</b> Les loadings et les weights</a></li>
+<li class="chapter" data-level="5.2" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>5.2</b> Modèle PLSR avec validation croisée</a></li>
+<li class="chapter" data-level="5.3" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>5.3</b> Le nombre de composantes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>6</b> Comparaison des performances des différentes méthodes d’estimation</a></li>
+<li class="chapter" data-level="7" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>7</b> Bibliographie</a></li>
+<li class="chapter" data-level="8" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>8</b> Annexes</a><ul>
+<li class="chapter" data-level="8.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>8.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Prédire le prix des maisons présentant plusieurs caractéristiques</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="régéressions-sur-les-moindres-carrés-partiels" class="section level1">
+<h1><span class="header-section-number">5</span> Régéressions sur les moindres carrés partiels</h1>
+<p>Comme pour la régression PCR, calcul de T dont les éléments sont les « scores » et les colonnes les « composantes » :
+<span class="math inline">\(T = X.W\)</span> avec <span class="math inline">\(W\)</span> matrice des poids (ou loadings) et <span class="math inline">\(X\)</span> matrice des variables explicatives centrées (n,m).</p>
+<p>Mais, contrairement à la PCR, le calcul de <span class="math inline">\(T\)</span> se fait en tenant compte de la variable à prédire <span class="math inline">\(y\)</span>. Double modélisation :</p>
+<p><span class="math inline">\(X = TP + R\)</span> (1)</p>
+<p><span class="math inline">\(Y = TQ + F\)</span> (2)</p>
+<p>Avec : R matrice des résidus associées à la prédiction de <span class="math inline">\(X\)</span> ;
+<span class="math inline">\(F\)</span> vecteur des résidus associé à la prédiction de <span class="math inline">\(y\)</span>.</p>
+<p>Première étape : calculer t1 la première composante principale, puis estimer (1) et (2) à une seule composante :</p>
+<p><span class="math inline">\(X = t_1 . p_1 + R1\)</span> et <span class="math inline">\(Y = t_1 . q_1 + F_1\)</span></p>
+<p>Avec <span class="math inline">\(t_1\)</span> de dimension (n,1)
+<span class="math inline">\(p_1\)</span> de dim (1,m) loadings
+<span class="math inline">\(q_1\)</span> de dim (1,1) loadings</p>
+<p>On introduit une deuxième composante <span class="math inline">\(t_2\)</span>. Ainsi, une ligne <span class="math inline">\(x_i\)</span> de <span class="math inline">\(X\)</span> est égale à : <span class="math inline">\(x_i = t_1i p_1 + t_2i p2\)</span></p>
+<p>L’introduction de nouvelles composantes se fait selon la même procédure : partant d’un modèle à k composantes, on créé un nouveau modèle à k+1 composantes en calculant une nouvelle composante tk, puis les paramètres des deux modèles couplés :</p>
+<p>$ X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1 $</p>
+<p><span class="math inline">\(Y = t_1q_1+t_2 q_2 +…+t_k q_k + t_k+1 q_k+1 + F_k+1\)</span></p>
+<div id="les-loadings-et-les-weights" class="section level2">
+<h2><span class="header-section-number">5.1</span> Les loadings et les weights</h2>
+</div>
+<div id="modèle-plsr-avec-validation-croisée" class="section level2">
+<h2><span class="header-section-number">5.2</span> Modèle PLSR avec validation croisée</h2>
+<p>La validation croisée nous permet de sélectionner le nombre de composantes à retenir dans le modèle.</p>
+<pre><code>## Data:    X dimension: 2930 34 
+##  Y dimension: 2930 1
+## Fit method: kernelpls
+## Number of components considered: 10
+## 
+## VALIDATION: RMSEP
+## Cross-validated using 2930 leave-one-out segments.
+##        (Intercept)  1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
+## CV           79900    77084    48250    46459    44618    43416    44012
+## adjCV        79900    77084    48250    46459    44618    43416    44005
+##        7 comps  8 comps  9 comps  10 comps
+## CV       43140    42424    41269     40807
+## adjCV    43140    42424    41268     40805
+## 
+## TRAINING: % variance explained
+##             1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps
+## X            97.780    98.53    98.84    99.22    99.34    99.45    99.85
+## Sale_Price    8.027    64.11    68.84    70.33    72.22    72.86    73.08
+##             8 comps  9 comps  10 comps
+## X             99.89    99.90     99.91
+## Sale_Price    74.37    75.76     77.46</code></pre>
+</div>
+<div id="le-nombre-de-composantes" class="section level2">
+<h2><span class="header-section-number">5.3</span> Le nombre de composantes</h2>
+<p>A mesure que nous ajoutons des composantes les erreurs de prédictions baissent. Toutefois nous ne voulons pas avoir beaucoup trop de composantes pour expliquer notre variable dépendante.</p>
+<p><img src="main_files/figure-html/unnamed-chunk-27-1.png" width="3000" /></p>
+<pre><code>## , , 10 comps
+## 
+##                      Sale_Price
+## Lot_Frontage        79.31193427
+## Lot_Area             0.36831117
+## Year_Built         518.88299718
+## Year_Remod_Add     447.68830427
+## Mas_Vnr_Area        61.78841090
+## BsmtFin_SF_1        -2.02267103
+## BsmtFin_SF_2       -20.23508441
+## Bsmt_Unf_SF        -18.82959785
+## Total_Bsmt_SF       45.07635111
+## First_Flr_SF        33.42330452
+## Second_Flr_SF       31.11598592
+## Low_Qual_Fin_SF    -33.10973603
+## Gr_Liv_Area         31.42955442
+## Bsmt_Full_Bath       2.50625853
+## Bsmt_Half_Bath      -0.87468571
+## Full_Bath            3.57979273
+## Half_Bath            1.86239802
+## Bedroom_AbvGr      -11.05782822
+## Kitchen_AbvGr       -3.50590804
+## TotRms_AbvGrd       -3.98120283
+## Fireplaces           6.16607951
+## Garage_Cars          4.60657406
+## Garage_Area         38.97209215
+## Wood_Deck_SF        31.53136203
+## Open_Porch_SF       18.00519183
+## Enclosed_Porch      40.88928470
+## Three_season_porch  21.84401255
+## Screen_Porch        96.59518558
+## Pool_Area          -87.63481230
+## Misc_Val           -10.91991992
+## Mo_Sold              0.74461463
+## Year_Sold           -2.74854560
+## Overall_Qual         5.88611302
+## Overall_Cond        -7.55337559</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-29-1.png" width="3000" /></p>
+<pre><code>##        Comp 1        Comp 2        Comp 3        Comp 4        Comp 5 
+## 97.7795258945  0.7516886473  0.3130167329  0.3786266466  0.1185967353 
+##        Comp 6        Comp 7        Comp 8        Comp 9       Comp 10 
+##  0.1122299071  0.4011698316  0.0328497876  0.0156070413  0.0082290949</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-31-1.png" width="2400" /></p>
+<pre><code>## 
+## Loadings:
+##                    Comp 1 Comp 2 Comp 3 Comp 4 Comp 5 Comp 6 Comp 7 Comp 8
+## Lot_Frontage                                                              
+## Lot_Area            0.966 -0.258                                          
+## Year_Built                               0.142  0.158  0.512  0.213  0.284
+## Year_Remod_Add                                  0.119  0.420  0.173  0.243
+## Mas_Vnr_Area               0.162  0.220  0.236  0.152               -0.146
+## BsmtFin_SF_1                                                              
+## BsmtFin_SF_2                            -0.160 -0.245         0.192  0.306
+## Bsmt_Unf_SF                0.150 -0.790         0.507         0.178 -0.169
+## Total_Bsmt_SF       0.128  0.480         0.257        -0.404  0.569  0.297
+## First_Flr_SF        0.112  0.401        -0.106 -0.399  0.326  0.122 -0.425
+## Second_Flr_SF              0.216        -0.156  0.323        -0.446  0.524
+## Low_Qual_Fin_SF                                       -0.110              
+## Gr_Liv_Area         0.164  0.614        -0.311 -0.123  0.130 -0.361       
+## Bsmt_Full_Bath                                                            
+## Bsmt_Half_Bath                                                            
+## Full_Bath                                                                 
+## Half_Bath                                                                 
+## Bedroom_AbvGr                                                             
+## Kitchen_AbvGr                                                             
+## TotRms_AbvGrd                                                             
+## Fireplaces                                                                
+## Garage_Cars                                                               
+## Garage_Area                0.243  0.364  0.416  0.314 -0.175 -0.163 -0.292
+## Wood_Deck_SF                      0.145  0.159  0.123  0.275        -0.150
+## Open_Porch_SF                                          0.180              
+## Enclosed_Porch                                        -0.248              
+## Three_season_porch                                                        
+## Screen_Porch                                           0.166              
+## Pool_Area                                                                 
+## Misc_Val                         -0.373  0.688 -0.449        -0.372  0.208
+## Mo_Sold                                                                   
+## Year_Sold                                                                 
+## Overall_Qual                                                              
+## Overall_Cond                                                              
+##                    Comp 9 Comp 10
+## Lot_Frontage                     
+## Lot_Area                         
+## Year_Built          0.262  0.169 
+## Year_Remod_Add      0.249  0.230 
+## Mas_Vnr_Area               0.131 
+## BsmtFin_SF_1                     
+## BsmtFin_SF_2                     
+## Bsmt_Unf_SF                      
+## Total_Bsmt_SF      -0.159        
+## First_Flr_SF                     
+## Second_Flr_SF                    
+## Low_Qual_Fin_SF            0.210 
+## Gr_Liv_Area                      
+## Bsmt_Full_Bath                   
+## Bsmt_Half_Bath                   
+## Full_Bath                        
+## Half_Bath                        
+## Bedroom_AbvGr                    
+## Kitchen_AbvGr                    
+## TotRms_AbvGrd                    
+## Fireplaces                       
+## Garage_Cars                      
+## Garage_Area         0.287 -0.138 
+## Wood_Deck_SF       -0.780  0.416 
+## Open_Porch_SF      -0.106 -0.453 
+## Enclosed_Porch      0.313  0.632 
+## Three_season_porch               
+## Screen_Porch              -0.198 
+## Pool_Area                        
+## Misc_Val                         
+## Mo_Sold                          
+## Year_Sold                        
+## Overall_Qual                     
+## Overall_Cond                     
+## 
+##                Comp 1 Comp 2 Comp 3 Comp 4 Comp 5 Comp 6 Comp 7 Comp 8 Comp 9
+## SS loadings     1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000
+## Proportion Var  0.029  0.029  0.029  0.029  0.029  0.029  0.029  0.029  0.029
+## Cumulative Var  0.029  0.059  0.088  0.118  0.147  0.176  0.206  0.235  0.265
+##                Comp 10
+## SS loadings      1.000
+## Proportion Var   0.029
+## Cumulative Var   0.294</code></pre>
+<pre><code>## 
+## Loadings:
+##            Comp 1  Comp 2  Comp 3  Comp 4  Comp 5  Comp 6  Comp 7  Comp 8 
+## Sale_Price   2.950  87.750  44.614  25.186  41.210  57.841   8.954  77.426
+##            Comp 9  Comp 10
+## Sale_Price 115.890 199.577
+## 
+##                Comp 1   Comp 2   Comp 3    Comp 4    Comp 5    Comp 6    Comp 7
+## SS loadings       8.7 7700.075 1990.377   634.354  1698.287  3345.604    80.172
+## Proportion Var    8.7 7700.075 1990.377   634.354  1698.287  3345.604    80.172
+## Cumulative Var    8.7 7708.775 9699.152 10333.506 12031.793 15377.398 15457.569
+##                   Comp 8    Comp 9   Comp 10
+## SS loadings     5994.735 13430.417 39830.805
+## Proportion Var  5994.735 13430.417 39830.805
+## Cumulative Var 21452.304 34882.721 74713.526</code></pre>
+<pre><code>##  [1] &quot;coefplot&quot;          &quot;compnames&quot;         &quot;corrplot&quot;         
+##  [4] &quot;cppls&quot;             &quot;crossval&quot;          &quot;cvsegments&quot;       
+##  [7] &quot;explvar&quot;           &quot;gasoline&quot;          &quot;jack.test&quot;        
+## [10] &quot;kernelpls.fit&quot;     &quot;loading.weights&quot;   &quot;loadingplot&quot;      
+## [13] &quot;loadings&quot;          &quot;mayonnaise&quot;        &quot;msc&quot;              
+## [16] &quot;MSEP&quot;              &quot;mvr&quot;               &quot;mvrValstats&quot;      
+## [19] &quot;oliveoil&quot;          &quot;oscorespls.fit&quot;    &quot;pcr&quot;              
+## [22] &quot;pls.options&quot;       &quot;plsr&quot;              &quot;prednames&quot;        
+## [25] &quot;predplot&quot;          &quot;R2&quot;                &quot;respnames&quot;        
+## [28] &quot;RMSEP&quot;             &quot;scoreplot&quot;         &quot;scores&quot;           
+## [31] &quot;selectNcomp&quot;       &quot;simpls.fit&quot;        &quot;stdize&quot;           
+## [34] &quot;svdpc.fit&quot;         &quot;validationplot&quot;    &quot;var.jack&quot;         
+## [37] &quot;widekernelpls.fit&quot; &quot;yarn&quot;              &quot;Yloadings&quot;        
+## [40] &quot;Yscores&quot;</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="comparaison-des-performances-des-différentes-méthodes-destimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 20
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

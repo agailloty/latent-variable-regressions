@@ -5,7 +5,14 @@ output:
   bookdown::gitbook:
    #word_document:
       #reference_docx : "template2.docx"
+    config:
+      fontsettings:
+        theme: sepia
+        family: sans
+        size : 20
+        
 author: Axel-Cleris Gailloty
+github-repo: "agailloty/latent-variable-regressions"
 #toc: true
 ---
 
@@ -353,7 +360,7 @@ Les techniques mises en œuvre par la procédure PLS sont les suivantes:
 
 - La régression de rang réduit, qui extrait des facteurs qui expliquent le plus la variation de la variable réponse (y). Cette technique, également appelée analyse de redondance (maximale), diffère de la régression linéaire multiple uniquement lorsqu'il y a plusieurs variables endogènes.  
 
-- La régression sur les moindres carrés partiels, qui équilibre les deux objectifs d’explication de la variation de l'a réponse'endogène et expliquant la variation des prédicteurs. Deux formulations différentes pour les moindres carrés partiels sont disponibles:
+- La régression sur les moindres carrés partiels, qui équilibre les deux objectifs d’explication de la variation de l'a réponse'endogène et expliquant la variation des prédicteurs. Deux formulations différentes pour les moindres carrés partiels sont disponibles: 
 la méthode prédictive originale de Wold (1966) et la méthode SIMPLS de de Jong (1993).
 
 En raison du fait que nous ne cherchons ici qu'à expliquer une seule variable (y), à savoir le prix des maisons, nous n'utiliserons pas la régression sur rang réduit car cela revient à faire une régression multiple, ce que nous avons déjà fait dans la section 3.2.
@@ -371,16 +378,17 @@ $$T= X.W$$
 
 Avec $W$ la matrice (m,k) des coefficients définissant les combinaisons linéaires, T une matrice dont les colonnes forment des variables « artificielles » obtenues par combinaison linéaire des variables
 d’origine.  
-Une régression multiple est ensuite appliquée avec T à la place de X :
+Une régression multiple est ensuite appliquée avec $T$ à la place de $X$ :
 $$y = c + d.T$$
 
 Il faut donc déterminer $W$ de manière à avoir une matrice de variables explicatives T plus adaptée au calcul de la régression que la matrice X d’origine.
 
-Deux méthodes pour construire T (et donc W) : RCP et RPLS
+Deux méthodes pour construire $T$ (et donc $W$) : RCP et RPLS
 
 ## Régression sur composantes principales (RCP ou PCR)
 
-ACP puis régression multiple. L’ACP nécessite des variables quantitatives. A partir des variables X centrées, l’ACP normée donne la matrice T dont les colonnes sont les composantes principales.   
+ACP puis régression multiple. L’ACP nécessite des variables quantitatives. A partir des variables $X$ centrées, l’ACP normée donne la matrice T dont les colonnes sont les composantes principales.   
+
 Elles sont orthogonales entre elles (plus de problème de colinéarité). La matrice $W$ est la matrice des coefficients des combinaisons linéaires (coordonnées sur les composantes principales).
 
 
@@ -407,7 +415,7 @@ Le test nous indique qu'à partir de la 4e composante il n'existe plus de diffé
 
 
 Il convient maintenant d'interpréter les résultats du modèle construit.   
-Le tableau suivant affiche la variation de pourcentage expliquée par composantes principales
+Le tableau suivant affiche la variation de pourcentage expliquée par composantes principales.
 
 ![](pcr-img/pcr_results.PNG)
 
@@ -436,11 +444,13 @@ Les résultats globaux du modèle que nous trouvons sont les mêmes avec R. Les 
 
 Nous pouvons écrire ce résultat sous forme d'une équation :
 
-$$SalePrice = 1800796.06 + 27395.65 * Dim1 - 7046.03 * Dim2 + 478.57 * Dim3 + 2778.86* Dim4 + 5769.77* Dim5 $$
-Tous les coefficients sont positifs, à l'exception du coefficient de la dimension 2.
+$$SalePrice = 1800796.06 + 27395.65 * Dim1 - 7046.03 * Dim2 + 478.57 * Dim3 + 2778.86* Dim4 + 5769.77* Dim5 $$ 
+
+Tous les coefficients sont positifs, à l'exception du coefficient de la dimension 2.  
+
 Le coefficient de la dimension 3 est le plus faible et est non significatif (p-value > 5%).
 
-Pour pouvoir interpréter les coefficients, il importe de savoir ce que mesure chaque composante. A l'aide de R nous pouvons, comme nous l'avons fait dans la section 2.3, afficher ce que mesure chaque composante en affichant les 10 premières contributions à chaque composante.
+Pour pouvoir interpréter les coefficients, il importe de savoir ce que mesure chaque composante. A l'aide de R nous pouvons, comme nous l'avons fait dans la section 2.3, afficher ce que mesure chaque composante en affichant les 10 premières contributions à chaque composante.  
 
 Nous décidons de représenter ces composantes sur un graphique.
 
@@ -469,7 +479,7 @@ for (i in 2:5) df <- rbind(df, retrieve_dims_contrib(pc, i))
 ```
 
 
-```{r fig.height=8, fig.width=16}
+```{r fig.height=8, fig.width=12}
 df %>% mutate(variable = tidytext::reorder_within(variable, contrib, dim)) %>%
   ggplot(aes(variable, contrib)) +
   geom_col( col = "black", fill = "lightblue") + coord_flip() + 
@@ -480,7 +490,9 @@ df %>% mutate(variable = tidytext::reorder_within(variable, contrib, dim)) %>%
   theme_ipsum()
 ```
 
-Le poids des variables sur les trois premières dimensions est assez équilibrée. Les deux dernières dimensions sont chacune fortement dominées par une variable.
+Le poids des variables sur les trois premières dimensions est assez équilibrée. Les deux dernières dimensions sont chacune fortement dominées par une variable.  
+
+Les variables synthétiques que produit l'ACP sont orthogonales entre elles. Pour le vérifier nous pouvons représenter les corrélations entre les dimensions.
 
 ```{r}
 data.frame(pc$var$coord) %>%
@@ -523,45 +535,101 @@ de ce fait à de mauvaises interprétations des résultats.
 Nous pouvons donc utiliser la deuxième méthode de cette famille.
 
 
-## Régéressions sur les moindres carrés partiels
+# Régéressions sur les moindres carrés partiels
 
-2) Régressions PLS
-Deux modèles PLS : PLS simple (ou PLS 1) et PLS 2
-a) PLS 1
-Comme pour la régression PCR, calcul de T dont les éléments
-sont les « scores » et les colonnes les « composantes » : T =
-XW avec W matrice des poids (ou loadings) et X matrice des
-variables explicatives centrées (n,m).
+Comme pour la régression PCR, calcul de T dont les éléments sont les « scores » et les colonnes les « composantes » : 
+$T = X.W$ avec $W$ matrice des poids (ou loadings) et $X$ matrice des variables explicatives centrées (n,m).
 
-Mais, contrairement à la PCR, le calcul de T se fait en tenant compte de la variable à prédire $y$. Double modélisation :
+Mais, contrairement à la PCR, le calcul de $T$ se fait en tenant compte de la variable à prédire $y$. Double modélisation :
 
-X = TP + R (1)
-Y = TQ + F (2)
+$X = TP + R$ (1)
 
-Avec : R matrice des résidus associées à la prédiction de X ;
-F vecteur des résidus associé à la prédiction de Y.  
+$Y = TQ + F$ (2)
+
+Avec : R matrice des résidus associées à la prédiction de $X$ ;
+$F$ vecteur des résidus associé à la prédiction de $y$.  
 
 Première étape : calculer t1 la première composante principale, puis estimer (1) et (2) à une seule composante :
 
 $X = t_1 . p_1 + R1$ et $Y = t_1 . q_1 + F_1$
 
+
 Avec $t_1$ de dimension (n,1)
 $p_1$ de dim (1,m) loadings
 $q_1$ de dim (1,1) loadings
 
-On introduit une deuxième composante $t_2$. Ainsi, une ligne $x_i$ de X est égale à : $x_i = t_1i p_1 + t_2i p2$ 
+On introduit une deuxième composante $t_2$. Ainsi, une ligne $x_i$ de $X$ est égale à : $x_i = t_1i p_1 + t_2i p2$ 
 
-L’introduction de nouvelles composantes se fait selon la même procédure : partant d’un modèle à k composantes, on créé un nouveau modèle à k+1 composantes en calculant une nouvelle composante tk, puis les paramètres des deux modèles couplés :
-$X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1$
+L’introduction de nouvelles composantes se fait selon la même procédure : partant d’un modèle à k composantes, on créé un nouveau modèle à k+1 composantes en calculant une nouvelle composante tk, puis les paramètres des deux modèles couplés : 
+
+$ X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1 $
+
+
 $Y = t_1q_1+t_2 q_2 +…+t_k q_k + t_k+1 q_k+1 + F_k+1$
 
-### Les loadings et les weights
+## Les loadings et les weights
 
-\pagebreak
+## Modèle PLSR avec validation croisée
 
+La validation croisée nous permet de sélectionner le nombre de composantes à retenir dans le modèle. 
+
+```{r}
+model.plsr <- plsr(Sale_Price~., data = base_export, 
+                   method = pls.options()$plsralg, ncomp = 10, validation = "LOO")
+summary(model.plsr)
+```
+
+## Le nombre de composantes
+
+A mesure que nous ajoutons des composantes les erreurs de prédictions baissent. Toutefois nous ne voulons pas avoir beaucoup trop de composantes pour expliquer notre variable dépendante. 
+
+
+```{r fig.height=5, fig.width=10}
+ncomp.onesigma <- selectNcomp(model.plsr, method = "onesigma", plot = TRUE, alpha = 0.5)
+```
+
+
+
+```{r}
+coef(model.plsr)
+```
+
+
+```{r fig.height=5, fig.width=10}
+plot(model.plsr, plottype = "coef", ncomp=1:5, legendpos = "bottomleft", xlab = "nm")
+
+```
+
+```{r}
+explvar(model.plsr)
+```
+
+
+
+
+```{r}
+corrplot(model.plsr)
+```
+
+
+```{r}
+loading.weights(model.plsr)
+```
+
+
+```{r}
+Yloadings(model.plsr)
+```
+
+```{r}
+ls("package:pls")
+```
+
+```{r}
+#Yscores(model.plsr)
+```
 
 # Comparaison des performances des différentes méthodes d'estimation
-
 
 # Bibliographie
 
@@ -580,7 +648,8 @@ Jan Niklas Schneider and Timothy Raymond Brick (2019). plsr: Pleasure -
   version 0.0.1.
 
 Max Kuhn (2017). AmesHousing: The Ames Iowa Housing Data. R package
-  version 0.0.3.
+  version 0.0.3.   
+  
 The PLS Procedure, SAS/STAT® 13.1 User’s Guide https://support.sas.com/documentation/onlinedoc/stat/131/pls.pdf
 
 

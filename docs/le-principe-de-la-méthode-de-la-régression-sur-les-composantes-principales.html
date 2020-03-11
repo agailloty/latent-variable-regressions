@@ -13,7 +13,7 @@
   
   
   
-  
+  <meta name="github-repo" content="agailloty/latent-variable-regressions" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="4 Le principe de la méthode de la régression sur les composantes principales | Prédire le prix des maisons présentant plusieurs caractéristiques" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="modélisations.html"/>
-<link rel="next" href="comparaison-des-performances-des-différentes-méthodes-destimation.html"/>
+<link rel="next" href="régéressions-sur-les-moindres-carrés-partiels.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -94,14 +94,16 @@
 <li class="chapter" data-level="4.2.5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-5"><i class="fa fa-check"></i><b>4.2.5</b> Dimension 5</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#limite-de-la-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>4.3</b> Limite de la régression sur les composantes principales</a></li>
-<li class="chapter" data-level="4.4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#régéressions-sur-les-moindres-carrés-partiels"><i class="fa fa-check"></i><b>4.4</b> Régéressions sur les moindres carrés partiels</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#les-loadings-et-les-weights"><i class="fa fa-check"></i><b>4.4.1</b> Les loadings et les weights</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html"><i class="fa fa-check"></i><b>5</b> Régéressions sur les moindres carrés partiels</a><ul>
+<li class="chapter" data-level="5.1" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#les-loadings-et-les-weights"><i class="fa fa-check"></i><b>5.1</b> Les loadings et les weights</a></li>
+<li class="chapter" data-level="5.2" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>5.2</b> Modèle PLSR avec validation croisée</a></li>
+<li class="chapter" data-level="5.3" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>5.3</b> Le nombre de composantes</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>5</b> Comparaison des performances des différentes méthodes d’estimation</a></li>
-<li class="chapter" data-level="6" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>6</b> Bibliographie</a></li>
-<li class="chapter" data-level="7" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>7</b> Annexes</a><ul>
-<li class="chapter" data-level="7.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>7.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+<li class="chapter" data-level="6" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>6</b> Comparaison des performances des différentes méthodes d’estimation</a></li>
+<li class="chapter" data-level="7" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>7</b> Bibliographie</a></li>
+<li class="chapter" data-level="8" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>8</b> Annexes</a><ul>
+<li class="chapter" data-level="8.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>8.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
 </ul></li>
 </ul>
 
@@ -128,14 +130,14 @@
 <p><span class="math display">\[T= X.W\]</span></p>
 <p>Avec <span class="math inline">\(W\)</span> la matrice (m,k) des coefficients définissant les combinaisons linéaires, T une matrice dont les colonnes forment des variables « artificielles » obtenues par combinaison linéaire des variables
 d’origine.<br />
-Une régression multiple est ensuite appliquée avec T à la place de X :
+Une régression multiple est ensuite appliquée avec <span class="math inline">\(T\)</span> à la place de <span class="math inline">\(X\)</span> :
 <span class="math display">\[y = c + d.T\]</span></p>
 <p>Il faut donc déterminer <span class="math inline">\(W\)</span> de manière à avoir une matrice de variables explicatives T plus adaptée au calcul de la régression que la matrice X d’origine.</p>
-<p>Deux méthodes pour construire T (et donc W) : RCP et RPLS</p>
+<p>Deux méthodes pour construire <span class="math inline">\(T\)</span> (et donc <span class="math inline">\(W\)</span>) : RCP et RPLS</p>
 <div id="régression-sur-composantes-principales-rcp-ou-pcr" class="section level2">
 <h2><span class="header-section-number">4.1</span> Régression sur composantes principales (RCP ou PCR)</h2>
-<p>ACP puis régression multiple. L’ACP nécessite des variables quantitatives. A partir des variables X centrées, l’ACP normée donne la matrice T dont les colonnes sont les composantes principales.<br />
-Elles sont orthogonales entre elles (plus de problème de colinéarité). La matrice <span class="math inline">\(W\)</span> est la matrice des coefficients des combinaisons linéaires (coordonnées sur les composantes principales).</p>
+<p>ACP puis régression multiple. L’ACP nécessite des variables quantitatives. A partir des variables <span class="math inline">\(X\)</span> centrées, l’ACP normée donne la matrice T dont les colonnes sont les composantes principales.</p>
+<p>Elles sont orthogonales entre elles (plus de problème de colinéarité). La matrice <span class="math inline">\(W\)</span> est la matrice des coefficients des combinaisons linéaires (coordonnées sur les composantes principales).</p>
 <p>Pour cette méthode, nous allons utiliser conjointement SAS et R afin de ressortir le maximum d’informations utiles à l’interprétation des résultats.</p>
 </div>
 <div id="résultats-destimations-avec-sas" class="section level2">
@@ -149,7 +151,7 @@ Nous choisissons également de faire une validation croisée sur le jeu de donn�
 <p>Le test nous indique qu’à partir de la 4e composante il n’existe plus de différences significatives entre les composantes. Nous allons donc retenir 5 composantes pour la suite de l’analyse.</p>
 <p><img src="pcr-img/pcr_analysis_val_crois.png" /></p>
 <p>Il convient maintenant d’interpréter les résultats du modèle construit.<br />
-Le tableau suivant affiche la variation de pourcentage expliquée par composantes principales</p>
+Le tableau suivant affiche la variation de pourcentage expliquée par composantes principales.</p>
 <p><img src="pcr-img/pcr_results.PNG" /></p>
 <p>Le tableau affiche deux catégories de résultats : la variation de pourcentage expliquée par composantes principales sur les effets du modèle (les variables explicatives) et la variation de pourcentage expliquée de la variable dépendante pour chaque facteur (ou composante) ajouté.</p>
 <p>Nous voyons donc que pour les 5 composantes retenues, la régression sur les composantes principales explique 75.93% de la variable dépendante et environ 43% des variables explicatives.</p>
@@ -179,14 +181,15 @@ Multiple R-squared:  0.75934,   Adjusted R-squared:  0.75893
 F-statistic: 1845.2 on 5 and 2924 DF,  p-value: &lt; 2.22e-16</code></pre>
 <p>Les résultats globaux du modèle que nous trouvons sont les mêmes avec R. Les 5 composantes retenues expliquent bien 75,93% de la variance des prix de vente de la maison.</p>
 <p>Nous pouvons écrire ce résultat sous forme d’une équation :</p>
-<p><span class="math display">\[SalePrice = 1800796.06 + 27395.65 * Dim1 - 7046.03 * Dim2 + 478.57 * Dim3 + 2778.86* Dim4 + 5769.77* Dim5 \]</span>
-Tous les coefficients sont positifs, à l’exception du coefficient de la dimension 2.
-Le coefficient de la dimension 3 est le plus faible et est non significatif (p-value &gt; 5%).</p>
+<p><span class="math display">\[SalePrice = 1800796.06 + 27395.65 * Dim1 - 7046.03 * Dim2 + 478.57 * Dim3 + 2778.86* Dim4 + 5769.77* Dim5 \]</span></p>
+<p>Tous les coefficients sont positifs, à l’exception du coefficient de la dimension 2.</p>
+<p>Le coefficient de la dimension 3 est le plus faible et est non significatif (p-value &gt; 5%).</p>
 <p>Pour pouvoir interpréter les coefficients, il importe de savoir ce que mesure chaque composante. A l’aide de R nous pouvons, comme nous l’avons fait dans la section 2.3, afficher ce que mesure chaque composante en affichant les 10 premières contributions à chaque composante.</p>
 <p>Nous décidons de représenter ces composantes sur un graphique.</p>
 <p>Les contributions des variables aux différents axes factoriels sont :</p>
-<p><img src="main_files/figure-html/unnamed-chunk-24-1.png" width="4800" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-24-1.png" width="3600" /></p>
 <p>Le poids des variables sur les trois premières dimensions est assez équilibrée. Les deux dernières dimensions sont chacune fortement dominées par une variable.</p>
+<p>Les variables synthétiques que produit l’ACP sont orthogonales entre elles. Pour le vérifier nous pouvons représenter les corrélations entre les dimensions.</p>
 <p><img src="main_files/figure-html/unnamed-chunk-25-1.png" width="2400" /></p>
 <div id="dimension-1" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Dimension 1</h3>
@@ -215,38 +218,6 @@ Le coefficient de la dimension 3 est le plus faible et est non significatif (p-v
 de ce fait à de mauvaises interprétations des résultats.</p>
 <p>Nous pouvons donc utiliser la deuxième méthode de cette famille.</p>
 </div>
-<div id="régéressions-sur-les-moindres-carrés-partiels" class="section level2">
-<h2><span class="header-section-number">4.4</span> Régéressions sur les moindres carrés partiels</h2>
-<ol start="2" style="list-style-type: decimal">
-<li>Régressions PLS
-Deux modèles PLS : PLS simple (ou PLS 1) et PLS 2</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>PLS 1
-Comme pour la régression PCR, calcul de T dont les éléments
-sont les « scores » et les colonnes les « composantes » : T =
-XW avec W matrice des poids (ou loadings) et X matrice des
-variables explicatives centrées (n,m).</li>
-</ol>
-<p>Mais, contrairement à la PCR, le calcul de T se fait en tenant compte de la variable à prédire <span class="math inline">\(y\)</span>. Double modélisation :</p>
-<p>X = TP + R (1)
-Y = TQ + F (2)</p>
-<p>Avec : R matrice des résidus associées à la prédiction de X ;
-F vecteur des résidus associé à la prédiction de Y.</p>
-<p>Première étape : calculer t1 la première composante principale, puis estimer (1) et (2) à une seule composante :</p>
-<p><span class="math inline">\(X = t_1 . p_1 + R1\)</span> et <span class="math inline">\(Y = t_1 . q_1 + F_1\)</span></p>
-<p>Avec <span class="math inline">\(t_1\)</span> de dimension (n,1)
-<span class="math inline">\(p_1\)</span> de dim (1,m) loadings
-<span class="math inline">\(q_1\)</span> de dim (1,1) loadings</p>
-<p>On introduit une deuxième composante <span class="math inline">\(t_2\)</span>. Ainsi, une ligne <span class="math inline">\(x_i\)</span> de X est égale à : <span class="math inline">\(x_i = t_1i p_1 + t_2i p2\)</span></p>
-<p>L’introduction de nouvelles composantes se fait selon la même procédure : partant d’un modèle à k composantes, on créé un nouveau modèle à k+1 composantes en calculant une nouvelle composante tk, puis les paramètres des deux modèles couplés :
-<span class="math inline">\(X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1\)</span>
-<span class="math inline">\(Y = t_1q_1+t_2 q_2 +…+t_k q_k + t_k+1 q_k+1 + F_k+1\)</span></p>
-<div id="les-loadings-et-les-weights" class="section level3">
-<h3><span class="header-section-number">4.4.1</span> Les loadings et les weights</h3>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
 </div>
             </section>
 
@@ -254,7 +225,7 @@ F vecteur des résidus associé à la prédiction de Y.</p>
         </div>
       </div>
 <a href="modélisations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="comparaison-des-performances-des-différentes-méthodes-destimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="régéressions-sur-les-moindres-carrés-partiels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -280,9 +251,9 @@ gitbook.start({
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
-"theme": "white",
+"theme": "sepia",
 "family": "sans",
-"size": 2
+"size": 20
 },
 "edit": {
 "link": null,
