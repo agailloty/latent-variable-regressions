@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="introduction-générale.html"/>
-<link rel="next" href="modélisations.html"/>
+<link rel="next" href="la-régression-régression-multiple.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,68 @@
 
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 </head>
 
@@ -66,22 +128,18 @@
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="introduction-générale.html"><a href="introduction-générale.html"><i class="fa fa-check"></i><b>1</b> Introduction générale</a><ul>
 <li class="chapter" data-level="1.1" data-path="introduction-générale.html"><a href="introduction-générale.html#présentation-des-données"><i class="fa fa-check"></i><b>1.1</b> Présentation des données</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction-générale.html"><a href="introduction-générale.html#plan-de-létude"><i class="fa fa-check"></i><b>1.3</b> Plan de l’étude</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude-et-plan"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude et plan</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html"><i class="fa fa-check"></i><b>2</b> Analyse exploratoire des données</a><ul>
 <li class="chapter" data-level="2.1" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-univariées"><i class="fa fa-check"></i><b>2.1</b> Statistiques descriptives univariées</a></li>
 <li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
 <li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="modélisations.html"><a href="modélisations.html"><i class="fa fa-check"></i><b>3</b> Modélisations</a><ul>
-<li class="chapter" data-level="3.1" data-path="modélisations.html"><a href="modélisations.html#transformations-des-données"><i class="fa fa-check"></i><b>3.1</b> Transformations des données</a></li>
-<li class="chapter" data-level="3.2" data-path="modélisations.html"><a href="modélisations.html#modèle-de-régression-multiple"><i class="fa fa-check"></i><b>3.2</b> Modèle de régression multiple</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="modélisations.html"><a href="modélisations.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.2.1</b> Le test d’inflation de la variance (VIF)</a></li>
-<li class="chapter" data-level="3.2.2" data-path="modélisations.html"><a href="modélisations.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.2.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="modélisations.html"><a href="modélisations.html#régressions-sur-variables-latentes"><i class="fa fa-check"></i><b>3.3</b> Régressions sur variables latentes</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="modélisations.html"><a href="modélisations.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>3.3.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+<li class="chapter" data-level="3" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html"><i class="fa fa-check"></i><b>3</b> La régression régression multiple</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.0.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.0.2" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.0.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
+<li class="chapter" data-level="3.1" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html#régressions-sur-variables-latentes"><i class="fa fa-check"></i><b>3.1</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>3.1.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><i class="fa fa-check"></i><b>4</b> Le principe de la méthode de la régression sur les composantes principales</a><ul>
@@ -96,9 +154,10 @@
 <li class="chapter" data-level="4.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#limite-de-la-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>4.3</b> Limite de la régression sur les composantes principales</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html"><i class="fa fa-check"></i><b>5</b> Régéressions sur les moindres carrés partiels</a><ul>
-<li class="chapter" data-level="5.1" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#les-loadings-et-les-weights"><i class="fa fa-check"></i><b>5.1</b> Les loadings et les weights</a></li>
-<li class="chapter" data-level="5.2" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>5.2</b> Modèle PLSR avec validation croisée</a></li>
-<li class="chapter" data-level="5.3" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>5.3</b> Le nombre de composantes</a></li>
+<li class="chapter" data-level="5.1" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>5.1</b> Modèle PLSR avec validation croisée</a></li>
+<li class="chapter" data-level="5.2" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>5.2</b> Le nombre de composantes</a></li>
+<li class="chapter" data-level="5.3" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#les-coefficients-estimés-par-le-pls"><i class="fa fa-check"></i><b>5.3</b> Les coefficients estimés par le PLS</a></li>
+<li class="chapter" data-level="5.4" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#loadings-chargements-and-weights-poids"><i class="fa fa-check"></i><b>5.4</b> Loadings (chargements) and weights (poids)</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>6</b> Comparaison des performances des différentes méthodes d’estimation</a></li>
 <li class="chapter" data-level="7" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>7</b> Bibliographie</a></li>
@@ -124,9 +183,14 @@
             <section class="normal" id="section-">
 <div id="analyse-exploratoire-des-données" class="section level1">
 <h1><span class="header-section-number">2</span> Analyse exploratoire des données</h1>
+<p>Il est important que nous explorions les données pour découvrir la structure des données. Le but de cette analyse exploratoire est d’étudier la variance associée au jeu de données. En effet une base de donnée comporte en elle une variance ou information et le but de tout travail économétrique consistant à modéliser la variable dépendante est de trouver un modèle qui arrive à expliquer la variance de cette variable dépendante en se basant sur des variables qu’on appelle variable explicatives.<br />
+L’analyse exploratoire permet entre autres de détecter des anomalies dans le jeu de données et les corriger si possibles.</p>
 <div id="statistiques-descriptives-univariées" class="section level2">
 <h2><span class="header-section-number">2.1</span> Statistiques descriptives univariées</h2>
 <p>Nous allons afficher les statistiques descriptives des variables quantitatives continues présentes dans le jeu de données. Ces statistiques descriptives seront présentées sous formes d’un tableau à 5 colonnes qui affichent respectivement le minimum, la moyenne, l’écart-type, le maximum et la médiane.</p>
+<p>Le tableau suivant présente les statistiques descriptives des colonnes numériques.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">kable</span>(<span class="kw">statistiques_desc</span>(<span class="kw">subset</span>(ames, <span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(Longitude, Latitude))), </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">      <span class="dt">caption =</span> <span class="st">&quot;Tableau 1 : Statistiques descriptives sur les colonnes numériques&quot;</span>)</a></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-4">Table 2.1: </span>Tableau 1 : Statistiques descriptives sur les colonnes numériques</caption>
 <thead>
@@ -408,18 +472,59 @@
 </table>
 <p>En moyenne les maisons vendues coûtent un peu plus de 180 mille dollars. Les prix varient fortement d’une maison à l’autre puisque le prix minimum de vente est de 12789 dollars tandis que le prix maximum est de plus de 755 mille dollars.
 Pour avoir une meilleure vision de la distribution des prix, nous pouvons représenter un histogramme des prix.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> ames, <span class="kw">aes</span>(<span class="dt">x =</span> Sale_Price)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">50</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Distribution du prix de vente des maisons&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">size =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  )</a></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-5-1.png" width="2400" /></p>
-<p>Nous pouvons également avoir un aperçu de l’ensemble des colonnes numériques du jeu de données en faisant une représentation graphique combinée de ces colonnes.</p>
+<p>La distribution des prix est un peu concentrée vers la gauche, ce qui l’éloigne d’une distribution gaussienne (normale).</p>
+<p>Nous pouvons également avoir un aperçu de l’ensemble des colonnes numériques du jeu de données en faisant une représentation graphique combinée de ces colonnes.
+Le graphique suivant présente les histogrammes ou diagramme e bâton de toutes les variables quantitatives présentes dans le jeu de données . Ce type de représentation a pour intérêt d’afficher les caractéristiques des variables qui n’étaient pas observables par les simples statistiques que nous avions présentées plus haut.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">num_columns &lt;-<span class="st"> </span>ames[<span class="kw">sapply</span>(ames, is.numeric)]</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">num_columns <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">subset</span>(<span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(Latitude, Longitude, Sale_Price)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">30</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)  <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-6-1.png" width="2400" /></p>
-<p>Il est important que nous explorions les données pour découvrir la structure des données. Le but de cette analyse exploratoire est d’étudier la variance associée au jeu de données. En effet une base de donnée comporte en elle une variance ou information et le but de tout travail économétrique consistant à modéliser la variable dépendante est de trouver un modèle qui arrive à expliquer la variance de cette variable dépendante en se basant sur des variables qu’on appelle variable explicatives.</p>
+<p>Parmi toutes les variables qui composent le jeu de données, nous observons qu’aucune ne suit une distribution normale. Certaines variables telles Bsmft_Half_Bath (salle de bain au sous-sol), Low_Qual_Fn_SF (superficie en pieds carrés construites de qualité médiocre), Kitchen_Abv_Grad (nombre de cuisine à l’étage), Enclosed_Porch (porche fermée en pieds carrés), Screen_Porch (écran de la véranda en pieds carrés), Pool_Area (superficie de la piscine) et Misc_Val (valeurs des caractéristiques diverses) soit 9 variables n’ont seulement qu’une seule unique valeur à savoir zéro.</p>
+<p>En effet plusieurs des maisons n’ont pas ces caractéristiques mentionnées. Par exemple la probabilité de trouver une maison ayant une piscine est très faible donc la variable Pool_Area prend dans la grande majorité des cas la valeur 0, ce qui fait que la distribution des colonnes est fortement concentrée à gauche et sur une seule valeur.</p>
+<p>Nous pourrons être tentées de les enlever pour la suite de l’étude, mais à l’évidence si ces variables ont été mesurées c’est qu’ils ont un intérêt. Nous étudierons les coefficients qui leur seront associés lorsque nous ferons les régressions.</p>
 </div>
 <div id="statistiques-descriptives-bivariées" class="section level2">
 <h2><span class="header-section-number">2.2</span> Statistiques descriptives bivariées</h2>
 <p>Les statistiques bivariées nous permettent d’observer le degré de liaisons entre les différentes variables. Nous allons nous intéresser au coefficient de corrélation pour chaque paire de variables afin de voir le degré de liaisons pour les variables prises deux à deux.</p>
 <p>Pour simplifier la lecture de ces paires de corrélation, nous allons représenter la matrice des paires de corrélation sous la forme d’un graphique. Cette façon nous permet de voir à la fois dans la globalité et pour chaque variable le degré de corrélation.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">corel &lt;-<span class="st"> </span><span class="kw">cor</span>(ames[<span class="kw">sapply</span>(ames, is.numeric)])</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">ggcorrplot</span>(corel, <span class="dt">hc.order =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">           <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>),</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">           <span class="dt">title =</span> <span class="st">&quot;Matrice des corrélations&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">             <span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>,</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">             <span class="dt">legend.key.size =</span> <span class="kw">unit</span>(<span class="dv">3</span>, <span class="st">&quot;mm&quot;</span>),</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">             <span class="dt">legend.box.spacing =</span> <span class="kw">unit</span>(<span class="fl">0.5</span>, <span class="st">&quot;mm&quot;</span>),</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">             <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="st">&quot;cor&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">             <span class="dt">legend.key.width =</span> <span class="kw">unit</span>(<span class="fl">0.8</span>, <span class="st">&quot;cm&quot;</span>),</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">             <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">20</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">             <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>),</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">             <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">             </a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">           )</a></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-7-1.png" width="2400" /></p>
-<p>Nous voyons que sur un plan global les corrélations entre les variables sont davantage positives que négatives. Etant donné le grand nombre des variables que nous étudions, nous n’allons commenter que les coefficients de corrélation les plus fortes.
-Pour cela nous affichons dans les tableaux suivants les respectivement les plus fortes corrélations positives et les plus fortes corrélations négatives.</p>
+<p>Nous voyons que sur un plan global les corrélations entre les variables sont davantage positives que négatives. Etant donné le grand nombre des variables que nous étudions, nous n’allons commenter que les coefficients de corrélation les plus fortes.</p>
+<p>Pour cela nous affichons dans les tableaux suivants les respectivement les plus fortes corrélations positives et les plus fortes corrélations négatives.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">corel.df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(corel) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>( <span class="op">-</span>value) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw">filter</span>(value <span class="op">&lt;</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">colnames</span>(corel.df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;cor.coef&quot;</span>)</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">idx &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(corel.df) <span class="op">%%</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="kw">kable</span>(corel.df[idx, ] [<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ], <span class="dt">caption =</span> </a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">        <span class="st">&quot;Les 10 premières fortes corrélations entre les variables&quot;</span>)</a></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-8">Table 2.2: </span>Les 10 premières fortes corrélations entre les variables</caption>
 <thead>
@@ -495,8 +600,18 @@ Pour cela nous affichons dans les tableaux suivants les respectivement les plus 
 </table>
 <p>La variable Garage_Cars mesure la taille du garage en capacité de voiture et la variable Garage_Area mesure la taille du garage en pieds carrés (mesure américaine). La corrélation entre ces deux variables est positive et très forte.
 La superficie totale en pieds carrés du sous-sol (Total_Bsmt_SF) est fortement corrélée avec la superficie du premier étage (First_Flr_SF).
-Nous voyons également que la corrélation entre la superficie totale (Gr_Liv_Area) de la maison et son prix (Sale_Price) est également positive et forte.
-Nous voyons également qu’il y a une corrélation positive entre le prix de la maison et la superficie totale du sous-sol. La superficie totale corrèle également positivement et fortement avec les salles de bain complètes au-dessus du niveau du sol (Full_Bath).</p>
+Nous voyons également que la corrélation entre la superficie totale (Gr_Liv_Area) de la maison et son prix (Sale_Price) est également positive et forte.</p>
+<p>Nous voyons également qu’il y a une corrélation positive entre le prix de la maison et la superficie totale du sous-sol. La superficie totale corrèle également positivement et fortement avec les salles de bain complètes au-dessus du niveau du sol (Full_Bath).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">corel.df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(corel) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>( value) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">filter</span>(value <span class="op">&lt;</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw">colnames</span>(corel.df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;cor.coef&quot;</span>)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">idx &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(corel.df) <span class="op">%%</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="kw">kable</span>(corel.df[idx, ][<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ], <span class="dt">caption =</span> </a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">        <span class="st">&quot;Les 10 premières fortes corrélations négatives entre les variables&quot;</span>)</a></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-9">Table 2.3: </span>Les 10 premières fortes corrélations négatives entre les variables</caption>
 <thead>
@@ -578,12 +693,55 @@ Pour ce faire nous pouvons utiliser l’analyse en composante principale qui est
 <p>Le cercle de corrélation que nous construisons ici est le résultat d’une analyse en composantes principales sur les données quantitatives. Par souci de simplicité nous ne représenterons que le premier plan factoriel.<br />
 Ce premier plan factoriel comporte affiche la direction et la force de corrélation de chacune des variables sur les deux premiers axes factoriels. En ACP le pouvoir explicatif des axes est descendant, les deux premiers axes expliquent souvent une grande partie de la variance.
 L’intérêt de cette représentation est d’observer dans quel sens vont les corrélations et comment les variables peuvent être groupées sur les axes factoriels.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">base_finale &lt;-<span class="st"> </span><span class="kw">cbind</span>(num_columns, ames[, <span class="kw">c</span>(<span class="st">&quot;Overall_Qual&quot;</span>, <span class="st">&quot;Overall_Cond&quot;</span>)])</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">base_finale<span class="op">$</span>Overall_Cond &lt;-<span class="st"> </span><span class="kw">as.character</span>(base_finale<span class="op">$</span>Overall_Cond)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">base_finale<span class="op">$</span>Overall_Qual &lt;-<span class="st"> </span><span class="kw">as.character</span>(base_finale<span class="op">$</span>Overall_Qual)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Transformer les variables overall_qual et overall_cond. Réduire le nombre de modalités</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">base_finale<span class="op">$</span>Overall_Cond &lt;-<span class="st"> </span><span class="kw">ifelse</span>(base_finale<span class="op">$</span>Overall_Cond <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Very_Poor&quot;</span>, <span class="st">&quot;Poor&quot;</span>, <span class="st">&quot;Fair&quot;</span>, <span class="st">&quot;Below_Average&quot;</span>), <span class="st">&quot;Low_Qual&quot;</span>, base_finale<span class="op">$</span>Overall_Cond)</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">base_finale<span class="op">$</span>Overall_Cond &lt;-<span class="st"> </span><span class="kw">ifelse</span>(base_finale<span class="op">$</span>Overall_Cond <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Above_Average&quot;</span>,<span class="st">&quot;Good&quot;</span>, <span class="st">&quot;Very_Good&quot;</span>, <span class="st">&quot;Excellent&quot;</span>), <span class="st">&quot;Good-to-excellent&quot;</span>, base_finale<span class="op">$</span>Overall_Cond)</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co"># Overall_Qual</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">base_finale<span class="op">$</span>Overall_Qual &lt;-<span class="st"> </span><span class="kw">ifelse</span>(base_finale<span class="op">$</span>Overall_Qual <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Very_Poor&quot;</span>, <span class="st">&quot;Poor&quot;</span>, <span class="st">&quot;Fair&quot;</span>, <span class="st">&quot;Below_Average&quot;</span>), <span class="st">&quot;Low_Qual&quot;</span>, base_finale<span class="op">$</span>Overall_Qual)</a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14">base_finale<span class="op">$</span>Overall_Qual &lt;-<span class="st"> </span><span class="kw">ifelse</span>(base_finale<span class="op">$</span>Overall_Qual <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Above_Average&quot;</span>,<span class="st">&quot;Good&quot;</span>, <span class="st">&quot;Very_Good&quot;</span>, <span class="st">&quot;Excellent&quot;</span>), <span class="st">&quot;Good-to-excellent&quot;</span>, base_finale<span class="op">$</span>Overall_Qual)</a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16">base_finale<span class="op">$</span>Overall_Cond &lt;-<span class="st"> </span><span class="kw">as.factor</span>(base_finale<span class="op">$</span>Overall_Cond)</a>
+<a class="sourceLine" id="cb8-17" data-line-number="17">base_finale<span class="op">$</span>Overall_Qual &lt;-<span class="st"> </span><span class="kw">as.factor</span>(base_finale<span class="op">$</span>Overall_Qual)</a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19">base_finale &lt;-<span class="st"> </span>base_finale <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(Longitude, Latitude))</a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co"># EXPORT to csv for further processing with SAS</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22">base_export &lt;-<span class="st"> </span>base_finale <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb8-24" data-line-number="24">    <span class="dt">Overall_Cond =</span> <span class="kw">as.numeric</span>(Overall_Cond),</a>
+<a class="sourceLine" id="cb8-25" data-line-number="25">    <span class="dt">Overall_Qual =</span> <span class="kw">as.numeric</span>(Overall_Qual)</a>
+<a class="sourceLine" id="cb8-26" data-line-number="26">  )</a>
+<a class="sourceLine" id="cb8-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb8-28" data-line-number="28"><span class="kw">write.csv</span>(<span class="dt">x =</span> base_export, <span class="dt">file =</span> <span class="st">&quot;base_export.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">pc &lt;-<span class="st"> </span>FactoMineR<span class="op">::</span><span class="kw">PCA</span>(<span class="kw">subset</span>(base_export, <span class="dt">select =</span> <span class="op">-</span>Sale_Price), <span class="dt">graph =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">fviz_eig</span>(pc, <span class="dt">main =</span> <span class="st">&quot;Pouvoir explicatif de chaque composante principale&quot;</span>,</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">         <span class="dt">addlabels =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">size =</span> <span class="dv">20</span>))</a></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-12-1.png" width="3600" /></p>
 <p>Le pouvoir explicatif marginal d’une composante est négative. Les deux premières composantes arrivent à expliquer 27,1% de la variance des caractéristiques des maisons.</p>
 <p>Nous pouvons représenter sur un plan factoriel les deux premières composantes principales pour observer le sens des variances.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">fviz_pca_var</span>(pc, <span class="dt">repel =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">             <span class="dt">title =</span> <span class="st">&quot;Cercle des corrélations&quot;</span>,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">             ) <span class="op">+</span><span class="st"> </span><span class="kw">theme_ipsum</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">50</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>)</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">  )</a></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-13-1.png" width="3600" /></p>
 <p>Le cercle des corrélations montre qu’une grande partie des variable est fortement corrélée avec l’axe 1. Ce qui signifie que ces variables évoluent dans le même sens.</p>
 <p>Pour avoir une meilleure idée de ce que représente chacun des axes, nous pouvons lister les contributions respectives des variables à la définition des axes.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">data.frame</span>(pc<span class="op">$</span>var<span class="op">$</span>contrib[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="dt">var =</span> <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>Dim<span class="fl">.1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Variable, Dim<span class="fl">.1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;Les dix premières contributions à la première composante&quot;</span>)</a></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-14">Table 2.4: </span>Les dix premières contributions à la première composante</caption>
 <thead>
@@ -635,8 +793,13 @@ L’intérêt de cette représentation est d’observer dans quel sens vont les 
 </tr>
 </tbody>
 </table>
-<p>Les variables qui ont les plus fortes contributions sur le premier axe factoriel sont principalement des variables qui touchent à la superficie de la maison ainsi que la superficie des pièces (Garages, salles de bain) que contient la maison.
+<p>Les variables qui ont les plus fortes contributions sur le premier axe factoriel sont principalement des variables qui touchent à la superficie de la maison ainsi que la superficie des pièces (Garages, salles de bain) que contient la maison.<br />
 Cette composante désigne donc globalement la taille de la maison.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">data.frame</span>(pc<span class="op">$</span>var<span class="op">$</span>contrib[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>(<span class="dt">var =</span> <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>Dim<span class="fl">.2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Variable, Dim<span class="fl">.2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;Les dix premières contributions à la deuxième composante&quot;</span>)</a></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-15">Table 2.5: </span>Les dix premières contributions à la deuxième composante</caption>
 <thead>
@@ -689,6 +852,7 @@ Cette composante désigne donc globalement la taille de la maison.</p>
 </tbody>
 </table>
 <p>Sur la deuxième composante ce sont les caractéristiques relatives au nombre d’étages et de pièces situés dans les étages des maisons.</p>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
             </section>
@@ -697,7 +861,7 @@ Cette composante désigne donc globalement la taille de la maison.</p>
         </div>
       </div>
 <a href="introduction-générale.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="modélisations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="la-régression-régression-multiple.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -725,7 +889,8 @@ gitbook.start({
 "fontsettings": {
 "theme": "sepia",
 "family": "sans",
-"size": 20
+"size": 2,
+"font-size": 20
 },
 "edit": {
 "link": null,

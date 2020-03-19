@@ -9,7 +9,7 @@ output:
       fontsettings:
         theme: sepia
         family: sans
-        size : 20
+        font-size : 20
         
 author: Axel-Cleris Gailloty
 github-repo: "agailloty/latent-variable-regressions"
@@ -18,7 +18,7 @@ github-repo: "agailloty/latent-variable-regressions"
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 pkg <- c("tidyverse", "plsr", "caret", "pls", "recipes", "dplyr", "psych", "tidytext",
-         "AmesHousing", "ggcorrplot", "factoextra", "hrbrthemes", "bookdown")
+         "AmesHousing", "ggcorrplot", "factoextra", "hrbrthemes", "bookdown", "pander")
 
 for (package in pkg){
   if (package %in% installed.packages()[, "Package"]){
@@ -33,8 +33,8 @@ for (package in pkg){
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(dpi = 350, message = FALSE, 
-                      warning = FALSE, echo = FALSE, 
-                      fig.height = 8, fig.width = 8, dpi=300)
+                      warning = FALSE, 
+                      fig.height = 8, fig.width = 8, dpi=300, comment = NA)
 source("functions.R")
 kable <- knitr::kable
 options(scipen = 10, digits = 8)
@@ -48,7 +48,7 @@ L'estimation de la valeur d'un bien immobilier est une étape cruciale dans la v
 
 Ce problème d'inefficience est principalement dû au différentiel d'estimation de la valeur que font les parties prenantes sur le marché. C'est pour cette raison que dans le cadre de cette étude, la question qui nous occupe est celle de comprendre les facteurs entrant dans la valorisation des biens immobiliers. Plus précisément il s'agit de se pencher sur les caractéristiques observables du bien qui entre positivement ou négativement dans la valeur du bien.  
 
-Pour comprendre donc ces facteurs cette étude se base sur une historique des des ventes de propriétés résidentielles effectuées dans la ville de Ames dans l'Etat de l'Iowa aux Etats-Unis sur la période de 2006 à 2010.
+Pour comprendre donc ces facteurs cette étude se base sur une historique des ventes de propriétés résidentielles effectuées dans la ville de Ames dans l'Etat de l'Iowa aux Etats-Unis sur la période de 2006 à 2010.
 
 
 
@@ -66,11 +66,10 @@ L'ensemble de données contient 2930 observations et 80 variables explicatives (
 
 
 
-## Objectifs de l'étude
+## Objectifs de l'étude et plan
 
 Bien que la motivation première de cette étude est celle de déterminer les facteurs entrant dans l'évaluation d'un bien immobilier, cette étude porte un grand intérêt à l'utilisation des méthodes économétriques d'estimation. Pour cette étude nous adoptons la démarche économétrique qui consiste à mettre en évidence les relations de causalité entre le prix auquel le bien immobilier est vendu et les caractéristiques de ce bien. Il ne s'agit pas seulement d'une analyse des corrélations, mais de déterminer aussi les causalités en hiérarchisant les effets des caractéristiques observables d'un bien immobilier sur son prix de vente et par cela identifier également les potentiels effets non observables.
 
-## Plan de l'étude
 
 Nous commencerons par faire des statistiques descriptives univariées des données. Dans cette partie nous cherchons à comprendre la distribution des variables que nous avons sélectionnées. Puis nous nous intéresserons aux statistiques bivariées en étudiant notamment les corrélations entre chaque paire de variables.
 
@@ -79,11 +78,16 @@ Nous commencerons par utiliser la méthode des moindre carrés ordinaires. Nous 
 
 \pagebreak
 
-# Analyse exploratoire des données
+# Analyse exploratoire des données  
+
+Il est important que nous explorions les données pour découvrir la structure des données. Le but de cette analyse exploratoire est d'étudier la variance associée au jeu de données. En effet une base de donnée comporte en elle une variance ou information et le but de tout travail économétrique consistant à modéliser la variable dépendante est de trouver un modèle qui arrive à expliquer la variance de cette variable dépendante en se basant sur des variables qu'on appelle variable explicatives.  
+L'analyse exploratoire permet entre autres de détecter des anomalies dans le jeu de données et les corriger si possibles.
 
 ## Statistiques descriptives univariées
 
 Nous allons afficher les statistiques descriptives des variables quantitatives continues présentes dans le jeu de données. Ces statistiques descriptives seront présentées sous formes d'un tableau à 5 colonnes qui affichent respectivement le minimum, la moyenne, l'écart-type, le maximum et la médiane.
+
+Le tableau suivant présente les statistiques descriptives des colonnes numériques.
 
 
 ```{r}
@@ -104,7 +108,11 @@ ggplot(data = ames, aes(x = Sale_Price)) +
   )
 ```
 
+La distribution des prix est un peu concentrée vers la gauche, ce qui l'éloigne d'une distribution gaussienne (normale).
+
 Nous pouvons également avoir un aperçu de l'ensemble des colonnes numériques du jeu de données en faisant une représentation graphique combinée de ces colonnes. 
+Le graphique suivant présente les histogrammes ou diagramme e bâton de toutes les variables quantitatives présentes dans le jeu de données . Ce type de représentation a pour intérêt d'afficher les caractéristiques des variables qui n'étaient pas observables par les simples statistiques que nous avions présentées plus haut.  
+
 
 ```{r fig.height=10, fig.width=8}
 num_columns <- ames[sapply(ames, is.numeric)]
@@ -115,15 +123,18 @@ num_columns %>%  subset(select = -c(Latitude, Longitude, Sale_Price)) %>%
   facet_wrap(~variable, scale = "free", ncol = 4)
 ```
 
+Parmi toutes les variables qui composent le jeu de données, nous observons qu'aucune ne suit une distribution normale. Certaines variables telles Bsmft_Half_Bath (salle de bain au sous-sol), Low_Qual_Fn_SF (superficie en pieds carrés construites de qualité médiocre), Kitchen_Abv_Grad (nombre de cuisine à l'étage), Enclosed_Porch (porche fermée en pieds carrés), Screen_Porch (écran de la véranda en pieds carrés), Pool_Area (superficie de la piscine) et Misc_Val (valeurs des caractéristiques diverses) soit 9 variables n'ont seulement qu'une seule unique valeur à savoir zéro.
 
-Il est important que nous explorions les données pour découvrir la structure des données. Le but de cette analyse exploratoire est d'étudier la variance associée au jeu de données. En effet une base de donnée comporte en elle une variance ou information et le but de tout travail économétrique consistant à modéliser la variable dépendante est de trouver un modèle qui arrive à expliquer la variance de cette variable dépendante en se basant sur des variables qu'on appelle variable explicatives.
+En effet plusieurs des maisons n'ont pas ces caractéristiques mentionnées. Par exemple la probabilité de trouver une maison ayant une piscine est très faible donc la variable Pool_Area prend dans la grande majorité des cas la valeur 0, ce qui fait que la distribution des colonnes est fortement concentrée à gauche et sur une seule valeur.   
+
+Nous pourrons être tentées de les enlever pour la suite de l'étude, mais à l'évidence si ces variables ont été mesurées c'est qu'ils ont un intérêt. Nous étudierons les coefficients qui leur seront associés lorsque nous ferons les régressions.  
 
 
 ## Statistiques descriptives bivariées
 
 Les statistiques bivariées nous permettent d'observer le degré de liaisons entre les différentes variables. Nous allons nous intéresser au coefficient de corrélation pour chaque paire de variables afin de voir le degré de liaisons pour les variables prises deux à deux.  
 
-Pour simplifier la lecture de ces paires de corrélation, nous allons représenter la matrice des paires de corrélation sous la forme d'un graphique. Cette façon nous permet de voir à la fois dans la globalité et pour chaque variable le degré de corrélation.
+Pour simplifier la lecture de ces paires de corrélation, nous allons représenter la matrice des paires de corrélation sous la forme d'un graphique. Cette façon nous permet de voir à la fois dans la globalité et pour chaque variable le degré de corrélation.  
 
 ```{r}
 corel <- cor(ames[sapply(ames, is.numeric)])
@@ -142,7 +153,8 @@ ggcorrplot(corel, hc.order = TRUE,
            )
 ```
 
-Nous voyons que sur un plan global les corrélations entre les variables sont davantage positives que négatives. Etant donné le grand nombre des variables que nous étudions, nous n'allons commenter que les coefficients de corrélation les plus fortes. 
+Nous voyons que sur un plan global les corrélations entre les variables sont davantage positives que négatives. Etant donné le grand nombre des variables que nous étudions, nous n'allons commenter que les coefficients de corrélation les plus fortes.  
+
 Pour cela nous affichons dans les tableaux suivants les respectivement les plus fortes corrélations positives et les plus fortes corrélations négatives.
 
 
@@ -161,7 +173,8 @@ kable(corel.df[idx, ] [1:10, ], caption =
 
 La variable Garage_Cars mesure la taille du garage en capacité de voiture et la variable Garage_Area mesure la taille du garage en pieds carrés (mesure américaine). La corrélation entre ces deux variables est positive et très forte. 
 La superficie totale en pieds carrés du sous-sol (Total_Bsmt_SF) est fortement corrélée avec la superficie du premier étage (First_Flr_SF).
-Nous voyons également que la corrélation entre la superficie totale (Gr_Liv_Area) de la maison et son prix (Sale_Price) est également positive et forte.
+Nous voyons également que la corrélation entre la superficie totale (Gr_Liv_Area) de la maison et son prix (Sale_Price) est également positive et forte.  
+
 Nous voyons également qu'il y a une corrélation positive entre le prix de la maison et la superficie totale du sous-sol. La superficie totale corrèle également positivement et fortement avec les salles de bain complètes au-dessus du niveau du sol (Full_Bath).
 
 
@@ -256,7 +269,7 @@ data.frame(pc$var$contrib[, 1:2]) %>%
   kable(caption = "Les dix premières contributions à la première composante")
 ```
 
-Les variables qui ont les plus fortes contributions sur le premier axe factoriel sont principalement des variables qui touchent à la superficie de la maison ainsi que la superficie des pièces (Garages, salles de bain) que contient la maison. 
+Les variables qui ont les plus fortes contributions sur le premier axe factoriel sont principalement des variables qui touchent à la superficie de la maison ainsi que la superficie des pièces (Garages, salles de bain) que contient la maison.  
 Cette composante désigne donc globalement la taille de la maison.
 
 ```{r}
@@ -269,19 +282,16 @@ data.frame(pc$var$contrib[, 1:2]) %>%
 
 Sur la deuxième composante ce sont les caractéristiques relatives au nombre d'étages et de pièces situés dans les étages des maisons.
 
-
-# Modélisations
-
+\pagebreak
 
 
-## Transformations des données
+# La régression régression multiple
 
+Nous voulons construire un modèle expliquant le prix de vente de la maison en fonction des caractéristiques.  
 
-Comme nous l'avions présenté dans la présentation des données, 46 des colonnes présentes dans le jeu de données ne sont pas quantitatives et continues. En effet 23 sont qualitatives ordinales et 23 autres sont qualitatives simples. Il est donc important que nous trouvions une stratégie pour inclure ces colonnes dans le modèle car ces informations qui ne sont pas nécessairement quantitatives sont importantes pour comprendre l'inertie de la variable que nous cherchons à modéliser qui est en l'occurrence le prix du bien immobilier (`Sale_Price`).
-
-Pour nous assurer de l'importance d'inclure les variables non quantitatives dans le modèle, nous allons construire deux modèles de régression multiples simples. Le premier modèle inclut uniquement les variables quantitatives continues et le second modèle va inclure en plus des variables quantitatives les variables qualitatives transformées.
-
-## Modèle de régression multiple
+Le modèle se présentera sous forme d'une équation comme celle-ci:
+$$ SalePrice = \alpha + \beta * X $$
+où $\alpha$ est la constante et $X$ les variables explicatives et $\beta$ les coefficients associés à chacune des variables explicatives.  
 
 ```{r}
 mod <- lm(Sale_Price~., data = base_export)
@@ -328,16 +338,17 @@ ggplot() + aes(x = mod$residuals) +
   theme(plot.title = element_text(face = "bold", size = 20))
 
 ```
-A l'aide de l'histogramme nous observons que la distribution ressemble à une loi normale, mais elle est fortement dirigée vers la droite. 
-Nous pouvons faire le test de Shapiro-Wilk pour tester plus formellement la normalité des résidus. L'hypothèse nulle de ce test est que la distribution est normalement distribuée.
+
+A l'aide de l'histogramme nous observons que la distribution ressemble à une loi normale, mais elle est fortement dirigée vers la droite.   
+Nous pouvons faire le test de Shapiro-Wilk pour tester plus formellement la normalité des résidus. L'hypothèse nulle de ce test est que la distribution est normalement distribuée.  
 
 ```{r comment=NA}
 shapiro.test(mod$residuals)
 ```
 
-Ici la p-value est inférieure à 5% donc, nous rejettons cette hypothèse nulle, la distribution ne suit pas une loi normale.
+Ici la p-value est inférieure à 5% donc, nous rejettons cette hypothèse nulle, la distribution ne suit pas une loi normale.  
 
-Dès lors que les résidus ne suivent pas une loi normale, les estimations faites par les OLS sont biaisées. Il importe donc d'utiliser d'autres méthodes d'estimations pour construire le modèle.
+Dès lors que les résidus ne suivent pas une loi normale, les estimations faites par les OLS sont biaisées. Il importe donc d'utiliser d'autres méthodes d'estimations pour construire le modèle.  
 
 ## Régressions sur variables latentes
 
@@ -367,9 +378,9 @@ En raison du fait que nous ne cherchons ici qu'à expliquer une seule variable (
 
 # Le principe de la méthode de la régression sur les composantes principales
 
-Dans le cadre d'une régression multiple, nous cherchons à expliquer l'endogène y à l'aide de variables explicatives X. Nous cherchons donc $y = \alpha + \beta . X$
+Dans le cadre d'une régression multiple, nous cherchons à expliquer l'endogène y à l'aide de variables explicatives X. Nous cherchons donc $$y = \alpha + \beta . X$$
 
-La régression sur les composantes principales consiste à remplacer la matrice des $X$ (n lignes et m colonnes) par une nouvelle matrice T dérivée de X, de n lignes et k colonnes, avec k très inférieur à m.
+La régression sur les composantes principales consiste à remplacer la matrice des $X$ (n lignes et m colonnes) par une nouvelle matrice $T$ dérivée de $X$, de n lignes et k colonnes, avec k très inférieur à m.
 
 Chaque colonne k doit être une combinaison linéaire des variables d'origine.
 
@@ -378,6 +389,7 @@ $$T= X.W$$
 
 Avec $W$ la matrice (m,k) des coefficients définissant les combinaisons linéaires, T une matrice dont les colonnes forment des variables « artificielles » obtenues par combinaison linéaire des variables
 d’origine.  
+
 Une régression multiple est ensuite appliquée avec $T$ à la place de $X$ :
 $$y = c + d.T$$
 
@@ -440,7 +452,7 @@ summary(mod_pc)
 ```
 
 
-Les résultats globaux du modèle que nous trouvons sont les mêmes avec R. Les 5 composantes retenues expliquent bien 75,93% de la variance des prix de vente de la maison.
+Les résultats globaux du modèle que nous trouvons sont les mêmes avec R. Les 5 composantes retenues expliquent bien 75,93% de la variance des prix de vente de la maison.  
 
 Nous pouvons écrire ce résultat sous forme d'une équation :
 
@@ -479,7 +491,9 @@ for (i in 2:5) df <- rbind(df, retrieve_dims_contrib(pc, i))
 ```
 
 
-```{r fig.height=8, fig.width=12}
+
+
+```{r fig.height=6, fig.width=12}
 df %>% mutate(variable = tidytext::reorder_within(variable, contrib, dim)) %>%
   ggplot(aes(variable, contrib)) +
   geom_col( col = "black", fill = "lightblue") + coord_flip() + 
@@ -487,10 +501,14 @@ df %>% mutate(variable = tidytext::reorder_within(variable, contrib, dim)) %>%
   tidytext::scale_x_reordered() +
   labs(title = "Contributions des variables à chacune des dimensions",
          subtitle = "La longueur de la barre indique le poids de la variable sur la dimension.") +
-  theme_ipsum()
+  theme_ipsum() + theme(
+    plot.title = element_text(size = 30),
+    plot.subtitle = element_text(size = 20)
+  )
 ```
 
-Le poids des variables sur les trois premières dimensions est assez équilibrée. Les deux dernières dimensions sont chacune fortement dominées par une variable.  
+Le poids des variables sur les trois premières dimensions est assez équilibrée avec des amplitudes modérées (0 à 12). Les deux dernières dimensions sont chacune fortement dominées par une variable avec des amplitudes beaucoup plus grande (0 à 30).  
+
 
 Les variables synthétiques que produit l'ACP sont orthogonales entre elles. Pour le vérifier nous pouvons représenter les corrélations entre les dimensions.
 
@@ -505,6 +523,7 @@ psych::pairs.panels(
              )
 ```
 
+Nous voyons bien que les corrélations entre les composantes sont faibles. La plus haute en valeur absolue est 0.30 et représente la corrélation entre la dimension 1 et la dimension 3. 
 
 ### Dimension 1
 
@@ -534,10 +553,12 @@ de ce fait à de mauvaises interprétations des résultats.
 
 Nous pouvons donc utiliser la deuxième méthode de cette famille.
 
+\pagebreak
 
 # Régéressions sur les moindres carrés partiels
 
-Comme pour la régression PCR, calcul de T dont les éléments sont les « scores » et les colonnes les « composantes » : 
+Comme pour la régression PCR, calcul de $T$ dont les éléments sont les « scores » et les colonnes les « composantes » : 
+
 $T = X.W$ avec $W$ matrice des poids (ou loadings) et $X$ matrice des variables explicatives centrées (n,m).
 
 Mais, contrairement à la PCR, le calcul de $T$ se fait en tenant compte de la variable à prédire $y$. Double modélisation :
@@ -562,12 +583,11 @@ On introduit une deuxième composante $t_2$. Ainsi, une ligne $x_i$ de $X$ est �
 
 L’introduction de nouvelles composantes se fait selon la même procédure : partant d’un modèle à k composantes, on créé un nouveau modèle à k+1 composantes en calculant une nouvelle composante tk, puis les paramètres des deux modèles couplés : 
 
-$ X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1 $
+$X = t_1p_1+t_2 p_2 +…+t_k p_k + t_k_+1 p_k+1 + R_k+1$  
 
 
 $Y = t_1q_1+t_2 q_2 +…+t_k q_k + t_k+1 q_k+1 + F_k+1$
 
-## Les loadings et les weights
 
 ## Modèle PLSR avec validation croisée
 
@@ -581,39 +601,77 @@ summary(model.plsr)
 
 ## Le nombre de composantes
 
-A mesure que nous ajoutons des composantes les erreurs de prédictions baissent. Toutefois nous ne voulons pas avoir beaucoup trop de composantes pour expliquer notre variable dépendante. 
+Comme nous le montre le graphique suivant, à mesure que nous ajoutons des composantes les erreurs de prédictions baissent. Toutefois nous ne voulons pas avoir beaucoup trop de composantes pour expliquer notre variable dépendante. 
 
 
 ```{r fig.height=5, fig.width=10}
 ncomp.onesigma <- selectNcomp(model.plsr, method = "onesigma", plot = TRUE, alpha = 0.5)
 ```
 
+La validation croisée nous suggère de retenir 9 composantes dans la construction d'un modèle PLS. Nous n'allons pas retenir autant de composantes car le pouvoir explicatif de celles-ci baisse, ce qui fait que les composantes éloignées peuvent ne pas être significatives. Nous n'allons donc retenir 5 composantes qui nous offrent un bon compromis en ce sens que la 5e composantes explique 72.2% de la variance de l'endogène alors que la 6e explique seulement 72.86, soit un apport marginal très faible.
 
+Nous estimons donc le modèle en sélectionnant 5 composantes.
 
 ```{r}
-coef(model.plsr)
+model.plsr <- plsr(Sale_Price~., data = base_export, 
+                   method = pls.options()$plsralg, ncomp = 5)
+summary(model.plsr)
 ```
 
 
-```{r fig.height=5, fig.width=10}
+## Les coefficients estimés par le PLS
+
+Les coefficients varient d'une composante à une autre. Nous choisissons de représenter les coefficients calculés par la régression sur les moindres carrés partiels à partir des 5 composantes.
+
+```{r}
+coef(model.plsr) %>%
+  data.frame() %>%
+  setNames(., c("Sale_Price")) %>%
+kable()
+```
+
+
+```{r eval=FALSE, fig.height=7, fig.width=12, include=FALSE}
+data.frame(model.plsr$coefficients) %>%
+  tibble::rownames_to_column("variables") %>%
+  reshape2::melt() %>%
+  mutate(variable = as.character(variable),
+    comp = paste("comp", substr(variable, 12, 12)),
+    variable = tidytext::reorder_within(variable, value, comp)) %>%
+  select( - variable) %>%
+  filter(comp == "5 composantes") %>%
+  ggplot(aes(x = variables, y = value)) +
+  geom_col( fill = "lightblue") + 
+  #facet_wrap(~comp, scales = "free") +
+  coord_flip() +
+  labs(title = "Coefficients") +
+  theme_ipsum() +
+  theme(plot.title = element_text(size = 40))
+```
+
+Ce graphique est souvent représenté de la manière suivante dans plusieurs logiciels. Toutefois cette dernière n'est pas très lisible. Nous allons donc commenter le premier graphique.
+
+```{r eval=FALSE, fig.height=5, fig.width=10, include=FALSE}
 plot(model.plsr, plottype = "coef", ncomp=1:5, legendpos = "bottomleft", xlab = "nm")
-
 ```
+
 
 ```{r}
 explvar(model.plsr)
 ```
 
+## Loadings (chargements) and weights (poids)
 
+Les « Loadings » reflètent (mais ne sont pas) les corrélations entre les composantes et les variables explicatives. Ils correspondent aux coordonnées sur les axes factoriels. On considère qu’une valeur supérieure à 0,4 (en valeur absolue) indique une liaison significative. Ce seuil est arbitraire (on
+descend parfois à 0,25). Les variables les plus excentrées sont les plus représentatives (ont une CTR plus élevée).
 
+Le poids des variables expliquées reflètent les corrélations entre ces variables et les scores uh. Ils permettent de cerner ce qui est expliqué sur ces facteurs.
+
+Le poids des variables explicatives reflètent la corrélation de ces variables avec les scores uh. Ils indiquent le rôle de chaque explicative dans l’explication globale de chaque axe.
+Dans la pratique, poids et loadings positionnent les variables de manière similaire, les interprétations sont identiques.
 
 ```{r}
-corrplot(model.plsr)
-```
-
-
-```{r}
-loading.weights(model.plsr)
+model.plsr$loading.weights
 ```
 
 
@@ -621,9 +679,7 @@ loading.weights(model.plsr)
 Yloadings(model.plsr)
 ```
 
-```{r}
-ls("package:pls")
-```
+
 
 ```{r}
 #Yscores(model.plsr)
@@ -670,6 +726,8 @@ kable(
     "...." = colnames(ames)[61:80]
     ))
 ```
+
+\pagebreak
 
 Description des colonnes :
 
