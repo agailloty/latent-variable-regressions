@@ -1,6 +1,6 @@
 ---
-title: "Prédire le prix des maisons présentant plusieurs caractéristiques"
-subtitle: "Une analyse par les méthodes de régression sur variables latentes"
+title: "Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles."
+subtitle: "Une analyse par les méthodes de régression sur variables latentes sur les ventes de propriétés résidentielles entre 2006 et 2010 à Ames, une ville de l’Etat de l’Iowa aux Etats-Unis."
 output: 
   bookdown::gitbook:
    #word_document:
@@ -9,7 +9,7 @@ output:
       fontsettings:
         theme: sepia
         family: sans
-        font-size : 20
+      font-size : 20
         
 author: Axel-Cleris Gailloty
 github-repo: "agailloty/latent-variable-regressions"
@@ -18,7 +18,7 @@ github-repo: "agailloty/latent-variable-regressions"
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 pkg <- c("tidyverse", "plsr", "caret", "pls", "recipes", "dplyr", "psych", "tidytext",
-         "AmesHousing", "ggcorrplot", "factoextra", "hrbrthemes", "bookdown", "pander")
+         "AmesHousing", "ggcorrplot", "factoextra", "hrbrthemes", "bookdown", "pander", "vip")
 
 for (package in pkg){
   if (package %in% installed.packages()[, "Package"]){
@@ -33,7 +33,7 @@ for (package in pkg){
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(dpi = 350, message = FALSE, 
-                      warning = FALSE, 
+                      warning = FALSE, echo = TRUE,
                       fig.height = 8, fig.width = 8, dpi=300, comment = NA)
 source("functions.R")
 kable <- knitr::kable
@@ -61,7 +61,7 @@ Pour comprendre donc ces facteurs cette étude se base sur une historique des ve
 ames <- AmesHousing::make_ames()
 ```
 
-Le jeu de données sur lequel ce travail se base est décrit la vente de propriétés résidentielles individuelles à Ames, une ville de l'Etat de l'Iowa aux USA entre 2006 et 2010.
+Le jeu de données sur lequel ce travail se base concerne la vente de propriétés résidentielles individuelles entre 2006 et 2010 à Ames, une ville de l'Etat de l'Iowa aux USA.  
 L'ensemble de données contient 2930 observations et 80 variables explicatives (23 nominales, 23 ordinales, 14 discrètes et 20 continues) impliquées dans l'évaluation de la valeur des propriétés résidentielles.
 
 
@@ -257,7 +257,7 @@ fviz_pca_var(pc, repel = TRUE,
   )
 ```
 
-Le cercle des corrélations montre qu'une grande partie des variable est fortement corrélée avec l'axe 1. Ce qui signifie que ces variables évoluent dans le même sens.
+Le cercle des corrélations montre qu'une grande partie des variables est fortement corrélée avec l'axe 1. Ce qui signifie que ces variables évoluent dans le même sens.
 
 Pour avoir une meilleure idée de ce que représente chacun des axes, nous pouvons lister les contributions respectives des variables à la définition des axes.
 
@@ -285,7 +285,7 @@ Sur la deuxième composante ce sont les caractéristiques relatives au nombre d'
 \pagebreak
 
 
-# La régression régression multiple
+# La régression linéaire multiple
 
 Nous voulons construire un modèle expliquant le prix de vente de la maison en fonction des caractéristiques.  
 
@@ -302,7 +302,7 @@ mod <- lm(Sale_Price~., data = base_export)
 summary(mod)
 ```
 
-La significativité globale de ce modèle de régression multiple est très bonne comme l'indique le test de Fisher. Le modèle explique 80% de la variance des prix de vente, ce qui est très bien pour des données transversales. La grande majorité des variables que nous avions sélectionnées pour inclure dans le modèle se sont montrés significatifs. Le test de Student effectué sur chacun des coefficients montre les différents dégrés de significativités des coefficients.  
+La significativité globale de ce modèle de régression multiple est très bonne comme l'indique le test de Fisher. Le modèle explique 80% de la variance des prix de vente, ce qui est très bien pour des données transversales. La grande majorité des variables que nous avions sélectionnées pour inclure dans le modèle se sont montrés significatifs. Le test de Student effectué sur chacun des coefficients montre les différents degrés de significativités des coefficients.  
 
 A cause de multicolinéarité, la variable `Gr_Liv_Area` qui représente la surface habitable hors étage de la maison a été enlevée du modèle. 
 
@@ -346,18 +346,18 @@ Nous pouvons faire le test de Shapiro-Wilk pour tester plus formellement la norm
 shapiro.test(mod$residuals)
 ```
 
-Ici la p-value est inférieure à 5% donc, nous rejettons cette hypothèse nulle, la distribution ne suit pas une loi normale.  
+Ici la p-value est inférieure à 5% donc, nous rejetons cette hypothèse nulle, la distribution ne suit pas une loi normale.  
 
 Dès lors que les résidus ne suivent pas une loi normale, les estimations faites par les OLS sont biaisées. Il importe donc d'utiliser d'autres méthodes d'estimations pour construire le modèle.  
 
-## Régressions sur variables latentes
+# Régressions sur variables latentes
 
-### Pourquoi faire une régression sur les variables latentes ?
+## Pourquoi faire une régression sur les variables latentes ?
 
 Les méthodes de régressions sur les latentes nous permettent d'adresser certaines limites que posent les méthodes de régression par les moindres carrés. En effet pour qu'une régression par les OLS soit sans biais il faut que toutes les hypothèses posées par les OLS soient vérifiées. Parmi ces hypothèses nous pouvons citer l'hypothèse de l'absence de corrélations entre les variables ou encore l'hypothèse d'absence de colinéarité entre les variables.
 
-Or en général les phénomènes que nous cherchons à expliquer, dans notre travail nous cherchons à expliquer le prix de vente d'un bien immobilier, ne vérifient pas toujours ces hypothèses à cause entre autres de l'interdépendance entre les variables.
-Dans le cas d'un bien immobilier, la taille des pièces du bien dépend de la superficie totale de la maison.  Cette situation nous amène à des résultats potentiellement biasés et non généralisables pour expliquer le phénomène.   
+Or en général les phénomènes que nous cherchons à expliquer, dans notre travail nous cherchons à expliquer le prix de vente d'un bien immobilier, ne vérifient pas toujours ces hypothèses à cause entre autres de l'interdépendance entre les variables.  
+Dans le cas d'un bien immobilier, la taille des pièces du bien dépend de la superficie totale de la maison.  Cette situation nous amène à des résultats potentiellement biaisés et non généralisables pour expliquer le phénomène.   
 
 Les méthodes de régression sur les variables nous permettent donc de corriger ces limites des régression standards en créant des variables synthétiques sur lesquelles nous allons faire les estimations.  
 
@@ -365,13 +365,13 @@ Les variables synthétiques créées lors de l'estimation présentent une propri
 
 Pour mettre en place ces méthodes, nous allons utiliser la procédure PLS (Partial Least Squares) implémentée dans le logiciel SAS.  
 
-Les techniques mises en œuvre par la procédure PLS sont les suivantes:  
+Les techniques mises en œuvre par la procédure PLS sont les suivantes :  
 
 - La régression sur composantes principales, qui extrait des facteurs qui expliquent le plus la variance des variables explicatives.  
 
 - La régression de rang réduit, qui extrait des facteurs qui expliquent le plus la variation de la variable réponse (y). Cette technique, également appelée analyse de redondance (maximale), diffère de la régression linéaire multiple uniquement lorsqu'il y a plusieurs variables endogènes.  
 
-- La régression sur les moindres carrés partiels, qui équilibre les deux objectifs d’explication de la variation de l'a réponse'endogène et expliquant la variation des prédicteurs. Deux formulations différentes pour les moindres carrés partiels sont disponibles: 
+- La régression sur les moindres carrés partiels, qui équilibre les deux objectifs d’explication de la variation de la variable endogène et expliquant la variation des prédicteurs. Deux formulations différentes pour les moindres carrés partiels sont disponibles : 
 la méthode prédictive originale de Wold (1966) et la méthode SIMPLS de de Jong (1993).
 
 En raison du fait que nous ne cherchons ici qu'à expliquer une seule variable (y), à savoir le prix des maisons, nous n'utiliserons pas la régression sur rang réduit car cela revient à faire une régression multiple, ce que nous avons déjà fait dans la section 3.2.
@@ -408,7 +408,7 @@ Pour cette méthode, nous allons utiliser conjointement SAS et R afin de ressort
 
 ## Résultats d'estimations avec SAS
 
-Nous avons spécifié la méthode "PCR" dans le procédure PLS afin de réaliser une régression sur les composantes principales. Il y a en total 34 variables explicatives pour 2930 observations.  
+Nous avons spécifié la méthode "PCR" dans la procédure PLS afin de réaliser une régression sur les composantes principales. Il y a en total 34 variables explicatives pour 2930 observations.  
 Nous choisissons également de faire une validation croisée sur le jeu de données.
 
 ![](pcr-img/pcr_general_info.PNG)
@@ -416,7 +416,7 @@ Nous choisissons également de faire une validation croisée sur le jeu de donn�
 
 ![](pcr-img/pcr_split-sample.PNG)
 
-Pour pouvoir déterminer avec confiance le nombre de composantes principales (ou facteurs) à retenir dans la PCR, l'algorithme utilise une technique de validation croisée. Une technique de validation croisée consiste à diviser l'échantillon en plusieurs groupes sur lesquels des ajustements successifs sont effectués. L'ajustement du modèle est effectué sur le groupe d'apprentissage et les résultats sont comparés aux observations du groupe test. L'efficaité prédictive est évaluée à l'aide l'indicateur PRESS (Predicted REsidual Sum of Squares).  
+Pour pouvoir déterminer avec confiance le nombre de composantes principales (ou facteurs) à retenir dans la PCR, l'algorithme utilise une technique de validation croisée. Une technique de validation croisée consiste à diviser l'échantillon en plusieurs groupes sur lesquels des ajustements successifs sont effectués. L'ajustement du modèle est effectué sur le groupe d'apprentissage et les résultats sont comparés aux observations du groupe test. L'efficacité prédictive est évaluée à l'aide l'indicateur PRESS (Predicted REsidual Sum of Squares).  
 
 Le tableau suivant nous montre que la valeur minimale de la validation croisée est atteinte si le nombre de composantes principales est 8. Toutefois il est préférable de se fier au test qui indique si oui ou non il existe une différence significative entre les 8 composantes.   
 
@@ -493,7 +493,7 @@ for (i in 2:5) df <- rbind(df, retrieve_dims_contrib(pc, i))
 
 
 
-```{r fig.height=6, fig.width=12}
+```{r fig.height=7, fig.width=12}
 df %>% mutate(variable = tidytext::reorder_within(variable, contrib, dim)) %>%
   ggplot(aes(variable, contrib)) +
   geom_col( col = "black", fill = "lightblue") + coord_flip() + 
@@ -507,7 +507,7 @@ df %>% mutate(variable = tidytext::reorder_within(variable, contrib, dim)) %>%
   )
 ```
 
-Le poids des variables sur les trois premières dimensions est assez équilibrée avec des amplitudes modérées (0 à 12). Les deux dernières dimensions sont chacune fortement dominées par une variable avec des amplitudes beaucoup plus grande (0 à 30).  
+Le poids des variables sur les trois premières dimensions est assez équilibré avec des amplitudes modérées (0 à 12). Les deux dernières dimensions sont chacune fortement dominées par une variable avec des amplitudes beaucoup plus grande (0 à 30).  
 
 
 Les variables synthétiques que produit l'ACP sont orthogonales entre elles. Pour le vérifier nous pouvons représenter les corrélations entre les dimensions.
@@ -527,11 +527,11 @@ Nous voyons bien que les corrélations entre les composantes sont faibles. La pl
 
 ### Dimension 1
 
-La dimension 1 fait référence à la superficie de la maison, que ce soit la taille de la résidence et des pièces qui composent la maison. Cette composante est également dans une certaine mesure influencée par l'âge de la maison (l'année où la maison a été construite et l'année où elle a été renovée.)
+La dimension 1 fait référence à la superficie de la maison, que ce soit la taille de la résidence et des pièces qui composent la maison. Cette composante est également dans une certaine mesure influencée par l'âge de la maison (l'année où la maison a été construite et l'année où elle a été rénovée.)
 
 ### Dimension 2
 
-La deuxième dimension se refère aux caractéristiques des maisons telles que la superficie du deuxième étage, et le nombres de pièces (salles de bain, chambres, cuisines) se trouvant au deuxième étage. Cette composante détermine donc le prestige de la maison.  
+La deuxième dimension se réfère aux caractéristiques des maisons telles que la superficie du deuxième étage, et le nombres de pièces (salles de bain, chambres, cuisines) se trouvant au deuxième étage. Cette composante détermine donc le prestige de la maison.  
 
 ### Dimension 3
 
@@ -555,7 +555,7 @@ Nous pouvons donc utiliser la deuxième méthode de cette famille.
 
 \pagebreak
 
-# Régéressions sur les moindres carrés partiels
+# Régression sur les moindres carrés partiels
 
 Comme pour la régression PCR, calcul de $T$ dont les éléments sont les « scores » et les colonnes les « composantes » : 
 
@@ -567,8 +567,8 @@ $X = TP + R$ (1)
 
 $Y = TQ + F$ (2)
 
-Avec : R matrice des résidus associées à la prédiction de $X$ ;
-$F$ vecteur des résidus associé à la prédiction de $y$.  
+Avec : R matrice des résidus associés à la prédiction de $X$ ;
+$F$ vecteur des résidus associés à la prédiction de $y$.  
 
 Première étape : calculer t1 la première composante principale, puis estimer (1) et (2) à une seule composante :
 
@@ -619,18 +619,6 @@ summary(model.plsr)
 ```
 
 
-## Les coefficients estimés par le PLS
-
-Les coefficients varient d'une composante à une autre. Nous choisissons de représenter les coefficients calculés par la régression sur les moindres carrés partiels à partir des 5 composantes.
-
-```{r}
-coef(model.plsr) %>%
-  data.frame() %>%
-  setNames(., c("Sale_Price")) %>%
-kable()
-```
-
-
 ```{r eval=FALSE, fig.height=7, fig.width=12, include=FALSE}
 data.frame(model.plsr$coefficients) %>%
   tibble::rownames_to_column("variables") %>%
@@ -665,14 +653,11 @@ explvar(model.plsr)
 Les « Loadings » reflètent (mais ne sont pas) les corrélations entre les composantes et les variables explicatives. Ils correspondent aux coordonnées sur les axes factoriels. On considère qu’une valeur supérieure à 0,4 (en valeur absolue) indique une liaison significative. Ce seuil est arbitraire (on
 descend parfois à 0,25). Les variables les plus excentrées sont les plus représentatives (ont une CTR plus élevée).
 
-Le poids des variables expliquées reflètent les corrélations entre ces variables et les scores uh. Ils permettent de cerner ce qui est expliqué sur ces facteurs.
+Le poids des variables expliquées reflète les corrélations entre ces variables et les scores uh. Ils permettent de cerner ce qui est expliqué sur ces facteurs.
 
-Le poids des variables explicatives reflètent la corrélation de ces variables avec les scores uh. Ils indiquent le rôle de chaque explicative dans l’explication globale de chaque axe.
+Le poids des variables explicatives reflète la corrélation de ces variables avec les scores uh. Ils indiquent le rôle de chaque explicative dans l’explication globale de chaque axe.
 Dans la pratique, poids et loadings positionnent les variables de manière similaire, les interprétations sont identiques.
 
-```{r}
-model.plsr$loading.weights
-```
 
 
 ```{r}
@@ -681,11 +666,99 @@ Yloadings(model.plsr)
 
 
 
-```{r}
-#Yscores(model.plsr)
+# Comparaison des performances des différentes méthodes d'estimation
+
+## Performances prédictives du modèle de régression multiple
+
+Nous pouvons représenter la qualité de l'ajustement en construisant pour chacun des modèle un nuage de points des valeurs observées et des valeurs prédites.
+
+```{r fig.height=4}
+pred_mod <- predict(mod, base_export)
+y <- base_export$Sale_Price
+
+ggplot() +
+  geom_point(aes (x = y, y = pred_mod)) + 
+  geom_point(aes(x = y, y = y), color = "red") +
+  labs( title = "Valeurs observées vs. valeurs prédites",
+        x = "Valeurs observées", y = "Valeurs observées", 
+        subtitle = "Pour le modèle de régression multiple")
 ```
 
-# Comparaison des performances des différentes méthodes d'estimation
+Nous voyons que le modèle a tendance à sous évaluer la valeur des maisons. En rouge c'est à quoi ressemblerait le nuage de point sur l'ajustement était parfait.  
+Le prix de certaines maisons semble être aberrant, c'est le cas pour les maisons de plus de 500.000 dollars.  
+
+Nous pouvons quantifier la différence entre les valeurs prédites et les valeurs observées en calculant la racine carrée des distances aux carrées. C'est le critère du Root Mean Square Error (RMSE).
+
+```{r}
+sigma(mod)
+```
+Le RMSE pour ce modèle est de 35861, ce qui signifie qu'en moyenne les valeurs prédites dévient de la valeur observée de 35861 dollars en valeur absolue.  
+
+## Performances prédictives du modèle de régression sur les composantes principales
+
+```{r fig.height=4}
+pred_mod <- predict(mod_pc, coord_pc)
+y <- base_export$Sale_Price
+
+ggplot() +
+  geom_point(aes (x = y, y = pred_mod)) + 
+  geom_point(aes(x = y, y = y), color = "red") +
+  labs( title = "Valeurs observées vs. valeurs prédites",
+        x = "Valeurs observées", y = "Valeurs observées", 
+        subtitle = "Pour le modèle de régression sur les composantes principales")
+```
+
+
+```{r}
+sigma(mod_pc)
+```
+Le RMSE de ce modèle de régression sur les composantes principales est de 39223, soit 3361 de plus que le modèle de régression multiple.
+
+
+## Performances prédictives du modèle sur les moindres carrés partiels
+
+```{r fig.height=4}
+pred_mod <- predict(model.plsr, base_export) %>%
+  matrix(ncol = 5)
+y <- base_export$Sale_Price
+
+ggplot() +
+  geom_point(aes (x = y, y = pred_mod[, 5])) + 
+  geom_point(aes(x = y, y = y), color = "red") +
+  labs( title = "Valeurs observées vs. valeurs prédites",
+        x = "Valeurs observées", y = "Valeurs observées", 
+        subtitle = "Pour le modèle de régression sur les moindres carrés partiels")
+```
+
+
+
+```{r}
+RMSEP(model.plsr)
+```
+
+Les valeurs affichées sont les RMSE pour chaque composante supplémentaire retenue dans le modèle. Pour les 5 composantes que nous avons retenues dans le modèle des moindres carrés partiels, le RMSE est de plus de 42000. 
+
+# Conclusion
+
+En conclusion il en ressort que le modèle de régression linéaire multiple possède le meilleur score dans ce test de performance.   
+Or notre objectif premier dans cette étude était de trouver les déterminants qui entrent dans l'explication du prix des propriétés résidentielles, pas simplement de construire un modèle qui fait de bonnes prédictions. Ainsi nous sommes davantage intéressés par l'explicabilité du modèle que par sa capacité prédictive. 
+Le faible taux d'erreur que nous avons observé pour la régression multiple est dû au fait que nous avions inclus toutes les 34 variables dans la construction du modèle. Or comme nous l'avons vu, plusieurs des variables n'étaient pas du tout significatives et le grand nombre des variables est un risque de sur-interprétation et il est donc difficile de généraliser ces résultats. 
+
+L'intérêt pour les deux modèles que nous avons construits (PCR et PLS) est que les résultats sont facilement généralisables. En effet pour la construction de ces modèles nous avons consenti à perdre des données pour gagner en généralité, nous sommes passés d'un complexe de 34 variables explicatives à un modèle simple à 5 composantes qui sont les combinaisons linéaires des 34 variables.  
+Pour le modèle de régression sur les composantes principales, nous savons que l'analyse en composantes principales applique une forme de contrainte sur les variables en ce sens que les variables peu significatives ont un poids insignifiant. 
+
+La régression sur les moindres carrés partiels a donné une plus mauvaise performance que la régression sur les composantes principales même alors que que la PLS est censée répercuter dans la construction des composantes synthétiques la variabilité de la variable endogène. Nous pouvons penser qu'en raison des valeurs aberrantes de certaines propriétés résidentielles rares la construction des variables synthétiques a subi des biais qui ont conduit à cette situation. Il est possible de corriger certains de ces problèmes lorsqu'on connaît le fonctionnement des méthodes et lorsqu'on a fait une bonne analyse exploratoire des données. 
+
+Concernant le sujet de ce travail, nous observons à l'aide du graphique suivant que les variables déterminantes dans le prix des propriétés résidentielles sont somme toutes des variables faisant référence est la superficie de la propriété résidentielle. 
+
+```{r fig.height=4}
+vip::vip(model.plsr) + labs(
+  title = "Importance des variables") +
+  theme_classic()
+```
+
+
+\pagebreak
 
 # Bibliographie
 
@@ -695,6 +768,8 @@ Alboukadel Kassambara and Fabian Mundt (2019). factoextra: Extract and
   
 Bjørn-Helge Mevik, Ron Wehrens and Kristian Hovde Liland (2019). pls: Partial Least Squares and Principal
   Component Regression. http://mevik.net/work/software/pls.html, https://github.com/bhmevik/pls.
+  
+Daniel Christophe, Régressions sur variables latentes : Principal Component Regression et Partial Least Square (Cours de Data Mining 2)
 
 Dean de Cook, Ames, Iowa: Alternative to the Boston Housing Data as an
 End of Semester Regression Project. *Journal of Statistics Education Volume 19, Number 3(2011)*
@@ -729,8 +804,18 @@ kable(
 
 \pagebreak
 
-Description des colonnes :
+## Annexe 2:  Les coefficients estimés par le PLS
 
+Les coefficients varient d'une composante à une autre. Nous choisissons de représenter les coefficients calculés par la régression sur les moindres carrés partiels à partir des 5 composantes.
+
+```{r}
+coef(model.plsr) %>%
+  data.frame() %>%
+  setNames(., c("Sale_Price")) %>%
+kable()
+```
+
+## Annexe 3 : Description des colonnes :
 
 SalePrice - the property's sale price in dollars. This is the target variable that you're trying to predict.  
 
@@ -814,20 +899,5 @@ YrSold: Year Sold
 SaleType: Type of sale  
 SaleCondition: Condition of sale  
 
-
-Présenter le sujet : 
-- Statistiques descriptives univariées (variable par variable)
-- Répondre à une question ou une série de questions
-- Présenter les statistiques bivariées : corrélation , test du khi-deux
-- ACP au préalable
-Comparer les résultats des différentes méthodes :
-- dire pourquoi utiliser chacune des méthode : pourquoi une OLS, pourquoi une PCR, PLS.
-- Dire quel résultat auquel on s'attend
-
-Présenter uniquement les tableaux de résultats principaux et les graphique. Mettre ce qui est moins pertinent en annexes. Commenter les résultats
-
-Conclure : analyser les résultats et les comparer à ce qu'on avait dit au début
-Quels résultats ces méthodes apportent?
-- 
 
 

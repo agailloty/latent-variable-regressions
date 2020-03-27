@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10 Annexes | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</title>
-  <meta name="description" content="10 Annexes | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <title>4 Régressions sur variables latentes | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</title>
+  <meta name="description" content="4 Régressions sur variables latentes | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10 Annexes | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <meta property="og:title" content="4 Régressions sur variables latentes | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="agailloty/latent-variable-regressions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10 Annexes | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <meta name="twitter:title" content="4 Régressions sur variables latentes | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="bibliographie.html"/>
-
+<link rel="prev" href="la-régression-linéaire-multiple.html"/>
+<link rel="next" href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -187,388 +187,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="annexes" class="section level1">
-<h1><span class="header-section-number">10</span> Annexes</h1>
-<div id="annexe-1-liste-exhaustive-des-colonnes" class="section level2">
-<h2><span class="header-section-number">10.1</span> Annexe 1 : Liste exhaustive des colonnes</h2>
-<p>Le jeu de données contient initialement 81 colonnes</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">kable</span>(</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">  <span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb46-3" data-line-number="3">    <span class="dt">Colonnes =</span> <span class="kw">colnames</span>(ames)[<span class="dv">0</span><span class="op">:</span><span class="dv">20</span>],</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4">    <span class="st">&quot;..&quot;</span> =<span class="st"> </span><span class="kw">colnames</span>(ames)[<span class="dv">21</span><span class="op">:</span><span class="dv">40</span>],</a>
-<a class="sourceLine" id="cb46-5" data-line-number="5">    <span class="st">&quot;...&quot;</span> =<span class="st"> </span><span class="kw">colnames</span>(ames)[<span class="dv">41</span><span class="op">:</span><span class="dv">60</span>],</a>
-<a class="sourceLine" id="cb46-6" data-line-number="6">    <span class="st">&quot;....&quot;</span> =<span class="st"> </span><span class="kw">colnames</span>(ames)[<span class="dv">61</span><span class="op">:</span><span class="dv">80</span>]</a>
-<a class="sourceLine" id="cb46-7" data-line-number="7">    ))</a></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Colonnes</th>
-<th align="left">..</th>
-<th align="left">…</th>
-<th align="left">….</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">MS_SubClass</td>
-<td align="left">Roof_Style</td>
-<td align="left">Central_Air</td>
-<td align="left">Garage_Area</td>
-</tr>
-<tr class="even">
-<td align="left">MS_Zoning</td>
-<td align="left">Roof_Matl</td>
-<td align="left">Electrical</td>
-<td align="left">Garage_Qual</td>
-</tr>
-<tr class="odd">
-<td align="left">Lot_Frontage</td>
-<td align="left">Exterior_1st</td>
-<td align="left">First_Flr_SF</td>
-<td align="left">Garage_Cond</td>
-</tr>
-<tr class="even">
-<td align="left">Lot_Area</td>
-<td align="left">Exterior_2nd</td>
-<td align="left">Second_Flr_SF</td>
-<td align="left">Paved_Drive</td>
-</tr>
-<tr class="odd">
-<td align="left">Street</td>
-<td align="left">Mas_Vnr_Type</td>
-<td align="left">Low_Qual_Fin_SF</td>
-<td align="left">Wood_Deck_SF</td>
-</tr>
-<tr class="even">
-<td align="left">Alley</td>
-<td align="left">Mas_Vnr_Area</td>
-<td align="left">Gr_Liv_Area</td>
-<td align="left">Open_Porch_SF</td>
-</tr>
-<tr class="odd">
-<td align="left">Lot_Shape</td>
-<td align="left">Exter_Qual</td>
-<td align="left">Bsmt_Full_Bath</td>
-<td align="left">Enclosed_Porch</td>
-</tr>
-<tr class="even">
-<td align="left">Land_Contour</td>
-<td align="left">Exter_Cond</td>
-<td align="left">Bsmt_Half_Bath</td>
-<td align="left">Three_season_porch</td>
-</tr>
-<tr class="odd">
-<td align="left">Utilities</td>
-<td align="left">Foundation</td>
-<td align="left">Full_Bath</td>
-<td align="left">Screen_Porch</td>
-</tr>
-<tr class="even">
-<td align="left">Lot_Config</td>
-<td align="left">Bsmt_Qual</td>
-<td align="left">Half_Bath</td>
-<td align="left">Pool_Area</td>
-</tr>
-<tr class="odd">
-<td align="left">Land_Slope</td>
-<td align="left">Bsmt_Cond</td>
-<td align="left">Bedroom_AbvGr</td>
-<td align="left">Pool_QC</td>
-</tr>
-<tr class="even">
-<td align="left">Neighborhood</td>
-<td align="left">Bsmt_Exposure</td>
-<td align="left">Kitchen_AbvGr</td>
-<td align="left">Fence</td>
-</tr>
-<tr class="odd">
-<td align="left">Condition_1</td>
-<td align="left">BsmtFin_Type_1</td>
-<td align="left">Kitchen_Qual</td>
-<td align="left">Misc_Feature</td>
-</tr>
-<tr class="even">
-<td align="left">Condition_2</td>
-<td align="left">BsmtFin_SF_1</td>
-<td align="left">TotRms_AbvGrd</td>
-<td align="left">Misc_Val</td>
-</tr>
-<tr class="odd">
-<td align="left">Bldg_Type</td>
-<td align="left">BsmtFin_Type_2</td>
-<td align="left">Functional</td>
-<td align="left">Mo_Sold</td>
-</tr>
-<tr class="even">
-<td align="left">House_Style</td>
-<td align="left">BsmtFin_SF_2</td>
-<td align="left">Fireplaces</td>
-<td align="left">Year_Sold</td>
-</tr>
-<tr class="odd">
-<td align="left">Overall_Qual</td>
-<td align="left">Bsmt_Unf_SF</td>
-<td align="left">Fireplace_Qu</td>
-<td align="left">Sale_Type</td>
-</tr>
-<tr class="even">
-<td align="left">Overall_Cond</td>
-<td align="left">Total_Bsmt_SF</td>
-<td align="left">Garage_Type</td>
-<td align="left">Sale_Condition</td>
-</tr>
-<tr class="odd">
-<td align="left">Year_Built</td>
-<td align="left">Heating</td>
-<td align="left">Garage_Finish</td>
-<td align="left">Sale_Price</td>
-</tr>
-<tr class="even">
-<td align="left">Year_Remod_Add</td>
-<td align="left">Heating_QC</td>
-<td align="left">Garage_Cars</td>
-<td align="left">Longitude</td>
-</tr>
-</tbody>
-</table>
-<div style="page-break-after: always;"></div>
-</div>
-<div id="annexe-2-les-coefficients-estimés-par-le-pls" class="section level2">
-<h2><span class="header-section-number">10.2</span> Annexe 2: Les coefficients estimés par le PLS</h2>
-<p>Les coefficients varient d’une composante à une autre. Nous choisissons de représenter les coefficients calculés par la régression sur les moindres carrés partiels à partir des 5 composantes.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">coef</span>(model.plsr) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="st">  </span><span class="kw">setNames</span>(., <span class="kw">c</span>(<span class="st">&quot;Sale_Price&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="kw">kable</span>()</a></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="right">Sale_Price</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Lot_Frontage</td>
-<td align="right">2.65567843</td>
-</tr>
-<tr class="even">
-<td>Lot_Area</td>
-<td align="right">0.09450319</td>
-</tr>
-<tr class="odd">
-<td>Year_Built</td>
-<td align="right">25.02291105</td>
-</tr>
-<tr class="even">
-<td>Year_Remod_Add</td>
-<td align="right">17.11894194</td>
-</tr>
-<tr class="odd">
-<td>Mas_Vnr_Area</td>
-<td align="right">53.99187589</td>
-</tr>
-<tr class="even">
-<td>BsmtFin_SF_1</td>
-<td align="right">-0.37974232</td>
-</tr>
-<tr class="odd">
-<td>BsmtFin_SF_2</td>
-<td align="right">-19.45242139</td>
-</tr>
-<tr class="even">
-<td>Bsmt_Unf_SF</td>
-<td align="right">-20.25931355</td>
-</tr>
-<tr class="odd">
-<td>Total_Bsmt_SF</td>
-<td align="right">67.71763140</td>
-</tr>
-<tr class="even">
-<td>First_Flr_SF</td>
-<td align="right">15.69656128</td>
-</tr>
-<tr class="odd">
-<td>Second_Flr_SF</td>
-<td align="right">29.23820959</td>
-</tr>
-<tr class="even">
-<td>Low_Qual_Fin_SF</td>
-<td align="right">-7.89461600</td>
-</tr>
-<tr class="odd">
-<td>Gr_Liv_Area</td>
-<td align="right">37.04015486</td>
-</tr>
-<tr class="even">
-<td>Bsmt_Full_Bath</td>
-<td align="right">0.13961835</td>
-</tr>
-<tr class="odd">
-<td>Bsmt_Half_Bath</td>
-<td align="right">-0.02077214</td>
-</tr>
-<tr class="even">
-<td>Full_Bath</td>
-<td align="right">0.17455210</td>
-</tr>
-<tr class="odd">
-<td>Half_Bath</td>
-<td align="right">0.12698764</td>
-</tr>
-<tr class="even">
-<td>Bedroom_AbvGr</td>
-<td align="right">-0.33210041</td>
-</tr>
-<tr class="odd">
-<td>Kitchen_AbvGr</td>
-<td align="right">-0.11093901</td>
-</tr>
-<tr class="even">
-<td>TotRms_AbvGrd</td>
-<td align="right">-0.08707872</td>
-</tr>
-<tr class="odd">
-<td>Fireplaces</td>
-<td align="right">0.19772083</td>
-</tr>
-<tr class="even">
-<td>Garage_Cars</td>
-<td align="right">0.41039209</td>
-</tr>
-<tr class="odd">
-<td>Garage_Area</td>
-<td align="right">90.71624581</td>
-</tr>
-<tr class="even">
-<td>Wood_Deck_SF</td>
-<td align="right">32.76562657</td>
-</tr>
-<tr class="odd">
-<td>Open_Porch_SF</td>
-<td align="right">10.59779031</td>
-</tr>
-<tr class="even">
-<td>Enclosed_Porch</td>
-<td align="right">-16.56734799</td>
-</tr>
-<tr class="odd">
-<td>Three_season_porch</td>
-<td align="right">0.92416455</td>
-</tr>
-<tr class="even">
-<td>Screen_Porch</td>
-<td align="right">5.76805957</td>
-</tr>
-<tr class="odd">
-<td>Pool_Area</td>
-<td align="right">-3.97712625</td>
-</tr>
-<tr class="even">
-<td>Misc_Val</td>
-<td align="right">-11.70509828</td>
-</tr>
-<tr class="odd">
-<td>Mo_Sold</td>
-<td align="right">0.04506869</td>
-</tr>
-<tr class="even">
-<td>Year_Sold</td>
-<td align="right">-0.06208878</td>
-</tr>
-<tr class="odd">
-<td>Overall_Qual</td>
-<td align="right">0.18500925</td>
-</tr>
-<tr class="even">
-<td>Overall_Cond</td>
-<td align="right">-0.32626718</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="annexe-3-description-des-colonnes" class="section level2">
-<h2><span class="header-section-number">10.3</span> Annexe 3 : Description des colonnes :</h2>
-<p>SalePrice - the property’s sale price in dollars. This is the target variable that you’re trying to predict.</p>
-<p>MSSubClass: The building class<br />
-MSZoning: The general zoning classification<br />
-LotFrontage: Linear feet of street connected to property<br />
-LotArea: Lot size in square feet<br />
-Street: Type of road access<br />
-Alley: Type of alley access<br />
-LotShape: General shape of property<br />
-LandContour: Flatness of the property<br />
-Utilities: Type of utilities available<br />
-LotConfig: Lot configuration<br />
-LandSlope: Slope of property<br />
-Neighborhood: Physical locations within Ames city limits<br />
-Condition1: Proximity to main road or railroad<br />
-Condition2: Proximity to main road or railroad (if a second is present)<br />
-BldgType: Type of dwelling<br />
-HouseStyle: Style of dwelling<br />
-OverallQual: Overall material and finish quality<br />
-OverallCond: Overall condition rating<br />
-YearBuilt: Original construction date<br />
-YearRemodAdd: Remodel date<br />
-RoofStyle: Type of roof<br />
-RoofMatl: Roof material<br />
-Exterior1st: Exterior covering on house<br />
-Exterior2nd: Exterior covering on house (if more than one material)<br />
-MasVnrType: Masonry veneer type<br />
-MasVnrArea: Masonry veneer area in square feet<br />
-ExterQual: Exterior material quality<br />
-ExterCond: Present condition of the material on the exterior<br />
-Foundation: Type of foundation<br />
-BsmtQual: Height of the basement<br />
-BsmtCond: General condition of the basement<br />
-BsmtExposure: Walkout or garden level basement walls<br />
-BsmtFinType1: Quality of basement finished area<br />
-BsmtFinSF1: Type 1 finished square feet<br />
-BsmtFinType2: Quality of second finished area (if present)<br />
-BsmtFinSF2: Type 2 finished square feet<br />
-BsmtUnfSF: Unfinished square feet of basement area<br />
-TotalBsmtSF: Total square feet of basement area<br />
-Heating: Type of heating<br />
-HeatingQC: Heating quality and condition<br />
-CentralAir: Central air conditioning<br />
-Electrical: Electrical system<br />
-1stFlrSF: First Floor square feet<br />
-2ndFlrSF: Second floor square feet<br />
-LowQualFinSF: Low quality finished square feet (all floors)<br />
-GrLivArea: Above grade (ground) living area square feet<br />
-BsmtFullBath: Basement full bathrooms<br />
-BsmtHalfBath: Basement half bathrooms<br />
-FullBath: Full bathrooms above grade<br />
-HalfBath: Half baths above grade<br />
-Bedroom: Number of bedrooms above basement level<br />
-Kitchen: Number of kitchens<br />
-KitchenQual: Kitchen quality<br />
-TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)<br />
-Functional: Home functionality rating<br />
-Fireplaces: Number of fireplaces<br />
-FireplaceQu: Fireplace quality<br />
-GarageType: Garage location<br />
-GarageYrBlt: Year garage was built<br />
-GarageFinish: Interior finish of the garage<br />
-GarageCars: Size of garage in car capacity<br />
-GarageArea: Size of garage in square feet<br />
-GarageQual: Garage quality<br />
-GarageCond: Garage condition<br />
-PavedDrive: Paved driveway<br />
-WoodDeckSF: Wood deck area in square feet<br />
-OpenPorchSF: Open porch area in square feet<br />
-EnclosedPorch: Enclosed porch area in square feet<br />
-3SsnPorch: Three season porch area in square feet<br />
-ScreenPorch: Screen porch area in square feet<br />
-PoolArea: Pool area in square feet<br />
-PoolQC: Pool quality<br />
-Fence: Fence quality<br />
-MiscFeature: Miscellaneous feature not covered in other categories<br />
-MiscVal: $Value of miscellaneous feature<br />
-MoSold: Month Sold<br />
-YrSold: Year Sold<br />
-SaleType: Type of sale<br />
-SaleCondition: Condition of sale</p>
+<div id="régressions-sur-variables-latentes" class="section level1">
+<h1><span class="header-section-number">4</span> Régressions sur variables latentes</h1>
+<div id="pourquoi-faire-une-régression-sur-les-variables-latentes" class="section level2">
+<h2><span class="header-section-number">4.1</span> Pourquoi faire une régression sur les variables latentes ?</h2>
+<p>Les méthodes de régressions sur les latentes nous permettent d’adresser certaines limites que posent les méthodes de régression par les moindres carrés. En effet pour qu’une régression par les OLS soit sans biais il faut que toutes les hypothèses posées par les OLS soient vérifiées. Parmi ces hypothèses nous pouvons citer l’hypothèse de l’absence de corrélations entre les variables ou encore l’hypothèse d’absence de colinéarité entre les variables.</p>
+<p>Or en général les phénomènes que nous cherchons à expliquer, dans notre travail nous cherchons à expliquer le prix de vente d’un bien immobilier, ne vérifient pas toujours ces hypothèses à cause entre autres de l’interdépendance entre les variables.<br />
+Dans le cas d’un bien immobilier, la taille des pièces du bien dépend de la superficie totale de la maison. Cette situation nous amène à des résultats potentiellement biaisés et non généralisables pour expliquer le phénomène.</p>
+<p>Les méthodes de régression sur les variables nous permettent donc de corriger ces limites des régression standards en créant des variables synthétiques sur lesquelles nous allons faire les estimations.</p>
+<p>Les variables synthétiques créées lors de l’estimation présentent une propriété très intéressante qui est celle de l’orthogonalité. En effet les variables synthétiques (ou les composantes) ne sont pas corrélées entre elles-mêmes, ce faisant nous pouvons donc estimer les paramètres du modèle que nous construisons sans courir le risque de violer les hypothèses posées par les moindres carrés ordinaires.</p>
+<p>Pour mettre en place ces méthodes, nous allons utiliser la procédure PLS (Partial Least Squares) implémentée dans le logiciel SAS.</p>
+<p>Les techniques mises en œuvre par la procédure PLS sont les suivantes :</p>
+<ul>
+<li><p>La régression sur composantes principales, qui extrait des facteurs qui expliquent le plus la variance des variables explicatives.</p></li>
+<li><p>La régression de rang réduit, qui extrait des facteurs qui expliquent le plus la variation de la variable réponse (y). Cette technique, également appelée analyse de redondance (maximale), diffère de la régression linéaire multiple uniquement lorsqu’il y a plusieurs variables endogènes.</p></li>
+<li><p>La régression sur les moindres carrés partiels, qui équilibre les deux objectifs d’explication de la variation de la variable endogène et expliquant la variation des prédicteurs. Deux formulations différentes pour les moindres carrés partiels sont disponibles :
+la méthode prédictive originale de Wold (1966) et la méthode SIMPLS de de Jong (1993).</p></li>
+</ul>
+<p>En raison du fait que nous ne cherchons ici qu’à expliquer une seule variable (y), à savoir le prix des maisons, nous n’utiliserons pas la régression sur rang réduit car cela revient à faire une régression multiple, ce que nous avons déjà fait dans la section 3.2.</p>
 </div>
 </div>
             </section>
@@ -576,8 +212,8 @@ SaleCondition: Condition of sale</p>
           </div>
         </div>
       </div>
-<a href="bibliographie.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="la-régression-linéaire-multiple.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

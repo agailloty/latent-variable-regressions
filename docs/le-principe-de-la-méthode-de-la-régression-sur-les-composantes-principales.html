@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Le principe de la méthode de la régression sur les composantes principales | Prédire le prix des maisons présentant plusieurs caractéristiques</title>
-  <meta name="description" content="4 Le principe de la méthode de la régression sur les composantes principales | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <title>5 Le principe de la méthode de la régression sur les composantes principales | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</title>
+  <meta name="description" content="5 Le principe de la méthode de la régression sur les composantes principales | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Le principe de la méthode de la régression sur les composantes principales | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta property="og:title" content="5 Le principe de la méthode de la régression sur les composantes principales | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="agailloty/latent-variable-regressions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Le principe de la méthode de la régression sur les composantes principales | Prédire le prix des maisons présentant plusieurs caractéristiques" />
+  <meta name="twitter:title" content="5 Le principe de la méthode de la régression sur les composantes principales | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="la-régression-régression-multiple.html"/>
-<link rel="next" href="régéressions-sur-les-moindres-carrés-partiels.html"/>
+<link rel="prev" href="régressions-sur-variables-latentes.html"/>
+<link rel="next" href="régression-sur-les-moindres-carrés-partiels.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -135,34 +135,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
 <li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html"><i class="fa fa-check"></i><b>3</b> La régression régression multiple</a><ul>
-<li class="chapter" data-level="3.0.1" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.0.1</b> Le test d’inflation de la variance (VIF)</a></li>
-<li class="chapter" data-level="3.0.2" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.0.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
-<li class="chapter" data-level="3.1" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html#régressions-sur-variables-latentes"><i class="fa fa-check"></i><b>3.1</b> Régressions sur variables latentes</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="la-régression-régression-multiple.html"><a href="la-régression-régression-multiple.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>3.1.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+<li class="chapter" data-level="3" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html"><i class="fa fa-check"></i><b>3</b> La régression linéaire multiple</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.0.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.0.2" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.0.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="régressions-sur-variables-latentes.html"><a href="régressions-sur-variables-latentes.html"><i class="fa fa-check"></i><b>4</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="4.1" data-path="régressions-sur-variables-latentes.html"><a href="régressions-sur-variables-latentes.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>4.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><i class="fa fa-check"></i><b>4</b> Le principe de la méthode de la régression sur les composantes principales</a><ul>
-<li class="chapter" data-level="4.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#régression-sur-composantes-principales-rcp-ou-pcr"><i class="fa fa-check"></i><b>4.1</b> Régression sur composantes principales (RCP ou PCR)</a></li>
-<li class="chapter" data-level="4.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>4.2</b> Résultats d’estimations avec SAS</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-1"><i class="fa fa-check"></i><b>4.2.1</b> Dimension 1</a></li>
-<li class="chapter" data-level="4.2.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-2"><i class="fa fa-check"></i><b>4.2.2</b> Dimension 2</a></li>
-<li class="chapter" data-level="4.2.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-3"><i class="fa fa-check"></i><b>4.2.3</b> Dimension 3</a></li>
-<li class="chapter" data-level="4.2.4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-4"><i class="fa fa-check"></i><b>4.2.4</b> Dimension 4</a></li>
-<li class="chapter" data-level="4.2.5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-5"><i class="fa fa-check"></i><b>4.2.5</b> Dimension 5</a></li>
+<li class="chapter" data-level="5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><i class="fa fa-check"></i><b>5</b> Le principe de la méthode de la régression sur les composantes principales</a><ul>
+<li class="chapter" data-level="5.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#régression-sur-composantes-principales-rcp-ou-pcr"><i class="fa fa-check"></i><b>5.1</b> Régression sur composantes principales (RCP ou PCR)</a></li>
+<li class="chapter" data-level="5.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>5.2</b> Résultats d’estimations avec SAS</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-1"><i class="fa fa-check"></i><b>5.2.1</b> Dimension 1</a></li>
+<li class="chapter" data-level="5.2.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-2"><i class="fa fa-check"></i><b>5.2.2</b> Dimension 2</a></li>
+<li class="chapter" data-level="5.2.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-3"><i class="fa fa-check"></i><b>5.2.3</b> Dimension 3</a></li>
+<li class="chapter" data-level="5.2.4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-4"><i class="fa fa-check"></i><b>5.2.4</b> Dimension 4</a></li>
+<li class="chapter" data-level="5.2.5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-5"><i class="fa fa-check"></i><b>5.2.5</b> Dimension 5</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#limite-de-la-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>4.3</b> Limite de la régression sur les composantes principales</a></li>
+<li class="chapter" data-level="5.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#limite-de-la-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>5.3</b> Limite de la régression sur les composantes principales</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html"><i class="fa fa-check"></i><b>5</b> Régéressions sur les moindres carrés partiels</a><ul>
-<li class="chapter" data-level="5.1" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>5.1</b> Modèle PLSR avec validation croisée</a></li>
-<li class="chapter" data-level="5.2" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>5.2</b> Le nombre de composantes</a></li>
-<li class="chapter" data-level="5.3" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#les-coefficients-estimés-par-le-pls"><i class="fa fa-check"></i><b>5.3</b> Les coefficients estimés par le PLS</a></li>
-<li class="chapter" data-level="5.4" data-path="régéressions-sur-les-moindres-carrés-partiels.html"><a href="régéressions-sur-les-moindres-carrés-partiels.html#loadings-chargements-and-weights-poids"><i class="fa fa-check"></i><b>5.4</b> Loadings (chargements) and weights (poids)</a></li>
+<li class="chapter" data-level="6" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html"><i class="fa fa-check"></i><b>6</b> Régression sur les moindres carrés partiels</a><ul>
+<li class="chapter" data-level="6.1" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>6.1</b> Modèle PLSR avec validation croisée</a></li>
+<li class="chapter" data-level="6.2" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>6.2</b> Le nombre de composantes</a></li>
+<li class="chapter" data-level="6.3" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#loadings-chargements-and-weights-poids"><i class="fa fa-check"></i><b>6.3</b> Loadings (chargements) and weights (poids)</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>6</b> Comparaison des performances des différentes méthodes d’estimation</a></li>
-<li class="chapter" data-level="7" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>7</b> Bibliographie</a></li>
-<li class="chapter" data-level="8" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>8</b> Annexes</a><ul>
-<li class="chapter" data-level="8.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>8.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+<li class="chapter" data-level="7" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>7</b> Comparaison des performances des différentes méthodes d’estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-de-régression-multiple"><i class="fa fa-check"></i><b>7.1</b> Performances prédictives du modèle de régression multiple</a></li>
+<li class="chapter" data-level="7.2" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-de-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>7.2</b> Performances prédictives du modèle de régression sur les composantes principales</a></li>
+<li class="chapter" data-level="7.3" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-sur-les-moindres-carrés-partiels"><i class="fa fa-check"></i><b>7.3</b> Performances prédictives du modèle sur les moindres carrés partiels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="9" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>9</b> Bibliographie</a></li>
+<li class="chapter" data-level="10" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>10</b> Annexes</a><ul>
+<li class="chapter" data-level="10.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>10.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+<li class="chapter" data-level="10.2" data-path="annexes.html"><a href="annexes.html#annexe-2-les-coefficients-estimés-par-le-pls"><i class="fa fa-check"></i><b>10.2</b> Annexe 2: Les coefficients estimés par le PLS</a></li>
+<li class="chapter" data-level="10.3" data-path="annexes.html"><a href="annexes.html#annexe-3-description-des-colonnes"><i class="fa fa-check"></i><b>10.3</b> Annexe 3 : Description des colonnes :</a></li>
 </ul></li>
 </ul>
 
@@ -173,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Prédire le prix des maisons présentant plusieurs caractéristiques</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</a>
           </h1>
         </div>
 
@@ -182,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales" class="section level1">
-<h1><span class="header-section-number">4</span> Le principe de la méthode de la régression sur les composantes principales</h1>
+<h1><span class="header-section-number">5</span> Le principe de la méthode de la régression sur les composantes principales</h1>
 <p>Dans le cadre d’une régression multiple, nous cherchons à expliquer l’endogène y à l’aide de variables explicatives X. Nous cherchons donc <span class="math display">\[y = \alpha + \beta . X\]</span></p>
 <p>La régression sur les composantes principales consiste à remplacer la matrice des <span class="math inline">\(X\)</span> (n lignes et m colonnes) par une nouvelle matrice <span class="math inline">\(T\)</span> dérivée de <span class="math inline">\(X\)</span>, de n lignes et k colonnes, avec k très inférieur à m.</p>
 <p>Chaque colonne k doit être une combinaison linéaire des variables d’origine.</p>
@@ -194,18 +200,18 @@ d’origine.</p>
 <p>Il faut donc déterminer <span class="math inline">\(W\)</span> de manière à avoir une matrice de variables explicatives T plus adaptée au calcul de la régression que la matrice X d’origine.</p>
 <p>Deux méthodes pour construire <span class="math inline">\(T\)</span> (et donc <span class="math inline">\(W\)</span>) : RCP et RPLS</p>
 <div id="régression-sur-composantes-principales-rcp-ou-pcr" class="section level2">
-<h2><span class="header-section-number">4.1</span> Régression sur composantes principales (RCP ou PCR)</h2>
+<h2><span class="header-section-number">5.1</span> Régression sur composantes principales (RCP ou PCR)</h2>
 <p>ACP puis régression multiple. L’ACP nécessite des variables quantitatives. A partir des variables <span class="math inline">\(X\)</span> centrées, l’ACP normée donne la matrice T dont les colonnes sont les composantes principales.</p>
 <p>Elles sont orthogonales entre elles (plus de problème de colinéarité). La matrice <span class="math inline">\(W\)</span> est la matrice des coefficients des combinaisons linéaires (coordonnées sur les composantes principales).</p>
 <p>Pour cette méthode, nous allons utiliser conjointement SAS et R afin de ressortir le maximum d’informations utiles à l’interprétation des résultats.</p>
 </div>
 <div id="résultats-destimations-avec-sas" class="section level2">
-<h2><span class="header-section-number">4.2</span> Résultats d’estimations avec SAS</h2>
-<p>Nous avons spécifié la méthode “PCR” dans le procédure PLS afin de réaliser une régression sur les composantes principales. Il y a en total 34 variables explicatives pour 2930 observations.<br />
+<h2><span class="header-section-number">5.2</span> Résultats d’estimations avec SAS</h2>
+<p>Nous avons spécifié la méthode “PCR” dans la procédure PLS afin de réaliser une régression sur les composantes principales. Il y a en total 34 variables explicatives pour 2930 observations.<br />
 Nous choisissons également de faire une validation croisée sur le jeu de données.</p>
 <p><img src="pcr-img/pcr_general_info.PNG" /></p>
 <p><img src="pcr-img/pcr_split-sample.PNG" /></p>
-<p>Pour pouvoir déterminer avec confiance le nombre de composantes principales (ou facteurs) à retenir dans la PCR, l’algorithme utilise une technique de validation croisée. Une technique de validation croisée consiste à diviser l’échantillon en plusieurs groupes sur lesquels des ajustements successifs sont effectués. L’ajustement du modèle est effectué sur le groupe d’apprentissage et les résultats sont comparés aux observations du groupe test. L’efficaité prédictive est évaluée à l’aide l’indicateur PRESS (Predicted REsidual Sum of Squares).</p>
+<p>Pour pouvoir déterminer avec confiance le nombre de composantes principales (ou facteurs) à retenir dans la PCR, l’algorithme utilise une technique de validation croisée. Une technique de validation croisée consiste à diviser l’échantillon en plusieurs groupes sur lesquels des ajustements successifs sont effectués. L’ajustement du modèle est effectué sur le groupe d’apprentissage et les résultats sont comparés aux observations du groupe test. L’efficacité prédictive est évaluée à l’aide l’indicateur PRESS (Predicted REsidual Sum of Squares).</p>
 <p>Le tableau suivant nous montre que la valeur minimale de la validation croisée est atteinte si le nombre de composantes principales est 8. Toutefois il est préférable de se fier au test qui indique si oui ou non il existe une différence significative entre les 8 composantes.</p>
 <p>Le test nous indique qu’à partir de la 4e composante il n’existe plus de différences significatives entre les composantes. Nous allons donc retenir 5 composantes pour la suite de l’analyse.</p>
 <p><img src="pcr-img/pcr_analysis_val_crois.png" /></p>
@@ -278,7 +284,7 @@ F-statistic: 1845.2 on 5 and 2924 DF,  p-value: &lt; 2.22e-16</code></pre>
 <a class="sourceLine" id="cb25-10" data-line-number="10">    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">20</span>)</a>
 <a class="sourceLine" id="cb25-11" data-line-number="11">  )</a></code></pre></div>
 <p><img src="main_files/figure-html/unnamed-chunk-24-1.png" width="3600" /></p>
-<p>Le poids des variables sur les trois premières dimensions est assez équilibrée avec des amplitudes modérées (0 à 12). Les deux dernières dimensions sont chacune fortement dominées par une variable avec des amplitudes beaucoup plus grande (0 à 30).</p>
+<p>Le poids des variables sur les trois premières dimensions est assez équilibré avec des amplitudes modérées (0 à 12). Les deux dernières dimensions sont chacune fortement dominées par une variable avec des amplitudes beaucoup plus grande (0 à 30).</p>
 <p>Les variables synthétiques que produit l’ACP sont orthogonales entre elles. Pour le vérifier nous pouvons représenter les corrélations entre les dimensions.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">data.frame</span>(pc<span class="op">$</span>var<span class="op">$</span>coord) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb26-2" data-line-number="2">psych<span class="op">::</span><span class="kw">pairs.panels</span>( </a>
@@ -291,28 +297,28 @@ F-statistic: 1845.2 on 5 and 2924 DF,  p-value: &lt; 2.22e-16</code></pre>
 <p><img src="main_files/figure-html/unnamed-chunk-25-1.png" width="2400" /></p>
 <p>Nous voyons bien que les corrélations entre les composantes sont faibles. La plus haute en valeur absolue est 0.30 et représente la corrélation entre la dimension 1 et la dimension 3.</p>
 <div id="dimension-1" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Dimension 1</h3>
-<p>La dimension 1 fait référence à la superficie de la maison, que ce soit la taille de la résidence et des pièces qui composent la maison. Cette composante est également dans une certaine mesure influencée par l’âge de la maison (l’année où la maison a été construite et l’année où elle a été renovée.)</p>
+<h3><span class="header-section-number">5.2.1</span> Dimension 1</h3>
+<p>La dimension 1 fait référence à la superficie de la maison, que ce soit la taille de la résidence et des pièces qui composent la maison. Cette composante est également dans une certaine mesure influencée par l’âge de la maison (l’année où la maison a été construite et l’année où elle a été rénovée.)</p>
 </div>
 <div id="dimension-2" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Dimension 2</h3>
-<p>La deuxième dimension se refère aux caractéristiques des maisons telles que la superficie du deuxième étage, et le nombres de pièces (salles de bain, chambres, cuisines) se trouvant au deuxième étage. Cette composante détermine donc le prestige de la maison.</p>
+<h3><span class="header-section-number">5.2.2</span> Dimension 2</h3>
+<p>La deuxième dimension se réfère aux caractéristiques des maisons telles que la superficie du deuxième étage, et le nombres de pièces (salles de bain, chambres, cuisines) se trouvant au deuxième étage. Cette composante détermine donc le prestige de la maison.</p>
 </div>
 <div id="dimension-3" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> Dimension 3</h3>
+<h3><span class="header-section-number">5.2.3</span> Dimension 3</h3>
 <p>La troisième composante mesure l’âge de la maison et la condition de la maison au moment de la vente.</p>
 </div>
 <div id="dimension-4" class="section level3">
-<h3><span class="header-section-number">4.2.4</span> Dimension 4</h3>
+<h3><span class="header-section-number">5.2.4</span> Dimension 4</h3>
 <p>Cette composante est principalement dominée par le fait que la maison contient des parties inachevées.</p>
 </div>
 <div id="dimension-5" class="section level3">
-<h3><span class="header-section-number">4.2.5</span> Dimension 5</h3>
+<h3><span class="header-section-number">5.2.5</span> Dimension 5</h3>
 <p>Cette composante est fortement dominée par le fait s’il y a une cuisine à l’étage et par la condition générale de la maison.</p>
 </div>
 </div>
 <div id="limite-de-la-régression-sur-les-composantes-principales" class="section level2">
-<h2><span class="header-section-number">4.3</span> Limite de la régression sur les composantes principales</h2>
+<h2><span class="header-section-number">5.3</span> Limite de la régression sur les composantes principales</h2>
 <p>Nous venons de voir l’intérêt de la régression sur les composantes principales. Nous avons vu notamment que les composantes issues de l’ACP sont orthogonales en ce sens qu’il cette méthode permet d’obtenir des composantes orthogonales entre elles. Toutefois, l’analyse en composante principale que nous avons effectuée maximise les variances des variables <span class="math inline">\(X\)</span> indépendamment des variations de Y : la variance de Y n’est pas maximisée. Ceci peut surestimer le poids de certaines explicatives et conduire
 de ce fait à de mauvaises interprétations des résultats.</p>
 <p>Nous pouvons donc utiliser la deuxième méthode de cette famille.</p>
@@ -324,8 +330,8 @@ de ce fait à de mauvaises interprétations des résultats.</p>
           </div>
         </div>
       </div>
-<a href="la-régression-régression-multiple.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="régéressions-sur-les-moindres-carrés-partiels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="régressions-sur-variables-latentes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="régression-sur-les-moindres-carrés-partiels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -353,8 +359,7 @@ gitbook.start({
 "fontsettings": {
 "theme": "sepia",
 "family": "sans",
-"size": 2,
-"font-size": 20
+"size": 2
 },
 "edit": {
 "link": null,
@@ -372,6 +377,7 @@ gitbook.start({
 "toc": {
 "collapse": "subsection"
 },
+"font-size": 20,
 "search": false
 });
 });
